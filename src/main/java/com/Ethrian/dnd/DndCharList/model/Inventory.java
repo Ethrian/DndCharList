@@ -6,22 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-public class Race implements IBonusable {
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private String desc;
 
     @ManyToMany
-    private Set<Bonus> racialBonuses;
+    private List<Item> Items;
 
-    public Race() { }
+    public Inventory() { }
 
     public Long getId() {
         return id;
@@ -39,19 +38,11 @@ public class Race implements IBonusable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public List<Item> getItems() {
+        return Items;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Set<Bonus> getRacialBonuses() {
-        return racialBonuses;
-    }
-
-    public void setRacialBonuses(Set<Bonus> racialBonuses) {
-        this.racialBonuses = racialBonuses;
+    public void setItems(List<Item> items) {
+        Items = items;
     }
 }
