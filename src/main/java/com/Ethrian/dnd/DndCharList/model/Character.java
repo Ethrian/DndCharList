@@ -1,11 +1,6 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import javafx.util.Pair;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -17,9 +12,11 @@ public class Character implements IBonusable {
 
     private String name;
     @ManyToOne
+    @JoinColumn(name = "race_id")
     private Race race;
     @ManyToMany
-    private CharacterClass characterClass;
+    @CollectionTable(name = "character_charClass", joinColumns = @JoinColumn(name = "class_id"))
+    private Set<CharacterClass> characterClasses;
     private String background;
     private Integer exp;
     private Integer maxHP;
@@ -31,13 +28,16 @@ public class Character implements IBonusable {
     private Integer curHitDices;
     private Integer deathSavesFailed;
     private Integer deathSavesPassed;
+    @OneToOne
+    @JoinColumn(name = "inventory_id")
     private Inventory inventory;
     private Integer cp;
     private Integer sp;
     private Integer gp;
     private Integer pp;
     @ManyToMany
-    private Set<Spell> spellsList;
+    @CollectionTable(name = "character_spells", joinColumns = @JoinColumn(name = "spell_id"))
+    private Set<Spell> spells;
     private Integer profBonus;
     private Integer lvl1Max;
     private Integer lvl2Max;
@@ -65,13 +65,16 @@ public class Character implements IBonusable {
     private Integer CHA;
 
     @ManyToMany
-    private Map<Skill, Integer> skills;
+    @CollectionTable(name = "character_skills", joinColumns = @JoinColumn(name = "characterSkill_id"))
+    private Set<CharacterSkill> skills;
 
+    @ElementCollection(targetClass = Effect.class)
+    @CollectionTable(name = "character_effect", joinColumns = @JoinColumn(name = "effect_id"))
     @Enumerated(EnumType.STRING)
-    @ManyToMany
     private Set<Effect> effects;
 
     @ManyToMany
+    @CollectionTable(name = "character_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<Bonus> otherBonuses;
 
 
@@ -101,12 +104,12 @@ public class Character implements IBonusable {
         this.race = race;
     }
 
-    public CharacterClass getCharacterClass() {
-        return characterClass;
+    public Set<CharacterClass> getCharacterClasses() {
+        return characterClasses;
     }
 
-    public void setCharacterClass(CharacterClass characterClass) {
-        this.characterClass = characterClass;
+    public void setCharacterClasses(Set<CharacterClass> characterClasses) {
+        this.characterClasses = characterClasses;
     }
 
     public String getBackground() {
@@ -237,12 +240,12 @@ public class Character implements IBonusable {
         this.pp = pp;
     }
 
-    public Set<Spell> getSpellsList() {
-        return spellsList;
+    public Set<Spell> getSpells() {
+        return spells;
     }
 
-    public void setSpellsList(Set<Spell> spellsList) {
-        this.spellsList = spellsList;
+    public void setSpellsList(Set<Spell> spells) {
+        this.spells = spells;
     }
 
     public Integer getProfBonus() {
@@ -445,11 +448,11 @@ public class Character implements IBonusable {
         this.CHA = CHA;
     }
 
-    public Map<Skill, Integer> getSkills() {
+    public Set<CharacterSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Map<Skill, Integer> skills) {
+    public void setSkills(Set<CharacterSkill> skills) {
         this.skills = skills;
     }
 

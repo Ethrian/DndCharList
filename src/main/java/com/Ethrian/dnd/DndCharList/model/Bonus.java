@@ -1,12 +1,7 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import javafx.util.Pair;
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToMany;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,15 +27,22 @@ public class Bonus {
     private Integer initiative;
     private Integer profBonus;
 
-    @ManyToMany
+    @ElementCollection(targetClass = DamageType.class)
+    @CollectionTable(name = "bonus_resistance", joinColumns = @JoinColumn(name = "resistance_id"))
+    @Enumerated(EnumType.STRING)
     private Set<DamageType> resistances;
-    @ManyToMany
+
+    @ElementCollection(targetClass = DamageType.class)
+    @CollectionTable(name = "bonus_immunity", joinColumns = @JoinColumn(name = "immunity_id"))
+    @Enumerated(EnumType.STRING)
     private Set<DamageType> immunities;
 
     @ManyToMany
+    @CollectionTable(name = "bonus_spell", joinColumns = @JoinColumn(name = "spell_id"))
     private Set<Spell> spells;
     @ManyToMany
-    private Map<Skill, Integer> skillsBonuses;
+    @CollectionTable(name = "bonus_skill", joinColumns = @JoinColumn(name = "skillsBonus_id"))
+    private Set<CharacterSkill> skillBonuses;
 
     public Bonus() { }
 
@@ -172,11 +174,11 @@ public class Bonus {
         this.spells = spells;
     }
 
-    public Map<Skill, Integer> getSkillsBonuses() {
-        return skillsBonuses;
+    public Set<CharacterSkill> getSkillsBonuses() {
+        return skillBonuses;
     }
 
-    public void setSkillsBonuses(Map<Skill, Integer> skillsBonuses) {
-        this.skillsBonuses = skillsBonuses;
+    public void setSkillsBonuses(Set<CharacterSkill> skillsBonuses) {
+        this.skillBonuses = skillsBonuses;
     }
 }

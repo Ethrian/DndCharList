@@ -1,6 +1,6 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,11 +15,13 @@ public class Item implements IBonusable {
     private String desc;
 
     private Double weight;
+    @CollectionTable(name = "item_type", joinColumns = @JoinColumn(name = "item_id"))
     @Enumerated(EnumType.STRING)
     private ItemType type;
     private Integer amount;
 
     @ManyToMany
+    @CollectionTable(name = "item_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<Bonus> itemBonuses;
 
     public Item() { }

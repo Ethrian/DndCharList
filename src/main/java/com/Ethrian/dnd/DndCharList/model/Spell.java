@@ -1,6 +1,6 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.*;
 
@@ -13,8 +13,10 @@ public class Spell {
     private String name;
     private String desc;
 
+    @CollectionTable(name = "spell_lvl", joinColumns = @JoinColumn(name = "spell_id"))
     @Enumerated(EnumType.STRING)
     private SpellLevel lvl;
+    @CollectionTable(name = "spell_type", joinColumns = @JoinColumn(name = "spell_id"))
     @Enumerated(EnumType.STRING)
     private SpellType type;
 

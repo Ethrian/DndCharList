@@ -1,11 +1,7 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
@@ -18,6 +14,7 @@ public class Inventory {
     private String name;
 
     @ManyToMany
+    @CollectionTable(name = "inventory_item", joinColumns = @JoinColumn(name = "item_id"))
     private List<Item> Items;
 
     public Inventory() { }

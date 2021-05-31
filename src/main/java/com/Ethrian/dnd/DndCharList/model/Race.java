@@ -1,11 +1,7 @@
 package com.Ethrian.dnd.DndCharList.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
@@ -19,6 +15,7 @@ public class Race implements IBonusable {
     private String desc;
 
     @ManyToMany
+    @CollectionTable(name = "race_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<Bonus> racialBonuses;
 
     public Race() { }
