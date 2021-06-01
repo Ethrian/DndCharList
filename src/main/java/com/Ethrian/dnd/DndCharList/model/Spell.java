@@ -11,7 +11,7 @@ public class Spell {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String desc;
+    private String description;
 
     @CollectionTable(name = "spell_lvl", joinColumns = @JoinColumn(name = "spell_id"))
     @Enumerated(EnumType.STRING)
@@ -47,12 +47,12 @@ public class Spell {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public SpellLevel getLvl() {

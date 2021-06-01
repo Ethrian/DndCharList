@@ -12,7 +12,7 @@ public class Item implements IBonusable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String desc;
+    private String description;
 
     private Double weight;
     @CollectionTable(name = "item_type", joinColumns = @JoinColumn(name = "item_id"))
@@ -42,12 +42,12 @@ public class Item implements IBonusable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public Double getWeight() {

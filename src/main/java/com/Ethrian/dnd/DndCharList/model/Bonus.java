@@ -2,7 +2,6 @@ package com.Ethrian.dnd.DndCharList.model;
 
 import javax.persistence.*;
 
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ public class Bonus {
     private Long id;
 
     private String name;
-    private String desc;
+    private String description;
 
     private Integer STR;
     private Integer DEX;
@@ -62,12 +61,12 @@ public class Bonus {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public Integer getSTR() {

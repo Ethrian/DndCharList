@@ -12,7 +12,7 @@ public class Race implements IBonusable {
     private Long id;
 
     private String name;
-    private String desc;
+    private String description;
 
     @ManyToMany
     @CollectionTable(name = "race_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
@@ -36,12 +36,12 @@ public class Race implements IBonusable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public Set<Bonus> getRacialBonuses() {
