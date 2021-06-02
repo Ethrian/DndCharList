@@ -24,23 +24,24 @@ public class Bonus {
     private Integer HP;
     private Integer armorClass;
     private Integer initiative;
+    private Integer speed;
     private Integer profBonus;
 
     @ElementCollection(targetClass = DamageType.class)
-    @CollectionTable(name = "bonus_resistance", joinColumns = @JoinColumn(name = "resistance_id"))
+    @CollectionTable(name = "bonus_resistance", joinColumns = @JoinColumn(name = "bonus_id"))
     @Enumerated(EnumType.STRING)
     private Set<DamageType> resistances;
 
     @ElementCollection(targetClass = DamageType.class)
-    @CollectionTable(name = "bonus_immunity", joinColumns = @JoinColumn(name = "immunity_id"))
+    @CollectionTable(name = "bonus_immunity", joinColumns = @JoinColumn(name = "bonus_id"))
     @Enumerated(EnumType.STRING)
     private Set<DamageType> immunities;
 
     @ManyToMany
-    @CollectionTable(name = "bonus_spell", joinColumns = @JoinColumn(name = "spell_id"))
+    @CollectionTable(name = "bonus_spell", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<Spell> spells;
     @ManyToMany
-    @CollectionTable(name = "bonus_skill", joinColumns = @JoinColumn(name = "skillsBonus_id"))
+    @CollectionTable(name = "bonus_skill", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<CharacterSkill> skillBonuses;
 
     public Bonus() { }
@@ -173,11 +174,19 @@ public class Bonus {
         this.spells = spells;
     }
 
-    public Set<CharacterSkill> getSkillsBonuses() {
+    public Set<CharacterSkill> getSkillBonuses() {
         return skillBonuses;
     }
 
-    public void setSkillsBonuses(Set<CharacterSkill> skillsBonuses) {
+    public void setSkillBonuses(Set<CharacterSkill> skillsBonuses) {
         this.skillBonuses = skillsBonuses;
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
     }
 }

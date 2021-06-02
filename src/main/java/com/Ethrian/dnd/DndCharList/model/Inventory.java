@@ -14,7 +14,7 @@ public class Inventory {
     private String name;
 
     @ManyToMany
-    @CollectionTable(name = "inventory_item", joinColumns = @JoinColumn(name = "item_id"))
+    @CollectionTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"))
     private List<Item> Items;
 
     public Inventory() { }

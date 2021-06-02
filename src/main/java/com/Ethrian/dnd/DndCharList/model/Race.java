@@ -15,7 +15,7 @@ public class Race implements IBonusable {
     private String description;
 
     @ManyToMany
-    @CollectionTable(name = "race_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
+    @CollectionTable(name = "race_bonus", joinColumns = @JoinColumn(name = "race_id"))
     private Set<Bonus> racialBonuses;
 
     public Race() { }
