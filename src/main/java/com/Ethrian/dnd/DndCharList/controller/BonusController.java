@@ -15,6 +15,12 @@ public class BonusController {
     @Autowired
     private BonusRepo bonusRepo;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String getBonus(@RequestParam Bonus bonus, Map<String, Object> model){
+
+        return "";
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public String addBonusToBonusable(@RequestParam Bonus bonus, @RequestParam IBonusable bonusable, Map<String, Object> model){
 
@@ -97,6 +103,5 @@ public class BonusController {
     ){
         return "";
     }
-
 
 }
