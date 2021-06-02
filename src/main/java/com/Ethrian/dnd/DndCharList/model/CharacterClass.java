@@ -6,14 +6,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class CharacterClass implements IBonusable {
+public class CharacterClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    private Integer lvl;
 
-    @CollectionTable(name = "class_dice", joinColumns = @JoinColumn(name = "character_class_id"))
     @Enumerated(EnumType.STRING)
     private Dice hitDice;
 
@@ -53,5 +53,13 @@ public class CharacterClass implements IBonusable {
 
     public void setClassBonuses(Set<Bonus> classBonuses) {
         this.classBonuses = classBonuses;
+    }
+
+    public Integer getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(Integer lvl) {
+        this.lvl = lvl;
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Character implements IBonusable {
+public class Character {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,9 +14,9 @@ public class Character implements IBonusable {
     @ManyToOne
     @JoinColumn(name = "race_id")
     private Race race;
-    @ManyToMany
-    @CollectionTable(name = "character_charClass", joinColumns = @JoinColumn(name = "character_id"))
-    private Set<CharacterClass> characterClasses;
+    @ManyToOne
+    @JoinColumn(name = "characterClass")
+    private CharacterClass characterClass;
     private String background;
     private String gender;
     private String appearence;
@@ -30,9 +30,9 @@ public class Character implements IBonusable {
     private Integer curHitDices;
     private Integer deathSavesFailed;
     private Integer deathSavesPassed;
-    @OneToOne
-    @JoinColumn(name = "inventory_id")
-    private Inventory inventory;
+    @ManyToMany
+    @CollectionTable(name = "character_items", joinColumns = @JoinColumn(name = "character_id"))
+    private Set<Item> items;
     private Integer cp;
     private Integer sp;
     private Integer gp;
@@ -59,6 +59,7 @@ public class Character implements IBonusable {
     private Integer lvl7Cur;
     private Integer lvl8Cur;
     private Integer lvl9Cur;
+
     private Integer STR;
     private Integer DEX;
     private Integer CON;
@@ -66,14 +67,24 @@ public class Character implements IBonusable {
     private Integer WIS;
     private Integer CHA;
 
-    @ManyToMany
-    @CollectionTable(name = "character_skills", joinColumns = @JoinColumn(name = "character_id"))
-    private Set<CharacterSkill> skills;
-
-    @ElementCollection(targetClass = Effect.class)
-    @CollectionTable(name = "character_effect", joinColumns = @JoinColumn(name = "character_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Effect> effects;
+    private Integer athleticBonus;
+    private Integer acrotabicBonus;
+    private Integer sleightOfHandsBonus;
+    private Integer stealthBonus;
+    private Integer investigationBonus;
+    private Integer historyBonus;
+    private Integer natureBonus;
+    private Integer arcanaBonus;
+    private Integer religionBonus;
+    private Integer perceptionBonus;
+    private Integer insightBonus;
+    private Integer survivalBonus;
+    private Integer medicineBonus;
+    private Integer animalHandlingBonus;
+    private Integer decetpionBonus;
+    private Integer intimidationBonus;
+    private Integer performanceBonus;
+    private Integer persuationBonus;
 
     @ManyToMany
     @CollectionTable(name = "character_bonus", joinColumns = @JoinColumn(name = "character_id"))
@@ -132,12 +143,12 @@ public class Character implements IBonusable {
         this.race = race;
     }
 
-    public Set<CharacterClass> getCharacterClasses() {
-        return characterClasses;
+    public CharacterClass getCharacterClass() {
+        return characterClass;
     }
 
-    public void setCharacterClasses(Set<CharacterClass> characterClasses) {
-        this.characterClasses = characterClasses;
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
     }
 
     public String getBackground() {
@@ -228,12 +239,12 @@ public class Character implements IBonusable {
         this.deathSavesPassed = deathSavesPassed;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public Integer getCp() {
@@ -476,22 +487,6 @@ public class Character implements IBonusable {
         this.CHA = CHA;
     }
 
-    public Set<CharacterSkill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<CharacterSkill> skills) {
-        this.skills = skills;
-    }
-
-    public Set<Effect> getEffects() {
-        return effects;
-    }
-
-    public void setEffects(Set<Effect> effects) {
-        this.effects = effects;
-    }
-
     public Set<Bonus> getOtherBonuses() {
         return otherBonuses;
     }
@@ -499,4 +494,149 @@ public class Character implements IBonusable {
     public void setOtherBonuses(Set<Bonus> otherBonuses) {
         this.otherBonuses = otherBonuses;
     }
+
+    public Integer getAthleticBonus() {
+        return athleticBonus;
+    }
+
+    public void setAthleticBonus(Integer athleticBonus) {
+        this.athleticBonus = athleticBonus;
+    }
+
+    public Integer getAcrotabicBonus() {
+        return acrotabicBonus;
+    }
+
+    public void setAcrotabicBonus(Integer acrotabicBonus) {
+        this.acrotabicBonus = acrotabicBonus;
+    }
+
+    public Integer getSleightOfHandsBonus() {
+        return sleightOfHandsBonus;
+    }
+
+    public void setSleightOfHandsBonus(Integer sleightOfHandsBonus) {
+        this.sleightOfHandsBonus = sleightOfHandsBonus;
+    }
+
+    public Integer getStealthBonus() {
+        return stealthBonus;
+    }
+
+    public void setStealthBonus(Integer stealthBonus) {
+        this.stealthBonus = stealthBonus;
+    }
+
+    public Integer getInvestigationBonus() {
+        return investigationBonus;
+    }
+
+    public void setInvestigationBonus(Integer investigationBonus) {
+        this.investigationBonus = investigationBonus;
+    }
+
+    public Integer getHistoryBonus() {
+        return historyBonus;
+    }
+
+    public void setHistoryBonus(Integer historyBonus) {
+        this.historyBonus = historyBonus;
+    }
+
+    public Integer getNatureBonus() {
+        return natureBonus;
+    }
+
+    public void setNatureBonus(Integer natureBonus) {
+        this.natureBonus = natureBonus;
+    }
+
+    public Integer getArcanaBonus() {
+        return arcanaBonus;
+    }
+
+    public void setArcanaBonus(Integer arcanaBonus) {
+        this.arcanaBonus = arcanaBonus;
+    }
+
+    public Integer getReligionBonus() {
+        return religionBonus;
+    }
+
+    public void setReligionBonus(Integer religionBonus) {
+        this.religionBonus = religionBonus;
+    }
+
+    public Integer getPerceptionBonus() {
+        return perceptionBonus;
+    }
+
+    public void setPerceptionBonus(Integer perceptionBonus) {
+        this.perceptionBonus = perceptionBonus;
+    }
+
+    public Integer getInsightBonus() {
+        return insightBonus;
+    }
+
+    public void setInsightBonus(Integer insightBonus) {
+        this.insightBonus = insightBonus;
+    }
+
+    public Integer getSurvivalBonus() {
+        return survivalBonus;
+    }
+
+    public void setSurvivalBonus(Integer survivalBonus) {
+        this.survivalBonus = survivalBonus;
+    }
+
+    public Integer getMedicineBonus() {
+        return medicineBonus;
+    }
+
+    public void setMedicineBonus(Integer medicineBonus) {
+        this.medicineBonus = medicineBonus;
+    }
+
+    public Integer getAnimalHandlingBonus() {
+        return animalHandlingBonus;
+    }
+
+    public void setAnimalHandlingBonus(Integer animalHandlingBonus) {
+        this.animalHandlingBonus = animalHandlingBonus;
+    }
+
+    public Integer getDecetpionBonus() {
+        return decetpionBonus;
+    }
+
+    public void setDecetpionBonus(Integer decetpionBonus) {
+        this.decetpionBonus = decetpionBonus;
+    }
+
+    public Integer getIntimidationBonus() {
+        return intimidationBonus;
+    }
+
+    public void setIntimidationBonus(Integer intimidationBonus) {
+        this.intimidationBonus = intimidationBonus;
+    }
+
+    public Integer getPerformanceBonus() {
+        return performanceBonus;
+    }
+
+    public void setPerformanceBonus(Integer performanceBonus) {
+        this.performanceBonus = performanceBonus;
+    }
+
+    public Integer getPersuationBonus() {
+        return persuationBonus;
+    }
+
+    public void setPersuationBonus(Integer persuationBonus) {
+        this.persuationBonus = persuationBonus;
+    }
+
 }

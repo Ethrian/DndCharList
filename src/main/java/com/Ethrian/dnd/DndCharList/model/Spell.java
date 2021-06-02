@@ -12,13 +12,8 @@ public class Spell {
     private Long id;
     private String name;
     private String description;
-
-    @CollectionTable(name = "spell_lvl", joinColumns = @JoinColumn(name = "spell_id"))
-    @Enumerated(EnumType.STRING)
-    private SpellLevel lvl;
-    @CollectionTable(name = "spell_type", joinColumns = @JoinColumn(name = "spell_id"))
-    @Enumerated(EnumType.STRING)
-    private SpellType type;
+    private Integer lvl;
+    private String spellType;
 
     private String castTime;
     private Integer distance;
@@ -55,20 +50,20 @@ public class Spell {
         this.description = desc;
     }
 
-    public SpellLevel getLvl() {
+    public Integer getLvl() {
         return lvl;
     }
 
-    public void setLvl(SpellLevel lvl) {
+    public void setLvl(Integer lvl) {
         this.lvl = lvl;
     }
 
-    public SpellType getType() {
-        return type;
+    public String getSpellType() {
+        return spellType;
     }
 
-    public void setType(SpellType type) {
-        this.type = type;
+    public void setSpellType(String spellType) {
+        this.spellType = spellType;
     }
 
     public String getCastTime() {
