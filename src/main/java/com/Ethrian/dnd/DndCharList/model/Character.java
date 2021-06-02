@@ -15,9 +15,11 @@ public class Character implements IBonusable {
     @JoinColumn(name = "race_id")
     private Race race;
     @ManyToMany
-    @CollectionTable(name = "character_charClass", joinColumns = @JoinColumn(name = "class_id"))
+    @CollectionTable(name = "character_charClass", joinColumns = @JoinColumn(name = "character_id"))
     private Set<CharacterClass> characterClasses;
     private String background;
+    private String gender;
+    private String appearence;
     private Integer exp;
     private Integer maxHP;
     private Integer curHP;
@@ -36,7 +38,7 @@ public class Character implements IBonusable {
     private Integer gp;
     private Integer pp;
     @ManyToMany
-    @CollectionTable(name = "character_spells", joinColumns = @JoinColumn(name = "spell_id"))
+    @CollectionTable(name = "character_spells", joinColumns = @JoinColumn(name = "character_id"))
     private Set<Spell> spells;
     private Integer profBonus;
     private Integer lvl1Max;
@@ -65,20 +67,46 @@ public class Character implements IBonusable {
     private Integer CHA;
 
     @ManyToMany
-    @CollectionTable(name = "character_skills", joinColumns = @JoinColumn(name = "characterSkill_id"))
+    @CollectionTable(name = "character_skills", joinColumns = @JoinColumn(name = "character_id"))
     private Set<CharacterSkill> skills;
 
     @ElementCollection(targetClass = Effect.class)
-    @CollectionTable(name = "character_effect", joinColumns = @JoinColumn(name = "effect_id"))
+    @CollectionTable(name = "character_effect", joinColumns = @JoinColumn(name = "character_id"))
     @Enumerated(EnumType.STRING)
     private Set<Effect> effects;
 
     @ManyToMany
-    @CollectionTable(name = "character_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
+    @CollectionTable(name = "character_bonus", joinColumns = @JoinColumn(name = "character_id"))
     private Set<Bonus> otherBonuses;
 
 
     public Character() { }
+
+    public Character(String name, String gender, Race race) {
+        this.name = name;
+        this.gender = gender;
+        this.race = race;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAppearence() {
+        return appearence;
+    }
+
+    public void setAppearence(String appearence) {
+        this.appearence = appearence;
+    }
+
+    public void setSpells(Set<Spell> spells) {
+        this.spells = spells;
+    }
 
     public Long getId() {
         return id;
