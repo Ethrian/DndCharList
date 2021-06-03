@@ -24,6 +24,17 @@ public class CharacterController {
         return "";
     }
 
+    @GetMapping(value = "/new")
+    public String newCharacter(
+            @RequestParam String name,
+            @RequestParam String gender,
+            Map<String, Object> model
+    ){
+        Character character = characterService.newCharacter(name, gender);
+        model.put("character", character);
+        return "/character";
+    }
+
 
     @GetMapping(value = "/getDescription/{character_id}")
     public String getCharactersDescription(
@@ -52,12 +63,10 @@ public class CharacterController {
             @RequestParam("character_id") Character character,
             @RequestParam Integer armorClass,
             @RequestParam Integer exp,
-            @RequestParam Integer initiative,
             @RequestParam Integer speed,
-            @RequestParam Integer profBonus,
             Map<String, Object> model
     ){
-        Character updatedCharacter = characterService.updateStats(character, armorClass, exp, initiative, speed, profBonus);
+        Character updatedCharacter = characterService.updateStats(character, armorClass, exp, speed);
         model.put("character", updatedCharacter);
         return "character";
     }
@@ -82,7 +91,7 @@ public class CharacterController {
     public String updateSkills(
             @RequestParam("character_id") Character character,
             @RequestParam Integer athletic,
-            @RequestParam Integer acrotabic,
+            @RequestParam Integer acrobatic,
             @RequestParam Integer sleightOfHands,
             @RequestParam Integer stealth,
             @RequestParam Integer investigation,
@@ -95,45 +104,21 @@ public class CharacterController {
             @RequestParam Integer survival,
             @RequestParam Integer medicine,
             @RequestParam Integer animalHandling,
-            @RequestParam Integer decetpion,
+            @RequestParam Integer deception,
             @RequestParam Integer intimidation,
             @RequestParam Integer performance,
-            @RequestParam Integer persuation,
+            @RequestParam Integer persuasion,
             Map<String, Object> model
-    ){
+    ) {
         Character updatedCharacter = characterService.updateSkills(
                 character,
                 athletic,
-                acrotabic, sleightOfHands, stealth,
+                acrobatic, sleightOfHands, stealth,
                 investigation, history, nature, arcana, religion,
                 perception, insight, survival, medicine, animalHandling,
-                decetpion, intimidation, performance, persuation
+                deception, intimidation, performance, persuasion
         );
 
-        model.put("character", updatedCharacter);
-        return "character";
-    }
-
-    @PostMapping(value = "/updateSpellSlots/{character_id}")
-    public String updateSpellSlots(
-            @RequestParam("character_id") Character character,
-            @RequestParam Integer lvl1,
-            @RequestParam Integer lvl2,
-            @RequestParam Integer lvl3,
-            @RequestParam Integer lvl4,
-            @RequestParam Integer lvl5,
-            @RequestParam Integer lvl6,
-            @RequestParam Integer lvl7,
-            @RequestParam Integer lvl8,
-            @RequestParam Integer lvl9,
-            Map<String, Object> model
-    ){
-        Character updatedCharacter = characterService.updateSpellSlots(
-                character,
-                lvl1, lvl2, lvl3,
-                lvl4, lvl5, lvl6,
-                lvl7, lvl8, lvl9
-        );
         model.put("character", updatedCharacter);
         return "character";
     }
@@ -232,11 +217,11 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/addDescription/{character_id}")
-    public String addDescription(
+    @PostMapping(value = "/updateDescription/{character_id}")
+    public String updateDescription(
             @RequestParam("character_id") Character character,
             @RequestParam String name,
-            @RequestParam String appearence,
+            @RequestParam String appearance,
             @RequestParam String background,
             @RequestParam String gender,
             Map<String, Object> model
