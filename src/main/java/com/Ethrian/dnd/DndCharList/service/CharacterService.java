@@ -5,19 +5,20 @@ import com.Ethrian.dnd.DndCharList.model.Item;
 import com.Ethrian.dnd.DndCharList.model.Spell;
 import com.Ethrian.dnd.DndCharList.repo.CharacterRepo;
 import com.Ethrian.dnd.DndCharList.repo.SpellRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
 public class CharacterService {
 
     private CharacterRepo characterRepo;
+    private SpellRepo spellRepo;
 
-    public CharacterService(CharacterRepo characterRepo) {
+    public CharacterService(CharacterRepo characterRepo, SpellRepo spellRepo) {
         this.characterRepo = characterRepo;
+        this.spellRepo = spellRepo;
     }
 
     public Character getCharacterById(Long id) {
@@ -63,7 +64,7 @@ public class CharacterService {
     }
 
     public Character updateSkills(
-            Character character,
+            Long characterId,
             Integer athletic,
             Integer acrobatic,
             Integer sleightOfHands,
@@ -83,12 +84,16 @@ public class CharacterService {
             Integer performance,
             Integer persuasion
     ){
-        return character;
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        // todo: change character params and save
+        character.setStealthBonus(stealth);
+        // todo: same for all params
+        return characterRepo.save(character);
     }
 
-    public Iterable<Spell> getSpells(Character character) {
-
-        Iterable<Spell> spells = null;
+    public Set<Spell> getSpells(Long id) {
+        Character character = characterRepo.findById(id).orElseThrow();
+        Set<Spell> spells = character.getSpells();
         return spells;
     }
 
