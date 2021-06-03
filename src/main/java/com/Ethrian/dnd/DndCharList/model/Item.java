@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Item implements IBonusable {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,9 +15,7 @@ public class Item implements IBonusable {
     private String description;
 
     private Double weight;
-    @CollectionTable(name = "item_type", joinColumns = @JoinColumn(name = "item_id"))
-    @Enumerated(EnumType.STRING)
-    private ItemType type;
+    private String itemType;
     private Integer amount;
 
     @ManyToMany
@@ -58,12 +56,12 @@ public class Item implements IBonusable {
         this.weight = weight;
     }
 
-    public ItemType getType() {
-        return type;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setType(ItemType type) {
-        this.type = type;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     public Integer getAmount() {

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Character implements IBonusable {
+public class Character {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,9 +14,9 @@ public class Character implements IBonusable {
     @ManyToOne
     @JoinColumn(name = "race_id")
     private Race race;
-    @ManyToMany
-    @CollectionTable(name = "character_charClass", joinColumns = @JoinColumn(name = "character_id"))
-    private Set<CharacterClass> characterClasses;
+    @ManyToOne
+    @JoinColumn(name = "characterClass")
+    private CharacterClass characterClass;
     private String background;
     private String gender;
     private String appearence;
@@ -30,9 +30,9 @@ public class Character implements IBonusable {
     private Integer curHitDices;
     private Integer deathSavesFailed;
     private Integer deathSavesPassed;
-    @OneToOne
-    @JoinColumn(name = "inventory_id")
-    private Inventory inventory;
+    @ManyToMany
+    @CollectionTable(name = "character_items", joinColumns = @JoinColumn(name = "character_id"))
+    private Set<Item> items;
     private Integer cp;
     private Integer sp;
     private Integer gp;
@@ -41,24 +41,7 @@ public class Character implements IBonusable {
     @CollectionTable(name = "character_spells", joinColumns = @JoinColumn(name = "character_id"))
     private Set<Spell> spells;
     private Integer profBonus;
-    private Integer lvl1Max;
-    private Integer lvl2Max;
-    private Integer lvl3Max;
-    private Integer lvl4Max;
-    private Integer lvl5Max;
-    private Integer lvl6Max;
-    private Integer lvl7Max;
-    private Integer lvl8Max;
-    private Integer lvl9Max;
-    private Integer lvl1Cur;
-    private Integer lvl2Cur;
-    private Integer lvl3Cur;
-    private Integer lvl4Cur;
-    private Integer lvl5Cur;
-    private Integer lvl6Cur;
-    private Integer lvl7Cur;
-    private Integer lvl8Cur;
-    private Integer lvl9Cur;
+
     private Integer STR;
     private Integer DEX;
     private Integer CON;
@@ -66,14 +49,24 @@ public class Character implements IBonusable {
     private Integer WIS;
     private Integer CHA;
 
-    @ManyToMany
-    @CollectionTable(name = "character_skills", joinColumns = @JoinColumn(name = "character_id"))
-    private Set<CharacterSkill> skills;
-
-    @ElementCollection(targetClass = Effect.class)
-    @CollectionTable(name = "character_effect", joinColumns = @JoinColumn(name = "character_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Effect> effects;
+    private Integer athleticBonus;
+    private Integer acrobaticBonus;
+    private Integer sleightOfHandsBonus;
+    private Integer stealthBonus;
+    private Integer investigationBonus;
+    private Integer historyBonus;
+    private Integer natureBonus;
+    private Integer arcanaBonus;
+    private Integer religionBonus;
+    private Integer perceptionBonus;
+    private Integer insightBonus;
+    private Integer survivalBonus;
+    private Integer medicineBonus;
+    private Integer animalHandlingBonus;
+    private Integer deceptionBonus;
+    private Integer intimidationBonus;
+    private Integer performanceBonus;
+    private Integer persuasionBonus;
 
     @ManyToMany
     @CollectionTable(name = "character_bonus", joinColumns = @JoinColumn(name = "character_id"))
@@ -82,10 +75,9 @@ public class Character implements IBonusable {
 
     public Character() { }
 
-    public Character(String name, String gender, Race race) {
+    public Character(String name, String gender) {
         this.name = name;
         this.gender = gender;
-        this.race = race;
     }
 
     public String getGender() {
@@ -132,12 +124,12 @@ public class Character implements IBonusable {
         this.race = race;
     }
 
-    public Set<CharacterClass> getCharacterClasses() {
-        return characterClasses;
+    public CharacterClass getCharacterClass() {
+        return characterClass;
     }
 
-    public void setCharacterClasses(Set<CharacterClass> characterClasses) {
-        this.characterClasses = characterClasses;
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
     }
 
     public String getBackground() {
@@ -228,12 +220,12 @@ public class Character implements IBonusable {
         this.deathSavesPassed = deathSavesPassed;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public Integer getCp() {
@@ -284,150 +276,6 @@ public class Character implements IBonusable {
         this.profBonus = profBonus;
     }
 
-    public Integer getLvl1Max() {
-        return lvl1Max;
-    }
-
-    public void setLvl1Max(Integer lvl1Max) {
-        this.lvl1Max = lvl1Max;
-    }
-
-    public Integer getLvl2Max() {
-        return lvl2Max;
-    }
-
-    public void setLvl2Max(Integer lvl2Max) {
-        this.lvl2Max = lvl2Max;
-    }
-
-    public Integer getLvl3Max() {
-        return lvl3Max;
-    }
-
-    public void setLvl3Max(Integer lvl3Max) {
-        this.lvl3Max = lvl3Max;
-    }
-
-    public Integer getLvl4Max() {
-        return lvl4Max;
-    }
-
-    public void setLvl4Max(Integer lvl4Max) {
-        this.lvl4Max = lvl4Max;
-    }
-
-    public Integer getLvl5Max() {
-        return lvl5Max;
-    }
-
-    public void setLvl5Max(Integer lvl5Max) {
-        this.lvl5Max = lvl5Max;
-    }
-
-    public Integer getLvl6Max() {
-        return lvl6Max;
-    }
-
-    public void setLvl6Max(Integer lvl6Max) {
-        this.lvl6Max = lvl6Max;
-    }
-
-    public Integer getLvl7Max() {
-        return lvl7Max;
-    }
-
-    public void setLvl7Max(Integer lvl7Max) {
-        this.lvl7Max = lvl7Max;
-    }
-
-    public Integer getLvl8Max() {
-        return lvl8Max;
-    }
-
-    public void setLvl8Max(Integer lvl8Max) {
-        this.lvl8Max = lvl8Max;
-    }
-
-    public Integer getLvl9Max() {
-        return lvl9Max;
-    }
-
-    public void setLvl9Max(Integer lvl9Max) {
-        this.lvl9Max = lvl9Max;
-    }
-
-    public Integer getLvl1Cur() {
-        return lvl1Cur;
-    }
-
-    public void setLvl1Cur(Integer lvl1Cur) {
-        this.lvl1Cur = lvl1Cur;
-    }
-
-    public Integer getLvl2Cur() {
-        return lvl2Cur;
-    }
-
-    public void setLvl2Cur(Integer lvl2Cur) {
-        this.lvl2Cur = lvl2Cur;
-    }
-
-    public Integer getLvl3Cur() {
-        return lvl3Cur;
-    }
-
-    public void setLvl3Cur(Integer lvl3Cur) {
-        this.lvl3Cur = lvl3Cur;
-    }
-
-    public Integer getLvl4Cur() {
-        return lvl4Cur;
-    }
-
-    public void setLvl4Cur(Integer lvl4Cur) {
-        this.lvl4Cur = lvl4Cur;
-    }
-
-    public Integer getLvl5Cur() {
-        return lvl5Cur;
-    }
-
-    public void setLvl5Cur(Integer lvl5Cur) {
-        this.lvl5Cur = lvl5Cur;
-    }
-
-    public Integer getLvl6Cur() {
-        return lvl6Cur;
-    }
-
-    public void setLvl6Cur(Integer lvl6Cur) {
-        this.lvl6Cur = lvl6Cur;
-    }
-
-    public Integer getLvl7Cur() {
-        return lvl7Cur;
-    }
-
-    public void setLvl7Cur(Integer lvl7Cur) {
-        this.lvl7Cur = lvl7Cur;
-    }
-
-    public Integer getLvl8Cur() {
-        return lvl8Cur;
-    }
-
-    public void setLvl8Cur(Integer lvl8Cur) {
-        this.lvl8Cur = lvl8Cur;
-    }
-
-    public Integer getLvl9Cur() {
-        return lvl9Cur;
-    }
-
-    public void setLvl9Cur(Integer lvl9Cur) {
-        this.lvl9Cur = lvl9Cur;
-    }
-
     public Integer getSTR() {
         return STR;
     }
@@ -476,22 +324,6 @@ public class Character implements IBonusable {
         this.CHA = CHA;
     }
 
-    public Set<CharacterSkill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<CharacterSkill> skills) {
-        this.skills = skills;
-    }
-
-    public Set<Effect> getEffects() {
-        return effects;
-    }
-
-    public void setEffects(Set<Effect> effects) {
-        this.effects = effects;
-    }
-
     public Set<Bonus> getOtherBonuses() {
         return otherBonuses;
     }
@@ -499,4 +331,149 @@ public class Character implements IBonusable {
     public void setOtherBonuses(Set<Bonus> otherBonuses) {
         this.otherBonuses = otherBonuses;
     }
+
+    public Integer getAthleticBonus() {
+        return athleticBonus;
+    }
+
+    public void setAthleticBonus(Integer athleticBonus) {
+        this.athleticBonus = athleticBonus;
+    }
+
+    public Integer getAcrotabicBonus() {
+        return acrobaticBonus;
+    }
+
+    public void setAcrotabicBonus(Integer acrotabicBonus) {
+        this.acrobaticBonus = acrotabicBonus;
+    }
+
+    public Integer getSleightOfHandsBonus() {
+        return sleightOfHandsBonus;
+    }
+
+    public void setSleightOfHandsBonus(Integer sleightOfHandsBonus) {
+        this.sleightOfHandsBonus = sleightOfHandsBonus;
+    }
+
+    public Integer getStealthBonus() {
+        return stealthBonus;
+    }
+
+    public void setStealthBonus(Integer stealthBonus) {
+        this.stealthBonus = stealthBonus;
+    }
+
+    public Integer getInvestigationBonus() {
+        return investigationBonus;
+    }
+
+    public void setInvestigationBonus(Integer investigationBonus) {
+        this.investigationBonus = investigationBonus;
+    }
+
+    public Integer getHistoryBonus() {
+        return historyBonus;
+    }
+
+    public void setHistoryBonus(Integer historyBonus) {
+        this.historyBonus = historyBonus;
+    }
+
+    public Integer getNatureBonus() {
+        return natureBonus;
+    }
+
+    public void setNatureBonus(Integer natureBonus) {
+        this.natureBonus = natureBonus;
+    }
+
+    public Integer getArcanaBonus() {
+        return arcanaBonus;
+    }
+
+    public void setArcanaBonus(Integer arcanaBonus) {
+        this.arcanaBonus = arcanaBonus;
+    }
+
+    public Integer getReligionBonus() {
+        return religionBonus;
+    }
+
+    public void setReligionBonus(Integer religionBonus) {
+        this.religionBonus = religionBonus;
+    }
+
+    public Integer getPerceptionBonus() {
+        return perceptionBonus;
+    }
+
+    public void setPerceptionBonus(Integer perceptionBonus) {
+        this.perceptionBonus = perceptionBonus;
+    }
+
+    public Integer getInsightBonus() {
+        return insightBonus;
+    }
+
+    public void setInsightBonus(Integer insightBonus) {
+        this.insightBonus = insightBonus;
+    }
+
+    public Integer getSurvivalBonus() {
+        return survivalBonus;
+    }
+
+    public void setSurvivalBonus(Integer survivalBonus) {
+        this.survivalBonus = survivalBonus;
+    }
+
+    public Integer getMedicineBonus() {
+        return medicineBonus;
+    }
+
+    public void setMedicineBonus(Integer medicineBonus) {
+        this.medicineBonus = medicineBonus;
+    }
+
+    public Integer getAnimalHandlingBonus() {
+        return animalHandlingBonus;
+    }
+
+    public void setAnimalHandlingBonus(Integer animalHandlingBonus) {
+        this.animalHandlingBonus = animalHandlingBonus;
+    }
+
+    public Integer getDecetpionBonus() {
+        return deceptionBonus;
+    }
+
+    public void setDecetpionBonus(Integer decetpionBonus) {
+        this.deceptionBonus = decetpionBonus;
+    }
+
+    public Integer getIntimidationBonus() {
+        return intimidationBonus;
+    }
+
+    public void setIntimidationBonus(Integer intimidationBonus) {
+        this.intimidationBonus = intimidationBonus;
+    }
+
+    public Integer getPerformanceBonus() {
+        return performanceBonus;
+    }
+
+    public void setPerformanceBonus(Integer performanceBonus) {
+        this.performanceBonus = performanceBonus;
+    }
+
+    public Integer getPersuationBonus() {
+        return persuasionBonus;
+    }
+
+    public void setPersuationBonus(Integer persuationBonus) {
+        this.persuasionBonus = persuationBonus;
+    }
+
 }

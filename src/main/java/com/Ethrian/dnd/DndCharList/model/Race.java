@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Race implements IBonusable {
+public class Race {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
