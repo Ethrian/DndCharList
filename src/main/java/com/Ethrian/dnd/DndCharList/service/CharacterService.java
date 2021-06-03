@@ -14,8 +14,15 @@ import java.util.Set;
 @Service
 public class CharacterService {
 
-    @Autowired
     private CharacterRepo characterRepo;
+
+    public CharacterService(CharacterRepo characterRepo) {
+        this.characterRepo = characterRepo;
+    }
+
+    public Character getCharacterById(Long id) {
+        return characterRepo.findById(id).orElseThrow();
+    }
 
     public Character newCharacter(
             String name,

@@ -25,14 +25,15 @@ public class CharacterController {
     }
 
     @GetMapping(value = "/{character_id}")
-    public String getCharacter(@RequestParam("character_id") Long id, Map<String, Object> model){
+    public String getCharacter(@PathVariable("character_id") Long id, Map<String, Object> model){
         logger.info("Get character with ID: {}", id);
-
-        return "";
+        Character character = characterService.getCharacterById(id);
+        model.put("character", character);
+        return "character";
     }
 
-    @GetMapping(value = "/new")
-    public String newCharacter(
+    @PostMapping(value = "/new")
+    public String createCharacter(
             @RequestParam String name,
             @RequestParam String gender,
             Map<String, Object> model
