@@ -4,22 +4,29 @@ import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.model.Item;
 import com.Ethrian.dnd.DndCharList.model.Spell;
 import com.Ethrian.dnd.DndCharList.service.CharacterService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "characters")
+@RequestMapping(value = "/characters")
 public class CharacterController {
 
-    @Autowired
+    private final Logger logger = LoggerFactory.getLogger(CharacterController.class);
+
     private CharacterService characterService;
 
-    @GetMapping(value = "/{character_id}")
-    public String getCharacter(@RequestParam("character_id") Character character, Map<String, Object> model){
+    public CharacterController(CharacterService characterService) {
+        this.characterService = characterService;
+    }
 
+    @GetMapping(value = "/{character_id}")
+    public String getCharacter(@RequestParam("character_id") Long id, Map<String, Object> model){
+        logger.info("Get character with ID: {}", id);
 
         return "";
     }
