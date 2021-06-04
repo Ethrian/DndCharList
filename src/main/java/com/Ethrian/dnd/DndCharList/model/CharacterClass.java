@@ -13,6 +13,7 @@ public class CharacterClass {
 
     private String name;
     private Integer lvl;
+    private Boolean dirty;
 
     @Enumerated(EnumType.STRING)
     private Dice hitDice;
@@ -22,6 +23,13 @@ public class CharacterClass {
     private Set<Bonus> classBonuses;
 
     public CharacterClass() { }
+
+    public CharacterClass(String name, Dice hitDice) {
+        this.name = name;
+        this.hitDice = hitDice;
+        this.dirty = false;
+        this.lvl = 1;
+    }
 
     public Long getId() {
         return id;
@@ -55,11 +63,23 @@ public class CharacterClass {
         this.classBonuses = classBonuses;
     }
 
+    public void addBonusToClass(Bonus classBonus) {
+        this.classBonuses.add(classBonus);
+    }
+
     public Integer getLvl() {
         return lvl;
     }
 
     public void setLvl(Integer lvl) {
         this.lvl = lvl;
+    }
+
+    public Boolean getDirty() {
+        return dirty;
+    }
+
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
     }
 }

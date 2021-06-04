@@ -13,8 +13,15 @@ public class Bonus {
 
     private String name;
     private String description;
+    private Boolean dirty;
 
     public Bonus() { }
+
+    public Bonus(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.dirty = false;
+    }
 
     public Long getId() {
         return id;
@@ -40,4 +47,11 @@ public class Bonus {
         this.description = desc;
     }
 
+    public Boolean getDirty() {
+        return dirty;
+    }
+
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
+    }
 }

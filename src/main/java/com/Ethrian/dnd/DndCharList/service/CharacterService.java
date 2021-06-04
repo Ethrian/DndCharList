@@ -16,13 +16,15 @@ public class CharacterService {
     private ItemRepo itemRepo;
     private CharacterClassRepo characterClassRepo;
     private RaceRepo raceRepo;
+    private BonusRepo bonusRepo;
 
-    public CharacterService(CharacterRepo characterRepo, SpellRepo spellRepo, ItemRepo itemRepo, CharacterClassRepo characterClassRepo, RaceRepo raceRepo) {
+    public CharacterService(CharacterRepo characterRepo, SpellRepo spellRepo, ItemRepo itemRepo, CharacterClassRepo characterClassRepo, RaceRepo raceRepo, BonusRepo bonusRepo) {
         this.characterRepo = characterRepo;
         this.spellRepo = spellRepo;
         this.itemRepo = itemRepo;
         this.characterClassRepo = characterClassRepo;
         this.raceRepo = raceRepo;
+        this.bonusRepo = bonusRepo;
     }
 
     public Character getCharacterById(Long id) {
@@ -192,12 +194,27 @@ public class CharacterService {
     public Character addSpell(Long characterId, Long spellId) {
 
         Character character = characterRepo.findById(characterId).orElseThrow();
-//        character.addSpellToList(spellRepo.findById(spellId).orElseThrow());
-//        characterRepo.save(character);
-        return character;
+        Spell searchedSpell = spellRepo.findById(spellId).orElseThrow();
+
+        Spell newSpell = new Spell(
+             searchedSpell.getName(),
+             searchedSpell.getDescription(),
+             searchedSpell.getLvl(),
+             searchedSpell.getSpellType(),
+             searchedSpell.getCastTime(),
+             searchedSpell.getDistance(),
+             searchedSpell.getDuration(),
+             searchedSpell.getVerbal(),
+             searchedSpell.getSomatic(),
+             searchedSpell.getMaterial()
+        );
+        newSpell.setDirty(true);
+        spellRepo.save(newSpell);
+        character.addSpellToList(newSpell);
+        return characterRepo.save(character);
     }
 
-    public Character removeSpell(Long characterId, Long spellId) {
+    public Character deleteSpell(Long characterId, Long spellId) {
 
         Character character = characterRepo.findById(characterId).orElseThrow();
         Set<Spell> spellbook = character.getSpells();
@@ -215,13 +232,22 @@ public class CharacterService {
     }
     public Character addItem(Long characterId, Long itemId) {
         Character character = characterRepo.findById(characterId).orElseThrow();
-//        character.addItemToList(itemRepo.findById(itemId).orElseThrow());
-//        characterRepo.save(character);
-        return character;
+        Item searchedItem = itemRepo.findById(itemId).orElseThrow();
+        Item item = new Item(
+                searchedItem.getName(),
+                searchedItem.getDescription(),
+                searchedItem.getWeight(),
+                searchedItem.getItemType(),
+                searchedItem.getAmount()
+        );
+        item.setDirty(true);
+        itemRepo.save(item);
+        character.addItemToList(item);
+        return characterRepo.save(character);
     }
 
 
-    public Character removeItem(Long characterId, Long itemId) {
+    public Character deleteItem(Long characterId, Long itemId) {
 
         Character character = characterRepo.findById(characterId).orElseThrow();
         Set<Item> inventory = character.getItems();
@@ -233,6 +259,51 @@ public class CharacterService {
     }
 
     public Character addClass(Long characterId, Long classId) {
-        return  null;
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        CharacterClass searchedClass = characterClassRepo.findById(classId).orElseThrow();
+        CharacterClass characterClass = new CharacterClass(searchedClass.getName(), searchedClass.getHitDice());
+        characterClass.setDirty(true);
+        characterClassRepo.save(characterClass);
+        character.setCharacterClass(characterClass);
+        return characterRepo.save(character);
+    }
+
+    public Character addRace(Long characterId, Long raceId) {
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        Race searchedRace = raceRepo.findById(raceId).orElseThrow();
+        Race race = new Race(searchedRace.getName(), searchedRace.getDescription());
+        race.setDirty(true);
+        raceRepo.save(race);
+        character.setRace(race);
+        return characterRepo.save(character);
+    }
+
+    public Set<Bonus> getBonuses(Long characterId, Long bonusId){
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        return character.getOtherBonuses();
+    }
+
+    public Character addBonus(Long characterId, Long bonusId) {
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        Bonus searchedBonus = bonusRepo.findById(bonusId).orElseThrow();
+        Bonus newBonus = new Bonus(searchedBonus.getName(), searchedBonus.getDescription());
+        newBonus.setDirty(true);
+        bonusRepo.save(newBonus);
+        character.addBonusToList(newBonus);
+        return characterRepo.save(character);
+    }
+
+    public Character deleteBonus(Long characterId, Long bonusId) {
+        Character character = characterRepo.findById(characterId).orElseThrow();
+        Bonus bonus = bonusRepo.findById(bonusId).orElseThrow();
+        Set<Bonus> bonuses = character.getOtherBonuses();
+        bonuses.remove(bonus);
+        character.setOtherBonuses(bonuses);
+        return characterRepo.save(character);
+    }
+
+    public void deleteCharacter(Long id, String name){
+        Character character = characterRepo.findById(id).orElseThrow();
+        if(character.getName().equals(name)) characterRepo.deleteById(id);
     }
 }

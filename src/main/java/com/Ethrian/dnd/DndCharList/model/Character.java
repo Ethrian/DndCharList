@@ -340,6 +340,10 @@ public class Character {
         this.otherBonuses = otherBonuses;
     }
 
+    public void addBonusToList(Bonus bonus) {
+        this.otherBonuses.add(bonus);
+    }
+
     public Integer getAthleticBonus() {
         return athleticBonus;
     }

@@ -22,6 +22,7 @@ public class Spell {
     private Boolean verbal;
     private Boolean somatic;
     private String material;
+    private Boolean dirty;
 
 
     public Spell() { }
@@ -37,6 +38,7 @@ public class Spell {
         this.verbal = verbal;
         this.somatic = somatic;
         this.material = material;
+        this.dirty = false;
     }
 
     public Long getId() {
@@ -125,5 +127,13 @@ public class Spell {
 
     public void setMaterial(String material) {
         this.material = material;
+    }
+
+    public Boolean getDirty() {
+        return dirty;
+    }
+
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
     }
 }

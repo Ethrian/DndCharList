@@ -5,6 +5,8 @@ import com.Ethrian.dnd.DndCharList.repo.BonusRepo;
 import com.Ethrian.dnd.DndCharList.repo.SpellRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SpellService {
 
@@ -16,8 +18,13 @@ public class SpellService {
         this.bonusRepo = bonusRepo;
     }
 
-    public Iterable<Spell> getAllSpells() {
-        return spellRepo.findAll();
+    public List<Spell> getAllSpells() {
+        Iterable<Spell> allSpells = spellRepo.findAll();
+        List<Spell> spellList = null;
+        for (Spell spell : allSpells) {
+            if(!spell.getDirty()) spellList.add(spell);
+        }
+        return spellList;
     }
 
     public Spell getSpell(Long id) {
@@ -72,5 +79,9 @@ public class SpellService {
         if(M != null) spell.setMaterial(M);
 
         return spellRepo.save(spell);
+    }
+
+    public void deleteSpell(Long id) {
+        spellRepo.deleteById(id);
     }
 }

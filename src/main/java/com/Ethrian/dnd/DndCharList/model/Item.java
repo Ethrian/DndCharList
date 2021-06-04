@@ -17,12 +17,22 @@ public class Item {
     private Double weight;
     private String itemType;
     private Integer amount;
+    private Boolean dirty;
 
     @ManyToMany
     @CollectionTable(name = "item_bonus", joinColumns = @JoinColumn(name = "bonus_id"))
     private Set<Bonus> itemBonuses;
 
     public Item() { }
+
+    public Item(String name, String description, Double weight, String itemType, Integer amount) {
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+        this.itemType = itemType;
+        this.amount = amount;
+        this.dirty = false;
+    }
 
     public Long getId() {
         return id;
@@ -78,5 +88,17 @@ public class Item {
 
     public void setItemBonuses(Set<Bonus> itemBonuses) {
         this.itemBonuses = itemBonuses;
+    }
+
+    public void addBonusToItem(Bonus bonus) {
+        this.itemBonuses.add(bonus);
+    }
+
+    public Boolean getDirty() {
+        return dirty;
+    }
+
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
     }
 }

@@ -13,12 +13,19 @@ public class Race {
 
     private String name;
     private String description;
+    private Boolean dirty;
 
     @ManyToMany
     @CollectionTable(name = "race_bonus", joinColumns = @JoinColumn(name = "race_id"))
     private Set<Bonus> racialBonuses;
 
     public Race() { }
+
+    public Race(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.dirty = false;
+    }
 
     public Long getId() {
         return id;
@@ -50,5 +57,17 @@ public class Race {
 
     public void setRacialBonuses(Set<Bonus> racialBonuses) {
         this.racialBonuses = racialBonuses;
+    }
+
+    public void addBonusToRace(Bonus racialBonus) {
+        this.racialBonuses.add(racialBonus);
+    }
+
+    public Boolean getDirty() {
+        return dirty;
+    }
+
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
     }
 }
