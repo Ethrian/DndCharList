@@ -228,6 +228,10 @@ public class Character {
         this.items = items;
     }
 
+    public void addItemToList(Item item) {
+        this.items.add(item);
+    }
+
     public Integer getCp() {
         return cp;
     }
@@ -266,6 +270,10 @@ public class Character {
 
     public void setSpellsList(Set<Spell> spells) {
         this.spells = spells;
+    }
+
+    public void addSpellToList(Spell spell) {
+        this.spells.add(spell);
     }
 
     public Integer getProfBonus() {

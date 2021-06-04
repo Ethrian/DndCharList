@@ -16,7 +16,7 @@ public class Spell {
     private String spellType;
 
     private String castTime;
-    private Integer distance;
+    private String distance;
     private String duration;
 
     private Boolean verbal;
@@ -25,6 +25,19 @@ public class Spell {
 
 
     public Spell() { }
+
+    public Spell(String name, String description, Integer lvl, String spellType, String castTime, String distance, String duration, Boolean verbal, Boolean somatic, String material) {
+        this.name = name;
+        this.description = description;
+        this.lvl = lvl;
+        this.spellType = spellType;
+        this.castTime = castTime;
+        this.distance = distance;
+        this.duration = duration;
+        this.verbal = verbal;
+        this.somatic = somatic;
+        this.material = material;
+    }
 
     public Long getId() {
         return id;
@@ -74,11 +87,11 @@ public class Spell {
         this.castTime = castTime;
     }
 
-    public Integer getDistance() {
+    public String getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 
