@@ -38,7 +38,7 @@ public class CharacterController {
             @RequestParam String gender,
             Map<String, Object> model
     ){
-        Character character = characterService.newCharacter(name, gender);
+        Character character = characterService.createCharacter(name, gender);
         model.put("character", character);
         return "character";
     }

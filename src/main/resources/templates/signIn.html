@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,8 +9,12 @@
         <form th:method="post" th:action="@{/signIn}">
             <input type="text" name="username" />
             <input type="text" name="password" />
-            <input type="submit" />
+            <input type="submit" value="Sign In"/>
         </form>
+        <th:block th:if="${message != null}" th:text="${message}"></th:block>
+    </div>
+    <div>
+        <button th:href="@{/signUp.html}">Sign Up</button>
     </div>
 </body>
 </html>
