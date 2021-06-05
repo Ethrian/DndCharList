@@ -1,5 +1,6 @@
 package com.Ethrian.dnd.DndCharList.service;
 
+import com.Ethrian.dnd.DndCharList.UserPrincipal;
 import com.Ethrian.dnd.DndCharList.model.Role;
 import com.Ethrian.dnd.DndCharList.model.User;
 import com.Ethrian.dnd.DndCharList.repo.UserRepo;
@@ -34,9 +35,9 @@ public class UserService implements UserDetailsService {
             for (Role role: user.getRoles()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getAuthority()));
             }
-            UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-            logger.info("UserDetails: {}", userDetails);
-            return userDetails;
+            UserPrincipal userPrincipal = new UserPrincipal(user);
+            logger.info("UserDetails: {}", userPrincipal);
+            return userPrincipal;
         }
         else throw new UsernameNotFoundException("User not found");
     }
