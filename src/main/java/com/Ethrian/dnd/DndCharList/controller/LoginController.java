@@ -1,5 +1,6 @@
 package com.Ethrian.dnd.DndCharList.controller;
 
+import com.Ethrian.dnd.DndCharList.model.Role;
 import com.Ethrian.dnd.DndCharList.repo.UserRepo;
 import com.Ethrian.dnd.DndCharList.model.User;
 import com.Ethrian.dnd.DndCharList.service.UserService;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -62,6 +64,7 @@ public class LoginController {
             return "signUp";
         }
         User user = new User(username, mail, password);
+        user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
 
         return "signIn";

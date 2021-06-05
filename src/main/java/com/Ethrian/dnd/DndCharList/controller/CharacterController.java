@@ -1,13 +1,12 @@
 package com.Ethrian.dnd.DndCharList.controller;
 
 import com.Ethrian.dnd.DndCharList.model.Character;
-import com.Ethrian.dnd.DndCharList.model.Spell;
+import com.Ethrian.dnd.DndCharList.model.*;
 import com.Ethrian.dnd.DndCharList.service.CharacterService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -34,8 +33,8 @@ public class CharacterController {
 
     @PostMapping(value = "/new")
     public String createCharacter(
-            @RequestParam String name,
-            @RequestParam String gender,
+            @PathVariable String name,
+            @PathVariable String gender,
             Map<String, Object> model
     ){
         Character character = characterService.createCharacter(name, gender);
@@ -53,47 +52,47 @@ public class CharacterController {
 //        return "character";
 //    }
 
-//    @PostMapping(value = "/updateAbilities/{character_id}")
-//    public String updateAbilities(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam Integer STR, @RequestParam Integer DEX,
-//            @RequestParam Integer CON, @RequestParam Integer INT,
-//            @RequestParam Integer WIS, @RequestParam Integer CHA,
-//            Map<String, Object> model
-//    ){
-//        Character updatedCharacter = characterService.updateAbilities(character, STR, DEX, CON, INT, WIS, CHA);
-//        model.put("character", updatedCharacter);
-//        return "character";
-//    }
+    @PostMapping(value = "/updateAbilities/{character_id}")
+    public String updateAbilities(
+            @PathVariable("character_id") Long id,
+            @RequestParam Integer STR, @RequestParam Integer DEX,
+            @RequestParam Integer CON, @RequestParam Integer INT,
+            @RequestParam Integer WIS, @RequestParam Integer CHA,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.updateAbilities(id, STR, DEX, CON, INT, WIS, CHA);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
-//    @PostMapping(value = "/updateStats/{character_id}")
-//    public String updateStats(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam Integer armorClass,
-//            @RequestParam Integer exp,
-//            @RequestParam Integer speed,
-//            Map<String, Object> model
-//    ){
-//        Character updatedCharacter = characterService.updateStats(character, armorClass, exp, speed);
-//        model.put("character", updatedCharacter);
-//        return "character";
-//    }
+    @PostMapping(value = "/updateStats/{character_id}")
+    public String updateStats(
+            @PathVariable("character_id") Long id,
+            @RequestParam Integer armorClass,
+            @RequestParam Integer exp,
+            @RequestParam Integer speed,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.updateStats(id, armorClass, exp, speed);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
-//    @PostMapping(value = "/updateHp/{character_id}")
-//    public String updateHp(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam Integer maxHp,
-//            @RequestParam Integer curHp,
-//            @RequestParam Integer tmpHp,
-//            @RequestParam Integer deathSavesFailed,
-//            @RequestParam Integer deathSavesPassed,
-//            @RequestParam Integer currentHitDices,
-//            Map<String, Object> model
-//    ){
-//        Character updatedCharacter = characterService.updateHp(character, maxHp, curHp, tmpHp, deathSavesFailed, deathSavesPassed, currentHitDices);
-//        model.put("character", updatedCharacter);
-//        return "character";
-//    }
+    @PostMapping(value = "/updateHp/{character_id}")
+    public String updateHp(
+            @RequestParam("character_id") Long id,
+            @RequestParam Integer maxHp,
+            @RequestParam Integer curHp,
+            @RequestParam Integer tmpHp,
+            @RequestParam Integer deathSavesFailed,
+            @RequestParam Integer deathSavesPassed,
+            @RequestParam Integer currentHitDices,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.updateHp(id, maxHp, curHp, tmpHp, deathSavesFailed, deathSavesPassed, currentHitDices);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
     @PostMapping(value = "/updateSkills/{character_id}")
     public String updateSkills(
@@ -131,23 +130,25 @@ public class CharacterController {
         return "character";
     }
 
-//    @PostMapping(value = "/addSpell/{character_id}")
-//    public String addSpell(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam("spell_id") Spell spell,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
+    @PostMapping(value = "/addSpell/{character_id}")
+    public String addSpell(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam("spell_id") Long spellId,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.addSpell(characterId, spellId);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
     @PostMapping(value = "/removeSpell/{character_id}")
     public String removeSpell(
-            @RequestParam("character_id") Character character,
-            @RequestParam("spell_id") Spell spell,
+            @PathVariable("character_id") Long characterId,
+            @RequestParam("spell_id") Long spellId,
             Map<String, Object> model
     ){
-
+        Character updatedCharacter = characterService.deleteSpell(characterId, spellId);
+        model.put("character", updatedCharacter);
         return "character";
     }
 
@@ -158,86 +159,95 @@ public class CharacterController {
     ){
         Set<Spell> spells = characterService.getSpells(id);
         logger.info("Character spells: {}", spells);
+        model.put("spells", spells);
         return "character";
     }
 
-//    @PostMapping(value = "/addItem/{character_id}")
-//    public String addItem(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam("item_id") Item item,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @PostMapping(value = "/removeItem/{character_id}")
-//    public String removeItem(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam("item_id") Item item,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @GetMapping(value = "/getItems/{character_id}")
-//    public String getItems(
-//            @RequestParam("character_id") Character character,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @GetMapping(value = "/getRace/{character_id}")
-//    public String getRace(
-//            @RequestParam("character_id") Character character,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @PostMapping(value = "/addRace/{character_id}")
-//    public String addRace(
-//            @RequestParam("character_id") Character character,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @GetMapping(value = "/getCharacterClass/{character_id}")
-//    public String getCharacterClass(
-//            @PathVariable("character_id") Long id,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @PostMapping(value = "/addCharacterClass/{character_id}")
-//    public String addCharacterClass(
-//            @RequestParam("character_id") Character character,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-//
-//    @PostMapping(value = "/updateDescription/{character_id}")
-//    public String updateDescription(
-//            @RequestParam("character_id") Character character,
-//            @RequestParam String name,
-//            @RequestParam String appearance,
-//            @RequestParam String background,
-//            @RequestParam String gender,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
+    @PostMapping(value = "/addItem/{character_id}")
+    public String addItem(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam("item_id") Long itemId,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.addItem(characterId, itemId);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
+    @PostMapping(value = "/removeItem/{character_id}")
+    public String removeItem(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam("item_id") Long itemId,
+            Map<String, Object> model
+    ){
+        Character updatedCharacter = characterService.deleteItem(characterId, itemId);
+        model.put("character", updatedCharacter);
+        return "character";
+    }
 
+    @GetMapping(value = "/getItems/{character_id}")
+    public String getItems(
+            @PathVariable("character_id") Long id,
+            Map<String, Object> model
+    ){
+        Set<Item> items = characterService.getItems(id);
+        model.put("items", items);
+        return "character";
+    }
+
+    @GetMapping(value = "/getRace/{character_id}")
+    public String getRace(
+            @PathVariable("character_id") Long id,
+            Map<String, Object> model
+    ){
+        Race race = characterService.getCharacterById(id).getRace();
+        model.put("race", race);
+        return "character";
+    }
+
+    @PostMapping(value = "/addRace/{character_id}")
+    public String addRace(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam Long raceId,
+            Map<String, Object> model
+    ){
+        Character character = characterService.addRace(characterId, raceId);
+        model.put("character", character);
+        return "character";
+    }
+
+    @GetMapping(value = "/getCharacterClass/{character_id}")
+    public String getCharacterClass(
+            @PathVariable("character_id") Long id,
+            Map<String, Object> model
+    ){
+        CharacterClass characterClass = characterService.getCharacterById(id).getCharacterClass();
+        model.put("class", characterClass);
+        return "character";
+    }
+
+    @PostMapping(value = "/addCharacterClass/{character_id}")
+    public String addCharacterClass(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam Long classId,
+            Map<String, Object> model
+    ){
+        Character character = characterService.addRace(characterId, classId);
+        model.put("character", character);
+        return "character";
+    }
+
+    @PostMapping(value = "/updateDescription/{character_id}")
+    public String updateDescription(
+            @PathVariable("character_id") Long id,
+            @RequestParam String name,
+            @RequestParam String appearance,
+            @RequestParam String background,
+            @RequestParam String gender,
+            Map<String, Object> model
+    ){
+        Character character = characterService.updateDescription(id, name, gender, background, appearance);
+        model.put("character", character);
+        return "character";
+    }
 }

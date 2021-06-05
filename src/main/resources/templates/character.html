@@ -28,75 +28,75 @@
             </tr>
         </table>
 
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <th>athletic</th>-->
-<!--                <td th:text="${character.athletic}"></td>-->
-<!--                <th>acrobatic</th>-->
-<!--                <td th:text="${character.acrobatic}"></td>-->
-<!--                <th>sleight of hands</th>-->
-<!--                <td th:text="${character.sleightOfHands}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>stealth</th>-->
-<!--                <td th:text="${character.stealth}"></td>-->
-<!--                <th>investigation</th>-->
-<!--                <td th:text="${character.investigation}"></td>-->
-<!--                <th>history</th>-->
-<!--                <td th:text="${character.history}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>nature</th>-->
-<!--                <td th:text="${character.nature}"></td>-->
-<!--                <th>arcana</th>-->
-<!--                <td th:text="${character.arcana}"></td>-->
-<!--                <th>religion</th>-->
-<!--                <td th:text="${character.religion}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>perception</th>-->
-<!--                <td th:text="${character.perception}"></td>-->
-<!--                <th>insight</th>-->
-<!--                <td th:text="${character.insight}"></td>-->
-<!--                <th>survival</th>-->
-<!--                <td th:text="${character.survival}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>medicine</th>-->
-<!--                <td th:text="${character.medicine}"></td>-->
-<!--                <th>animal handling</th>-->
-<!--                <td th:text="${character.animalHandling}"></td>-->
-<!--                <th>deception</th>-->
-<!--                <td th:text="${character.deception}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>investigation</th>-->
-<!--                <td th:text="${character.investigation}"></td>-->
-<!--                <th>performance</th>-->
-<!--                <td th:text="${character.performance}"></td>-->
-<!--                <th>persuation</th>-->
-<!--                <td th:text="${character.persuasion}"></td>-->
-<!--            </tr>-->
-<!--        </table>-->
+        <table>
+            <tr>
+                <th>athletic</th>
+                <td th:text="${character.athletic}"></td>
+                <th>acrobatic</th>
+                <td th:text="${character.acrobatic}"></td>
+                <th>sleight of hands</th>
+                <td th:text="${character.sleightOfHands}"></td>
+            </tr>
+            <tr>
+                <th>stealth</th>
+                <td th:text="${character.stealth}"></td>
+                <th>investigation</th>
+                <td th:text="${character.investigation}"></td>
+                <th>history</th>
+                <td th:text="${character.history}"></td>
+            </tr>
+            <tr>
+                <th>nature</th>
+                <td th:text="${character.nature}"></td>
+                <th>arcana</th>
+                <td th:text="${character.arcana}"></td>
+                <th>religion</th>
+                <td th:text="${character.religion}"></td>
+            </tr>
+            <tr>
+                <th>perception</th>
+                <td th:text="${character.perception}"></td>
+                <th>insight</th>
+                <td th:text="${character.insight}"></td>
+                <th>survival</th>
+                <td th:text="${character.survival}"></td>
+            </tr>
+            <tr>
+                <th>medicine</th>
+                <td th:text="${character.medicine}"></td>
+                <th>animal handling</th>
+                <td th:text="${character.animalHandling}"></td>
+                <th>deception</th>
+                <td th:text="${character.deception}"></td>
+            </tr>
+            <tr>
+                <th>investigation</th>
+                <td th:text="${character.investigation}"></td>
+                <th>performance</th>
+                <td th:text="${character.performance}"></td>
+                <th>persuation</th>
+                <td th:text="${character.persuasion}"></td>
+            </tr>
+        </table>
 
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <th>current hp</th>-->
-<!--                <td th:text="${character.curHp}"></td>-->
-<!--                <th>maximum hp</th>-->
-<!--                <td th:text="${character.maxHp}"></td>-->
-<!--                <th>temporal hp</th>-->
-<!--                <td th:text="${character.tmpHp}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>fails</th>-->
-<!--                <td th:text="${character.DeathSavesFailed}"></td>-->
-<!--                <th>successes</th>-->
-<!--                <td th:text="${character.DeathSavesPassed}"></td>-->
-<!--                <th>hit dices</th>-->
-<!--                <td th:text="${character.currentHitDices}"></td>-->
-<!--            </tr>-->
-<!--        </table>-->
+        <table>
+            <tr>
+                <th>current hp</th>
+                <td th:text="${character.curHp}"></td>
+                <th>maximum hp</th>
+                <td th:text="${character.maxHp}"></td>
+                <th>temporal hp</th>
+                <td th:text="${character.tmpHp}"></td>
+            </tr>
+            <tr>
+                <th>fails</th>
+                <td th:text="${character.DeathSavesFailed}"></td>
+                <th>successes</th>
+                <td th:text="${character.DeathSavesPassed}"></td>
+                <th>hit dices</th>
+                <td th:text="${character.currentHitDices}"></td>
+            </tr>
+        </table>
 
         <form th:method="post", th:action="@{/character/getSpells}">
             <input type="hidden" name="character_id" value="${character.id}" />
@@ -115,12 +115,12 @@
         <form th:method="post", th:action="@{/character/updateHp}">
             <h4>change hp</h4>
 
-<!--            <label>current hp <input type="number" name="curHp" th:value="${character.curHp}" /></label><br/>-->
-<!--            <label>temporal hp <input type="number" name="tmpHp" th:value="${character.tmpHp}" /></label><br/>-->
-<!--            <label>maximum hp <input type="number" name="maxHp" th:value="${character.maxHp}" /></label><br/>-->
+            <label>current hp <input type="number" name="curHp" th:value="${character.curHp}" /></label><br/>
+            <label>temporal hp <input type="number" name="tmpHp" th:value="${character.tmpHp}" /></label><br/>
+            <label>maximum hp <input type="number" name="maxHp" th:value="${character.maxHp}" /></label><br/>
             <label>death saves fails <input type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></label><br/>
             <label>death saves successes <input type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></label><br/>
-<!--            <label>hit dices <input type="number" name="currentHitDices" th:value="${character.currentHitDices}" /></label><br/>-->
+            <label>hit dices <input type="number" name="currentHitDices" th:value="${character.currentHitDices}" /></label><br/>
             <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
@@ -145,24 +145,24 @@
         <form th:method="post", th:action="@{/character/updateSkills}">
             <h4>change skills</h4>
 
-<!--            <label>athletic <input type="number" name="athletic" th:value="${character.athletic}" /></label><br/>-->
-<!--            <label>acrobatic <input type="number" name="acrobatic" th:value="${character.acrobatic}" /></label><br/>-->
-<!--            <label>sleight of hands <input type="number" name="sleightOfHands" th:value="${character.sleightOfHands}" /></label><br/>-->
-<!--            <label>stealth <input type="number" name="stealth" th:value="${character.stealth}" /></label><br/>-->
-<!--            <label>investigation <input type="number" name="investigation" th:value="${character.investigation}" /></label><br/>-->
-<!--            <label>history <input type="number" name="history" th:value="${character.history}" /></label><br/>-->
-<!--            <label>nature <input type="number" name="nature" th:value="${character.nature}" /></label><br/>-->
-<!--            <label>arcana <input type="number" name="arcana" th:value="${character.arcana}" /></label><br/>-->
-<!--            <label>religion <input type="number" name="religion" th:value="${character.religion}" /></label><br/>-->
-<!--            <label>perception <input type="number" name="perception" th:value="${character.perception}" /></label><br/>-->
-<!--            <label>insight <input type="number" name="insight" th:value="${character.insight}" /></label><br/>-->
-<!--            <label>survival <input type="number" name="survival" th:value="${character.survival}" /></label><br/>-->
-<!--            <label>medicine <input type="number" name="medicine" th:value="${character.medicine}" /></label><br/>-->
-<!--            <label>animal handling <input type="number" name="animalHandling" th:value="${character.animalHandling}" /></label><br/>-->
-<!--            <label>deception <input type="number" name="deception" th:value="${character.deception}" /></label><br/>-->
-<!--            <label>intimidation <input type="number" name="intimidation" th:value="${character.intimidation}" /></label><br/>-->
-<!--            <label>performance <input type="number" name="performance" th:value="${character.performance}" /></label><br/>-->
-<!--            <label>persuasion <input type="number" name="persuation" th:value="${character.persuasion}" /></label><br/>-->
+            <label>athletic <input type="number" name="athletic" th:value="${character.athletic}" /></label><br/>
+            <label>acrobatic <input type="number" name="acrobatic" th:value="${character.acrobatic}" /></label><br/>
+            <label>sleight of hands <input type="number" name="sleightOfHands" th:value="${character.sleightOfHands}" /></label><br/>
+            <label>stealth <input type="number" name="stealth" th:value="${character.stealth}" /></label><br/>
+            <label>investigation <input type="number" name="investigation" th:value="${character.investigation}" /></label><br/>
+            <label>history <input type="number" name="history" th:value="${character.history}" /></label><br/>
+            <label>nature <input type="number" name="nature" th:value="${character.nature}" /></label><br/>
+            <label>arcana <input type="number" name="arcana" th:value="${character.arcana}" /></label><br/>
+            <label>religion <input type="number" name="religion" th:value="${character.religion}" /></label><br/>
+            <label>perception <input type="number" name="perception" th:value="${character.perception}" /></label><br/>
+            <label>insight <input type="number" name="insight" th:value="${character.insight}" /></label><br/>
+            <label>survival <input type="number" name="survival" th:value="${character.survival}" /></label><br/>
+            <label>medicine <input type="number" name="medicine" th:value="${character.medicine}" /></label><br/>
+            <label>animal handling <input type="number" name="animalHandling" th:value="${character.animalHandling}" /></label><br/>
+            <label>deception <input type="number" name="deception" th:value="${character.deception}" /></label><br/>
+            <label>intimidation <input type="number" name="intimidation" th:value="${character.intimidation}" /></label><br/>
+            <label>performance <input type="number" name="performance" th:value="${character.performance}" /></label><br/>
+            <label>persuasion <input type="number" name="persuation" th:value="${character.persuasion}" /></label><br/>
 
             <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
@@ -187,7 +187,7 @@
 
             <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>
             <label>background <input type="text" name="background" th:value="${character.background}" /></label><br/>
-<!--            <label>appearance <input type="text" name="appearance" th:value="${character.appearance}" /></label><br/>-->
+            <label>appearance <input type="text" name="appearance" th:value="${character.appearance}" /></label><br/>
             <label>gender <input type="text" name="gender" th:value="${character.gender}" /></label><br/>
             <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />

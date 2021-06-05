@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-
+    <div>
+        <div th:each ="character : ${characters}">
+            <a th:href="@{/character}">
+                <span th:text="${character.name}"></span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
