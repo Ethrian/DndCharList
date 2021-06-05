@@ -20,18 +20,4 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findByUsername(username);
     }
-//
-//    public User createUser(
-//            String username,
-//            String mail,
-//            String password,
-//            String password2
-//    ){
-//        if(userRepo.findByUsername(username) == null) return null;
-//        if(userRepo.findByMail(mail) == null) return null;
-//        if(!password.equals(password2)) return null;
-//
-//        User newUser = new User(username, mail, password);
-//        return userRepo.save(newUser);
-//    }
 }

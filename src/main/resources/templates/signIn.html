@@ -6,8 +6,10 @@
 </head>
 <body>
     <div>
-        <form th:method="post" th:action="@{/login}">
-
+        <form th:method="post" th:action="@{/signIn}">
+            <input type="text" name="username" />
+            <input type="text" name="password" />
+            <input type="submit" />
         </form>
     </div>
 </body>
