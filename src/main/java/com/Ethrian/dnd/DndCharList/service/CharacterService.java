@@ -31,7 +31,7 @@ public class CharacterService {
         return characterRepo.findById(id).orElseThrow();
     }
 
-    public Character newCharacter(
+    public Character createCharacter(
             String name,
             String gender
     ){
@@ -110,6 +110,21 @@ public class CharacterService {
         return characterRepo.save(character);
     }
 
+    public Character updateDescription(
+            Long id,
+            String name,
+            String gender,
+            String background,
+            String appearance
+    ){
+        Character character = characterRepo.findById(id).orElseThrow();
+        if(name != null) character.setName(name);
+        if(gender != null) character.setGender(gender);
+        if(background != null) character.setBackground(background);
+        if(appearance != null) character.setAppearence(appearance);
+        return characterRepo.save(character);
+    }
+
     public Character updateHp(
             Long id,
             Integer maxHp,
@@ -171,6 +186,7 @@ public class CharacterService {
         if(sleightOfHands != null) character.setSleightOfHandsBonus(sleightOfHands);
         if(stealth != null) character.setStealthBonus(stealth);
         if(investigation != null) character.setInvestigationBonus(investigation);
+        if(history != null) character.setHistoryBonus(history);
         if(nature != null) character.setNatureBonus(nature);
         if(arcana != null) character.setArcanaBonus(arcana);
         if(religion != null) character.setReligionBonus(religion);
