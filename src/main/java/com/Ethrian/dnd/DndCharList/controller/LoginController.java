@@ -3,6 +3,7 @@ package com.Ethrian.dnd.DndCharList.controller;
 import com.Ethrian.dnd.DndCharList.model.Role;
 import com.Ethrian.dnd.DndCharList.repo.UserRepo;
 import com.Ethrian.dnd.DndCharList.model.User;
+import com.Ethrian.dnd.DndCharList.service.CharacterService;
 import com.Ethrian.dnd.DndCharList.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,19 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/")
 public class LoginController {
-    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private final UserRepo userRepo;
     private final UserService userService;
+    private final CharacterService characterService;
 
-    public LoginController(UserRepo userRepo, UserService userService) {
+    public LoginController(UserRepo userRepo, UserService userService, CharacterService characterService) {
         this.userRepo = userRepo;
         this.userService = userService;
+        this.characterService = characterService;
     }
 
     @GetMapping(value = {"/signIn", "/"})
@@ -41,8 +44,7 @@ public class LoginController {
             model.put("message", "Wrong username of password");
             return "signIn";
         }
-        // todo: get user's characters and add them to the model
-        return "characters";
+        return "redirect:/user/" + user.getId();
     }
 
     @GetMapping(value = "/signUp")

@@ -14,6 +14,7 @@ public class User {
     private String username;
     private String mail;
     private String password;
+    private boolean active;
 
     @OneToMany
     @JoinColumn(name = "characterClass")
@@ -83,5 +84,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

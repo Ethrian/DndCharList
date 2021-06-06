@@ -5,7 +5,9 @@ import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.repo.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -17,18 +19,34 @@ public class CharacterService {
     private CharacterClassRepo characterClassRepo;
     private RaceRepo raceRepo;
     private BonusRepo bonusRepo;
+    private UserRepo userRepo;
 
-    public CharacterService(CharacterRepo characterRepo, SpellRepo spellRepo, ItemRepo itemRepo, CharacterClassRepo characterClassRepo, RaceRepo raceRepo, BonusRepo bonusRepo) {
+    public CharacterService(
+            CharacterRepo characterRepo,
+            SpellRepo spellRepo,
+            ItemRepo itemRepo,
+            CharacterClassRepo characterClassRepo,
+            RaceRepo raceRepo,
+            BonusRepo bonusRepo,
+            UserRepo userRepo
+    ) {
         this.characterRepo = characterRepo;
         this.spellRepo = spellRepo;
         this.itemRepo = itemRepo;
         this.characterClassRepo = characterClassRepo;
         this.raceRepo = raceRepo;
         this.bonusRepo = bonusRepo;
+        this.userRepo = userRepo;
     }
 
     public Character getCharacterById(Long id) {
         return characterRepo.findById(id).orElseThrow();
+    }
+
+    public List<Character> getCharactersForUser(Long userId) {
+        final List<Character> characters = new ArrayList<>();
+        User user = userRepo.findById(userId).orElseThrow();
+        return characterRepo.findCharactersByUser(user);
     }
 
     public Character createCharacter(

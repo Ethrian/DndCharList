@@ -8,11 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(value = "/characters")
+@RequestMapping(value = "/user/{userId}/characters")
 public class CharacterController {
 
     private final Logger logger = LoggerFactory.getLogger(CharacterController.class);
@@ -25,7 +26,6 @@ public class CharacterController {
 
     @GetMapping(value = "/{character_id}")
     public String getCharacter(@PathVariable("character_id") Long id, Map<String, Object> model){
-        logger.info("Get character with ID: {}", id);
         Character character = characterService.getCharacterById(id);
         model.put("character", character);
         return "character";
@@ -80,7 +80,7 @@ public class CharacterController {
 
     @PostMapping(value = "/updateHp/{character_id}")
     public String updateHp(
-            @RequestParam("character_id") Long id,
+            @PathVariable("character_id") Long id,
             @RequestParam Integer maxHp,
             @RequestParam Integer curHp,
             @RequestParam Integer tmpHp,

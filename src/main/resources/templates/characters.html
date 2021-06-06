@@ -6,11 +6,14 @@
 </head>
 <body>
     <div>
-        <div th:each ="character : ${characters}">
-            <a th:href="@{/character}">
-                <span th:text="${character.name}"></span>
-            </a>
-        </div>
+        <h1>Characters</h1>
+        <th:block th:if="${characters != null}">
+            <div th:each ="character : ${characters}">
+                <a th:href="@{/character}">
+                    <span th:text="${characters.name}"></span>
+                </a>
+            </div>
+        </th:block>
     </div>
 </body>
 </html>
