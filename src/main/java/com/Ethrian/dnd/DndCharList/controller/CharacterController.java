@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +21,11 @@ public class CharacterController {
 
     public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
+    }
+
+    @GetMapping(value = "/")
+    public String getUserCharacters(@PathVariable Long userId, Map<String, Object> model) {
+        return "characters";
     }
 
     @GetMapping(value = "/{character_id}")

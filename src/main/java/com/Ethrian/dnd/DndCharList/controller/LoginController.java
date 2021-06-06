@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,12 +21,10 @@ public class LoginController {
 
     private final UserRepo userRepo;
     private final UserService userService;
-    private final CharacterService characterService;
 
-    public LoginController(UserRepo userRepo, UserService userService, CharacterService characterService) {
+    public LoginController(UserRepo userRepo, UserService userService) {
         this.userRepo = userRepo;
         this.userService = userService;
-        this.characterService = characterService;
     }
 
     @GetMapping(value = {"/signIn", "/"})
@@ -37,6 +36,7 @@ public class LoginController {
     public String signIn(
             @RequestParam String username,
             @RequestParam String password,
+            RedirectAttributes redirectAttrs,
             Map<String, Object> model
     ) {
         User user = userService.signIn(username, password);
@@ -44,7 +44,8 @@ public class LoginController {
             model.put("message", "Wrong username of password");
             return "signIn";
         }
-        return "redirect:/user/" + user.getId();
+        redirectAttrs.addAttribute("userId", user.getId());
+        return "redirect:/user";
     }
 
     @GetMapping(value = "/signUp")
