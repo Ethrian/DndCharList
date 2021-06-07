@@ -59,9 +59,9 @@ public class CharacterController {
 //        return "character";
 //    }
 
-    @PostMapping(value = "/characters/updateAbilities/{character_id}")
+    @PostMapping(value = "/characters/updateAbilities/{id}")
     public String updateAbilities(
-            @PathVariable("character_id") Long id,
+            @PathVariable("id") Long id,
             @RequestParam Integer STR, @RequestParam Integer DEX,
             @RequestParam Integer CON, @RequestParam Integer INT,
             @RequestParam Integer WIS, @RequestParam Integer CHA,
@@ -85,9 +85,9 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/updateHp/{character_id}")
+    @PostMapping(value = "/characters/updateHp/{id}")
     public String updateHp(
-            @PathVariable("character_id") Long id,
+            @PathVariable("id") Long id,
             @RequestParam Integer maxHp,
             @RequestParam Integer curHp,
             @RequestParam Integer tmpHp,
@@ -101,9 +101,9 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/updateSkills/{character_id}")
+    @PostMapping(value = "/characters/updateSkills/{id}")
     public String updateSkills(
-            @PathVariable("character_id") Long characterId,
+            @PathVariable("id") Long characterId,
             @RequestParam Integer athletic,
             @RequestParam Integer acrobatic,
             @RequestParam Integer sleightOfHands,

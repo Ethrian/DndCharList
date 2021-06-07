@@ -25,7 +25,7 @@ public class ItemController {
         return "items";
     }
 
-    @GetMapping(name = "/{itemId}")
+    @GetMapping(name = "/edit/{itemId}")
     public String editItem(@PathVariable Long id, Map<String, Object> model){
         Item item = itemService.getItem(id);
         model.put("item", item);

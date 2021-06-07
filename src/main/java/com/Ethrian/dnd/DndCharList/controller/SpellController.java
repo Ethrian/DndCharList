@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-//@Controller
+@Controller
 @RequestMapping(value = "/user/{userId}/spells")
 public class SpellController {
 
@@ -26,7 +26,7 @@ public class SpellController {
         return "spells";
     }
 
-    @GetMapping(value = "/{spellId}")
+    @GetMapping(value = "/edit/{spellId}")
     public String editSpell(@PathVariable Long id, Map<String, Object> model){
         Spell spell = spellService.getSpell(id);
         model.put("spell", spell);
