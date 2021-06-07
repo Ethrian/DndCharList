@@ -98,12 +98,12 @@
             </tr>
         </table>
 
-        <form th:method="post", th:action="@{/character/getSpells}">
+        <form th:method="post" th:action="@{/character/getSpells}">
             <input type="hidden" name="character_id" value="${character.id}" />
             <button type="submit">spells</button>
         </form>
 
-        <form th:method="post", th:action="@{/character/getItems}">
+        <form th:method="post" th:action="@{/character/getItems}">
             <input type="hidden" name="character_id" value="${character.id}" />
             <button type="submit">items</button>
         </form>
@@ -112,7 +112,7 @@
     </div>
 
     <div>
-        <form th:method="post", th:action="@{/character/updateHp}">
+        <form th:method="post" th:action="@{/character/updateHp}">
             <h4>change hp</h4>
 
             <label>current hp <input type="number" name="curHp" th:value="${character.curHp}" /></label><br/>
@@ -127,7 +127,7 @@
     </div>
 
     <div>
-        <form th:method="post", th:action="@{/character/updateAbilities}">
+        <form th:method="post" th:action="@{/character/updateAbilities}">
             <h4>change abilities</h4>
 
             <label>STR <input type="number" name="STR" th:value="${character.STR}" /></label><br/>
@@ -142,7 +142,7 @@
     </div>
 
     <div>
-        <form th:method="post", th:action="@{/character/updateSkills}">
+        <form th:method="post" th:action="@{/character/updateSkills}">
             <h4>change skills</h4>
 
             <label>athletic <input type="number" name="athletic" th:value="${character.athletic}" /></label><br/>
@@ -170,7 +170,7 @@
     </div>
 
     <div>
-        <form th:method="post", th:action="@{/character/updateStats}">
+        <form th:method="post" th:action="@{/character/updateStats}">
             <h4>change stats</h4>
 
             <label>armor class <input type="number" name="armorClass" th:value="${character.armorClass}" /></label><br/>
@@ -182,7 +182,7 @@
     </div>
 
     <div>
-        <form th:method="post", th:action="@{/character/updateDescription}">
+        <form th:method="post" th:action="@{/character/updateDescription}">
             <h4>change description</h4>
 
             <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>
@@ -194,6 +194,77 @@
         </form>
     </div>
 
+    <div>
+        <table>
+            <tr th:each="spell : ${character.spells}">
+                <td th:text="${spell.name}"></td>
+                <td th:text="${spell.lvl}"></td>
+                <td th:text="${spell.spellType}"></td>
+                <td th:text="${spell.castTime}"></td>
+                <td th:text="${spell.distance}"></td>
+                <td th:text="${spell.duration}"></td>
+                <td th:text="${spell.verbal}"></td>
+                <td th:text="${spell.somatic}"></td>
+                <td th:text="${spell.material}"></td>
+                <td th:text="${spell.description}"></td>
+                <td>
+                    <form th:action="/spell/delete" th:method="post">
+                        <input type="hidden" value="${spell.id}" name="spellId">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="/editSpell" th:method="post">
+                        <input type="hidden" value="${spell.id}" name="spellId">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <form>
+            <a th:thef="/spells">Add spell</a><br />
+        </form>
+    </div>
+
+    <div>
+        <table>
+            <tr th:each="item : ${character.items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${spell.weight}"></td>
+                <td th:text="${spell.itemType}"></td>
+                <td>
+                    <form th:action="/item/delete" th:method="post">
+                        <input type="hidden" value="${item.id}" name="itemId">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="/editItem" th:method="post">
+                        <input type="hidden" value="${item.id}" name="itemId">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <form>
+            <a th:thef="/items">Add item</a><br />
+        </form>
+    </div>
+
+    <div>
+        <span th:text="${character.race.name}"></span>
+        <span th:text="${character.race.description}"></span>
+
+        <a th:thef="/race">Change race</a><br />
+    </div>
+
+    <div>
+        <span th:text="${character.characterClass.name}"></span>
+        <span th:text="${character.characterClass.hitDice}"></span>
+
+        <a th:thef="/charclass">Change class</a><br />
+    </div>
 
 </body>
 </html>

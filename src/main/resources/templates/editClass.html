@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>edit class</h1>
+    <div>
+        <form th:action="characterClass/update" th:method="post">
+            <input type="text" value="${characterClass.name}" name="name"/>
+<!--            hit dices?-->
+            <input type="submit"/>
+        </form>
+    </div>
+</body>
+</html>

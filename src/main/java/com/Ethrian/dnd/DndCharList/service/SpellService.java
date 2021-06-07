@@ -61,6 +61,7 @@ public class SpellService {
 
     public Spell updateParams(
             Long id,
+            Integer lvl,
             String spellType,
             String castTime,
             String distance,
@@ -70,6 +71,7 @@ public class SpellService {
             String M
     ) {
         Spell spell = spellRepo.findById(id).orElseThrow();
+        if(lvl != null) spell.setLvl(lvl);
         if(spellType != null) spell.setSpellType(spellType);
         if(castTime != null) spell.setCastTime(castTime);
         if(distance != null) spell.setDistance(distance);

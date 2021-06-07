@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <form th:method="post" th:action="/race/add">
+            <input type="text" name="name" />
+            <input type="text" name="description" />
+            <button type="submit">Add new</button>
+        </form>
+
+        <table>
+            <tr th:each="race : ${races}">
+                <td th:text="${race.name}"></td>
+                <td th:text="${race.description}"></td>
+                <td>
+                    <form th:action="/race/delete" th:method="post">
+                        <input type="hidden" value="${race.id}" name="raceId">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="/editRace" th:method="post">
+                        <input type="hidden" value="${race.id}" name="raceId">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>//roles
+                    <form th:action="/character/addRace" th:method="post">
+                        <input type="hidden" value="${race.id}" name="raceId">
+                        <button type="submit">Add</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.Ethrian.dnd.DndCharList.controller;
 
+import com.Ethrian.dnd.DndCharList.model.User;
 import com.Ethrian.dnd.DndCharList.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,8 @@ public class UserController {
 
     @GetMapping
     public String getCharactersPage(@RequestParam("userId") Long userId, Map<String, Object> model) {
-//        User user = userService.getUserById(id);
-//        model.put("characters", user.getCharacters());
+        User user = userService.getUserById(userId);
+        model.put("user", user);
         return "profile";
     }
 }

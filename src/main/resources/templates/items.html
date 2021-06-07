@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <form th:method="post" th:action="/item/add">
+            <input type="text" name="name" />
+            <input type="text" name="description" />
+            <input type="number" name="weight" />
+            <input type="text" name="itemType" />
+            <button type="submit">Add new</button>
+        </form>
+
+        <table>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.weight}"></td>
+                <td th:text="${item.itemType}"></td>
+                <td>
+                    <form th:action="/item/delete" th:method="post">
+                        <input type="hidden" value="${item.id}" name="itemId">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="/editItem" th:method="post">
+                        <input type="hidden" value="${item.id}" name="itemId">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>//roles
+                    <form th:action="/character/addItem" th:method="post">
+                        <input type="hidden" value="${item.id}" name="itemId">
+                        <button type="submit">Add</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

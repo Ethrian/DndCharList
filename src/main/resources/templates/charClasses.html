@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <form th:method="post" th:action="/characterClass/add">
+            <input type="text" name="name" />
+<!--            hit dices? -->
+            <button type="submit">Add new</button>
+        </form>
+
+        <table>
+            <tr th:each="characterClass : ${characterClasses}">
+                <td th:text="${characterClass.name}"></td>
+                <td th:text="${characterClass.hitDice}"></td>
+                <td>
+                    <form th:action="/characterClass/delete" th:method="post">
+                        <input type="hidden" value="${characterClass.id}" name="classId">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="/editClass" th:method="post">
+                        <input type="hidden" value="${characterClass.id}" name="classId">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>//roles
+                    <form th:action="/character/addClass" th:method="post">
+                        <input type="hidden" value="${characterClass.id}" name="classId">
+                        <button type="submit">Add</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

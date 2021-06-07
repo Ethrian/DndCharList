@@ -35,10 +35,12 @@ public class ItemService {
 
     public Item createItem(
             String name,
+            String description,
+            Double weight,
             String itemType,
             Integer amount
     ) {
-        Item newItem = new Item(name, name, 1.0D, itemType, amount);
+        Item newItem = new Item(name, description, weight, itemType, amount);
         return itemRepo.save(newItem);
     }
 

@@ -35,8 +35,8 @@ public class RaceService {
         return raceList;
     }
 
-    public Race createRace(String name) {
-        Race newRace = new Race(name, name);
+    public Race createRace(String name, String description) {
+        Race newRace = new Race(name, description);
         return raceRepo.save(newRace);
     }
 
