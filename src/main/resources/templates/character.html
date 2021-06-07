@@ -255,19 +255,17 @@
 <!--        </form>-->
 <!--    </div>-->
 
-    <div th:with="race = ${character.race != null} ? ${character.race} : 'none'">
-        <span th:text="${race.name}"></span>
-        <span th:text="${race.description}"></span>
-
-        <a th:thef="/race">Change race</a><br />
+    <div th:if="${character.race != null}">
+        <span th:text="${character.race.name}"></span>
+        <span th:text="${character.race.description}"></span>
     </div>
+    <a th:href="@{/race}">Change race</a><br />
 
-    <div th:with="characterClass = ${character.class != null} ? ${character.characterClass} : 'none'">
-        <span th:text="${characterClass.name}"></span>
-        <span th:text="${characterClass.hitDice}"></span>
-
-        <a th:thef="/charclass">Change class</a><br />
+    <div th:if="${character.characterClass != null}">
+        <span th:text="${character.characterClass.name}"></span>
+        <span th:text="${character.characterClass.hitDice}"></span>
     </div>
+    <a th:href="@{/charclass}">Change class</a><br />
 
 </body>
 </html>
