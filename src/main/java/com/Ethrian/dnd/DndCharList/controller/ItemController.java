@@ -4,68 +4,68 @@ import com.Ethrian.dnd.DndCharList.model.Item;
 import com.Ethrian.dnd.DndCharList.service.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
-//@Controller
-@RequestMapping(value = "/user/{userId}/items")
+@Controller
+@RequestMapping(value = "/items")
 public class ItemController {
 
     private ItemService itemService;
 
-    public ItemController(ItemService itemService) {
+    public ItemController(
+            ItemService itemService
+    ) {
         this.itemService = itemService;
     }
 
-    @GetMapping(name = "/")
-    public String getItems(Map<String, Object> model){
+    @GetMapping
+    public ModelAndView getItems(){
         List<Item> items = itemService.getAllItems();
-        model.put("items", items);
-        return "items";
+        ModelAndView model = new ModelAndView("items");
+        model.addObject("items", items);
+        return model;
     }
 
-    @GetMapping(name = "/edit/{itemId}")
-    public String editItem(@PathVariable Long id, Map<String, Object> model){
+    @GetMapping(value = "/edit/{itemId}")
+    public ModelAndView editItem(@PathVariable Long id){
         Item item = itemService.getItem(id);
-        model.put("item", item);
-        return "/editItem";
+        ModelAndView model = new ModelAndView("editItem");
+        model.addObject("item", item);
+        return model;
     }
 
-    @GetMapping(name = "/delete")
-    public String deleteItem(@PathVariable Long id, Map<String, Object> model){
+    @DeleteMapping(value = "/delete/{id}")
+    public ModelAndView deleteItem(@PathVariable Long id){
         itemService.deleteItem(id);
-        return "redirect:/items";
+        return new ModelAndView("redirect:/items");
     }
 
 
-    @PostMapping(name = "/{itemId}")
-    public String saveItem(
+    @PostMapping(value = "/{itemId}")
+    public ModelAndView saveItem(
             @PathVariable Long id,
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam Double weight,
-            @RequestParam String itemType,
-            Map<String, Object> model
+            @RequestParam String itemType
     ){
         itemService.updateName(id, name);
         itemService.updateDescription(id, description);
         Item item = itemService.updateParams(id, itemType, weight, 1);
-        model.put("item", item);
-        return "redirect:/items";
+        return new ModelAndView("redirect:/items");
     }
 
-    @PostMapping(name = "/new")
-    public String newItem(
+    @PostMapping(value = "/new")
+    public ModelAndView newItem(
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam Double weight,
-            @RequestParam String itemType,
-            Map<String, Object> model
+            @RequestParam String itemType
     ){
         Item item = itemService.createItem(name, description, weight, itemType, 1);
-        model.put("item", item);
-        return "redirect:/items";
+        return new ModelAndView("redirect:/items");
     }
 
 }

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-//@Controller
-@RequestMapping(value = "/user/{userId}/class")
+@Controller
+@RequestMapping(value = "/class")
 public class CharacterClassController {
 
     private CharacterClassService characterClassService;
@@ -20,7 +20,7 @@ public class CharacterClassController {
         this.characterClassService = characterClassService;
     }
 
-    @GetMapping(name = "/")
+    @GetMapping
     public String getClasses(Map<String, Object> model){
         List<CharacterClass> characterClasses = characterClassService.getAllClasses();
         model.put("characterClasses", characterClasses);
@@ -41,7 +41,7 @@ public class CharacterClassController {
 //    }
 
 
-    @PostMapping(name = "/{classId}")
+    @PostMapping(value = "/{id}")
     public String saveClass(
             @PathVariable Long id,
             @RequestParam String name,
@@ -54,7 +54,7 @@ public class CharacterClassController {
         return "redirect:/charClasses";
     }
 
-    @PostMapping(name = "/new")
+    @PostMapping(value = "/new")
     public String newClass(
             @RequestParam String name,
             @RequestParam Dice hitDice,
