@@ -7,16 +7,16 @@
 <body>
     <div>
         <h1>Characters</h1>
-        <th:block th:if="${characters != null}">
+        <div th:with="characters = ${characters != null} ? ${characters} : ${#session.getAttribute('characters')}">
             <div th:each ="character : ${characters}">
                 <a th:href="@{/character}">
-                    <span th:text="${characters.name}"></span>
+                    <span th:text="${character.name}"></span>
                 </a>
             </div>
-        </th:block>
+        </div>
     </div>
     <div>
-        <form th:action="@{/user/${user.id}/characters/new}" th:method="post">
+        <form th:action="@{/characternew}" th:method="post">
             <input type="text" name="name" />
             <input type="text" name="gender" />
             <input type="submit"/>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+//@Controller
 @RequestMapping(value = "/user/{userId}/class")
 public class CharacterClassController {
 
@@ -27,18 +27,18 @@ public class CharacterClassController {
         return "/charClasses";
     }
 
-    @GetMapping(name = "/{classId}")
-    public String editClass(@PathVariable Long id, Map<String, Object> model){
-        CharacterClass characterClass = characterClassService.getCharacterClass(id);
-        model.put("characterClass", characterClass);
-        return "/editClass";
-    }
+//    @GetMapping(name = "/{classId}")
+//    public String editClass(@PathVariable("classId") Long classId, @PathVariable("userId") Long userId, Map<String, Object> model){
+//        CharacterClass characterClass = characterClassService.getCharacterClass(classId);
+//        model.put("characterClass", characterClass);
+//        return "/editClass";
+//    }
 
-    @GetMapping(name = "/delete")
-    public String deleteClass(@PathVariable Long id, Map<String, Object> model){
-        characterClassService.deleteCharacterClass(id);
-        return "redirect:/charClasses";
-    }
+//    @GetMapping(name = "/delete")
+//    public String deleteClass(@PathVariable Long id, Map<String, Object> model){
+//        characterClassService.deleteCharacterClass(id);
+//        return "redirect:/charClasses";
+//    }
 
 
     @PostMapping(name = "/{classId}")

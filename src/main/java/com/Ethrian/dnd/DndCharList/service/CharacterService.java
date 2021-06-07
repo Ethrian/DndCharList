@@ -50,10 +50,13 @@ public class CharacterService {
     }
 
     public Character createCharacter(
+            User user,
             String name,
             String gender
     ){
         Character character = new Character(name, gender);
+
+        character.setUser(user);
 
         character.setSTR(10);
         character.setDEX(10);

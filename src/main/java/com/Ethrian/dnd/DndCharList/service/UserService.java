@@ -1,8 +1,10 @@
 package com.Ethrian.dnd.DndCharList.service;
 
+import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.model.UserPrincipal;
 import com.Ethrian.dnd.DndCharList.model.Role;
 import com.Ethrian.dnd.DndCharList.model.User;
+import com.Ethrian.dnd.DndCharList.repo.CharacterRepo;
 import com.Ethrian.dnd.DndCharList.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,9 +21,14 @@ public class UserService implements UserDetailsService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private UserRepo userRepo;
+    private CharacterRepo characterRepo;
 
-    public UserService (UserRepo userRepo) {
+    public UserService (
+            UserRepo userRepo,
+            CharacterRepo characterRepo
+    ) {
         this.userRepo = userRepo;
+        this.characterRepo = characterRepo;
     }
 
     @Override
@@ -50,5 +58,9 @@ public class UserService implements UserDetailsService {
     public User getUserById(Long id) {
         User user = userRepo.findById(id).orElseThrow();
         return user;
+    }
+
+    public List<Character> getUserCharacters(User user) {
+        return characterRepo.findCharactersByUser(user);
     }
 }
