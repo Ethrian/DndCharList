@@ -193,79 +193,35 @@
         </form>
     </div>
 
-<!--    <div>-->
-<!--        <form th:method="post" th:action="@{/character/updateDescription}">-->
-<!--            <h4>change description</h4>-->
+    <div>
+        <form th:method="post" th:action="@{/character/updateDescription}">
+            <h4>change description</h4>
 
-<!--            <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>-->
-<!--            <label>background <input type="text" name="background" th:value="${character.background}" /></label><br/>-->
-<!--            <label>appearance <input type="text" name="appearance" th:value="${character.appearence}" /></label><br/>-->
-<!--            <label>gender <input type="text" name="gender" th:value="${character.gender}" /></label><br/>-->
-<!--            <input type="hidden" name="character_id" th:value="${character.id}" />-->
-<!--            <input type="submit" />-->
-<!--        </form>-->
-<!--    </div>-->
+            <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>
+            <label>background <input type="text" name="background" th:value="${character.background}" /></label><br/>
+            <label>appearance <input type="text" name="appearance" th:value="${character.appearence}" /></label><br/>
+            <label>gender <input type="text" name="gender" th:value="${character.gender}" /></label><br/>
+            <input type="hidden" name="character_id" th:value="${character.id}" />
+            <input type="submit" />
+        </form>
+    </div>
 
-<!--    <div>-->
-<!--        <h3>Spells</h3>-->
-<!--        <table>-->
-<!--            <tr th:each="spell : ${character.spells}">-->
-<!--                <td th:text="${spell.name}"></td>-->
-<!--                <td th:text="${spell.lvl}"></td>-->
-<!--                <td th:text="${spell.spellType}"></td>-->
-<!--                <td th:text="${spell.castTime}"></td>-->
-<!--                <td th:text="${spell.distance}"></td>-->
-<!--                <td th:text="${spell.duration}"></td>-->
-<!--                <td th:text="${spell.verbal}"></td>-->
-<!--                <td th:text="${spell.somatic}"></td>-->
-<!--                <td th:text="${spell.material}"></td>-->
-<!--                <td th:text="${spell.description}"></td>-->
-<!--                <td>-->
-<!--                <td>-->
-<!--                    <a th:href="@{/user/{userId}(id=${character.id})/spell/delete/{spellId}(id=${spell.id})">Delete</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a th:href="@{/user/{userId}(id=${character.id})/spell/edit/{spellId}(id=${spell.id})">Edit</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <form>-->
-<!--            <a th:href="@{/user/{userId}(id=${character.id})/spells}">Add spell</a><br />-->
-<!--        </form>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--        <h3>Items</h3>-->
-<!--        <table>-->
-<!--            <tr th:each="item : ${character.items}">-->
-<!--                <td th:text="${item.name}"></td>-->
-<!--                <td th:text="${item.description}"></td>-->
-<!--                <td th:text="${item.weight}"></td>-->
-<!--                <td th:text="${item.itemType}"></td>-->
-<!--                <td>-->
-<!--                    <a th:href="@{/user/{userId}(id=${character.id})/items/delete/{itemId}(id=${item.id})">Delete</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a th:href="@{/user/{userId}(id=${character.id})/items/edit/{itemId}(id=${item.id})">Edit</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <form>-->
-<!--            <a th:thef="@{/user/{userId}(id=${character.id})/items/addItem}">Add item</a><br />-->
-<!--        </form>-->
-<!--    </div>-->
+    <div>
+        <a th:href="@{/characters/getSpells/{character_id}(character_id=${character.id})}">to spellbook</a>
+        <a th:href="@{/characters/getItems/{character_id}(character_id=${character.id})}">to inventory</a>
+    </div>
 
     <div th:if="${character.race != null}">
         <span th:text="${character.race.name}"></span>
         <span th:text="${character.race.description}"></span>
     </div>
-    <a th:href="@{/race}">Change race</a><br />
+    <a th:href="@{/race/}">Change race</a><br />
 
     <div th:if="${character.characterClass != null}">
         <span th:text="${character.characterClass.name}"></span>
         <span th:text="${character.characterClass.hitDice}"></span>
     </div>
-    <a th:href="@{/charclass}">Change class</a><br />
+    <a th:href="@{/charclass/}">Change class</a><br />
 
 </body>
 </html>

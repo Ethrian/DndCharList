@@ -7,17 +7,18 @@
 <body>
     <h1>edit spell</h1>
     <div>
-        <form th:action="spell/update" th:method="post">
-            <input type="text" value="${spell.name}" name="name"/>
-            <input type="number" value="${spell.lvl}" name="lvl"/>
-            <input type="text" value="${spell.spellType}" name="spellType"/>
-            <input type="text" value="${spell.castTime}" name="castTime"/>
-            <input type="text" value="${spell.distance}" name="distance"/>
-            <input type="text" value="${spell.duration}" name="duration"/>
-            <input type="checkbox" value="${spell.verbal}" name="V"/>
-            <input type="checkbox" value="${spell.somatic}" name="S"/>
-            <input type="text" value="${spell.material}" name="M"/>
-            <input type="text" value="${spell.description}" name="description"/>
+        <form th:action="@{/spells}" th:method="post">
+            <input type="text" th:value="${spell.name}" name="name"/>
+            <input type="number" th:value="${spell.lvl}" name="lvl"/>
+            <input type="text" th:value="${spell.spellType}" name="spellType"/>
+            <input type="text" th:value="${spell.castTime}" name="castTime"/>
+            <input type="text" th:value="${spell.distance}" name="distance"/>
+            <input type="text" th:value="${spell.duration}" name="duration"/>
+            <input type="checkbox" th:value="${spell.verbal}" name="V"/>
+            <input type="checkbox" th:value="${spell.somatic}" name="S"/>
+            <input type="text" th:value="${spell.material}" name="M"/>
+            <input type="text" th:value="${spell.description}" name="description"/>
+            <input type="hidden" th:value="${spell.id}" name="spellId"/>
             <input type="submit"/>
         </form>
     </div>

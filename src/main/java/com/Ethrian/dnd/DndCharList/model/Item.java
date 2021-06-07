@@ -12,6 +12,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(columnDefinition = "text")
     private String description;
 
     private Double weight;

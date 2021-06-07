@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -137,7 +139,7 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/addSpell/{character_id}")
+    @PostMapping(value = "/characters/addSpell/{character_id}/{spell_id}")
     public String addSpell(
             @PathVariable("character_id") Long characterId,
             @RequestParam("spell_id") Long spellId,
@@ -145,29 +147,34 @@ public class CharacterController {
     ){
         Character updatedCharacter = characterService.addSpell(characterId, spellId);
         model.put("character", updatedCharacter);
-        return "character";
+        return "characterSpells";
     }
 
     @PostMapping(value = "/characters/removeSpell/{character_id}")
     public String removeSpell(
+            HttpSession session,
             @PathVariable("character_id") Long characterId,
             @RequestParam("spell_id") Long spellId,
             Map<String, Object> model
     ){
         Character updatedCharacter = characterService.deleteSpell(characterId, spellId);
         model.put("character", updatedCharacter);
-        return "character";
+        Set<Spell> spellList = characterService.getSpells(characterId);
+        session.setAttribute("spells", spellList);
+        return "characterSpells";
     }
 
     @GetMapping(value = "/characters/getSpells/{character_id}")
     public String getSpells(
+            HttpSession session,
             @PathVariable("character_id") Long id,
             Map<String, Object> model
     ){
+        session.setAttribute("character_id", characterService.getCharacterById(id).getId());
         Set<Spell> spells = characterService.getSpells(id);
         logger.info("Character spells: {}", spells);
         model.put("spells", spells);
-        return "character";
+        return "characterSpells";
     }
 
     @PostMapping(value = "/characters/addItem/{character_id}")
@@ -194,12 +201,14 @@ public class CharacterController {
 
     @GetMapping(value = "/characters/getItems/{character_id}")
     public String getItems(
+            HttpSession session,
             @PathVariable("character_id") Long id,
             Map<String, Object> model
     ){
+        session.setAttribute("character_id", characterService.getCharacterById(id).getId());
         Set<Item> items = characterService.getItems(id);
         model.put("items", items);
-        return "character";
+        return "characterItems";
     }
 
     @GetMapping(value = "/characters/getRace/{character_id}")

@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <form th:method="post" th:action="/race/add">
+        <form th:method="post" th:action="@{/race/new}">
             <input type="text" name="name" />
             <input type="text" name="description" />
             <button type="submit">Add new</button>
@@ -17,19 +17,18 @@
                 <td th:text="${race.name}"></td>
                 <td th:text="${race.description}"></td>
                 <td>
-                    <form th:action="/race/delete" th:method="post">
+                    <form th:action="@{/race/delete}" th:method="post">
                         <input type="hidden" value="${race.id}" name="raceId">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
                 <td>
-                    <form th:action="/editRace" th:method="post">
-                        <input type="hidden" value="${race.id}" name="raceId">
-                        <button type="submit">Edit</button>
-                    </form>
+                    <a th:href="@{/race/{raceId}(raceId=${race.id})}">
+                        <button>Edit</button>
+                    </a>
                 </td>
-                <td>//roles
-                    <form th:action="/character/addRace" th:method="post">
+                <td>
+                    <form th:action="@{/character/addRace}" th:method="post">
                         <input type="hidden" value="${race.id}" name="raceId">
                         <button type="submit">Add</button>
                     </form>

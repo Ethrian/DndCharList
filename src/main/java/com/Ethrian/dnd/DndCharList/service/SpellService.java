@@ -5,6 +5,7 @@ import com.Ethrian.dnd.DndCharList.repo.BonusRepo;
 import com.Ethrian.dnd.DndCharList.repo.SpellRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class SpellService {
 
     public List<Spell> getAllSpells() {
         Iterable<Spell> allSpells = spellRepo.findAll();
-        List<Spell> spellList = null;
+        List<Spell> spellList = new java.util.ArrayList<>(Collections.emptyList());
         for (Spell spell : allSpells) {
             if(!spell.getDirty()) spellList.add(spell);
         }

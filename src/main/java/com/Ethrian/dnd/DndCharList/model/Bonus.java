@@ -12,6 +12,7 @@ public class Bonus {
     private Long id;
 
     private String name;
+    @Column(columnDefinition = "text")
     private String description;
     private Boolean dirty;
 

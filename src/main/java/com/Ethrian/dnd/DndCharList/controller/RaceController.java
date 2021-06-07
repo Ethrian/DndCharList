@@ -1,15 +1,17 @@
 package com.Ethrian.dnd.DndCharList.controller;
 
+import com.Ethrian.dnd.DndCharList.model.Item;
 import com.Ethrian.dnd.DndCharList.model.Race;
 import com.Ethrian.dnd.DndCharList.service.RaceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 
-//@Controller
-@RequestMapping(value = "user/{userid}/race")
+@Controller
+@RequestMapping(value = "/race")
 public class RaceController {
 
     private RaceService raceService;
@@ -18,48 +20,46 @@ public class RaceController {
         this.raceService = raceService;
     }
 
-    @GetMapping(name = "/")
-    public String getRaces(Map<String, Object> model){
+    @GetMapping
+    public ModelAndView getRaces(){
         List<Race> races = raceService.getAllRaces();
-        model.put("races", races);
-        return "/races";
+        ModelAndView model = new ModelAndView("races");
+        model.addObject("races", races);
+        return model;
     }
 
-    @GetMapping(name = "/{raceId}")
-    public String editRace(@PathVariable Long id, Map<String, Object> model){
+    @GetMapping(value = "/{raceId}")
+    public ModelAndView editRace(@PathVariable("raceId") Long id){
         Race race = raceService.getRace(id);
-        model.put("race", race);
-        return "/editRace";
+        ModelAndView model = new ModelAndView("editRace");
+        model.addObject("race", race);
+        return model;
     }
 
-    @GetMapping(name = "/delete")
-    public String deleteRace(@PathVariable Long id, Map<String, Object> model){
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ModelAndView deletRace(@PathVariable Long id){
         raceService.deleteRace(id);
-        return "redirect:/races";
+        return new ModelAndView("redirect:/races");
     }
-
 
     @PostMapping(name = "/{raceId}")
-    public String saveRace(
+    public ModelAndView saveRace(
             @PathVariable Long id,
             @RequestParam String name,
-            @RequestParam String description,
-            Map<String, Object> model
+            @RequestParam String description
     ){
         raceService.updateName(id, name);
         Race race = raceService.updateDescription(id, description);
-        model.put("race", race);
-        return "redirect:/races";
+        return new ModelAndView("redirect:/races");
     }
 
     @PostMapping(name = "/new")
-    public String newRace(
+    public ModelAndView newRace(
             @RequestParam String name,
-            @RequestParam String description,
-            Map<String, Object> model
+            @RequestParam String description
     ){
         Race race = raceService.createRace(name, description);
-        model.put("race", race);
-        return "redirect:/races";
+        return new ModelAndView("redirect:/races");
     }
 }

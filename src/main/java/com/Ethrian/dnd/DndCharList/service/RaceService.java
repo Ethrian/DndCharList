@@ -8,6 +8,7 @@ import com.Ethrian.dnd.DndCharList.repo.BonusRepo;
 import com.Ethrian.dnd.DndCharList.repo.RaceRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class RaceService {
 
     public List<Race> getAllRaces(){
         Iterable<Race> allRaces = raceRepo.findAll();
-        List<Race> raceList = null;
+        List<Race> raceList = new java.util.ArrayList<>(Collections.emptyList());
         for (Race race : allRaces) {
             if(!race.getDirty()) raceList.add(race);
         }

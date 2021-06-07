@@ -6,11 +6,12 @@ import com.Ethrian.dnd.DndCharList.service.SpellService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/user/{userId}/spells")
+@RequestMapping(value = "/spells")
 public class SpellController {
 
     private SpellService spellService;
@@ -26,23 +27,28 @@ public class SpellController {
         return "spells";
     }
 
-    @GetMapping(value = "/edit/{spellId}")
-    public String editSpell(@PathVariable Long id, Map<String, Object> model){
+    @GetMapping(value = "/{spellId}")
+    public String editSpell(@PathVariable("spellId") Long id, Map<String, Object> model){
         Spell spell = spellService.getSpell(id);
         model.put("spell", spell);
         return "/editSpell";
     }
 
-    @GetMapping(value = "/delete")
-    public String deleteSpell(@PathVariable Long id, Map<String, Object> model){
+    @PostMapping(value = "/delete")
+    public String deleteSpell(
+            HttpSession session,
+            @RequestParam("spellId") Long id,
+            Map<String, Object> model
+    ){
+        List<Spell> spellList = spellService.getAllSpells();
+        session.setAttribute("spells", spellList);
         spellService.deleteSpell(id);
         return "redirect:/spells";
     }
 
-
-    @PostMapping(value = "/{spellId}")
+    @PostMapping
     public String saveSpell(
-            @PathVariable Long id,
+            @RequestParam("spellId") Long id,
             @RequestParam String name,
             @RequestParam Integer lvl,
             @RequestParam String spellType,
@@ -78,7 +84,7 @@ public class SpellController {
     ){
         Spell spell = spellService.createSpell(name, description, lvl, spellType, castTime, distance, duration, V, S, M);
         model.put("spell", spell);
-        return "redirect:/spells";
+        return "/spells";
     }
 
 }

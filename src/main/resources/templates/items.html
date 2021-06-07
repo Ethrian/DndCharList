@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <div>
-        <form th:method="post" th:action="/item/add">
+    <div th:with="character_id = ${character_id != null} ? ${character_id} : ${#session.getAttribute('character_id')}">
+        <form th:method="post" th:action="@{/items/new}">
             <input type="text" name="name" />
             <input type="text" name="description" />
             <input type="number" name="weight" />
@@ -21,19 +21,18 @@
                 <td th:text="${item.weight}"></td>
                 <td th:text="${item.itemType}"></td>
                 <td>
-                    <form th:action="/item/delete" th:method="post">
+                    <form th:action="@{/items/delete}" th:method="post">
                         <input type="hidden" value="${item.id}" name="itemId">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
                 <td>
-                    <form th:action="/editItem" th:method="post">
-                        <input type="hidden" value="${item.id}" name="itemId">
-                        <button type="submit">Edit</button>
-                    </form>
+                    <a th:href="@{/items/edit/{itemId}(itemId=${item.id})}">
+                        <button>Edit</button>
+                    </a>
                 </td>
-                <td>//roles
-                    <form th:action="/character/addItem" th:method="post">
+                <td>
+                    <form th:action="@{/character/addItem/${character_id}(character_id=${character_id})}" th:method="post">
                         <input type="hidden" value="${item.id}" name="itemId">
                         <button type="submit">Add</button>
                     </form>

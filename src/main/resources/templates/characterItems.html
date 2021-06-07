@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${item.weight}"></td>
+            <td th:text="${item.itemType}"></td>
+            <td>
+                <form th:action="@{/characters/removeItem/{character_id}}" th:method="post">
+                    <input type="hidden" value="${item.id}" name="itemId">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/items/edit/{itemId}(itemId=${item.id})}">
+                    <button>Edit</button>
+                </a>
+            </td>
+        </tr>
+        <a th:href="@{/items/}">
+            <button type="submit">More items</button>
+        </a>
+    </table>
+</div>
+</body>
+</html>
