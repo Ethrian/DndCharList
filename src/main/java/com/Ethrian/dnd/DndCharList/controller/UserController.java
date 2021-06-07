@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-//@RequestMapping(value = "/user")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);

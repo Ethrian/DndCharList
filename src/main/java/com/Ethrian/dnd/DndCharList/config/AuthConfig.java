@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -26,15 +27,20 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/*", "/signIn", "/signUp", "/static/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/signIn.html")
-                .permitAll()
+//                .formLogin()
+//                .loginPage("/signIn.html")
+//                .successHandler(appAuthenticationSuccessHandler())
+//                .permitAll()
+//                .and()
+                .logout().permitAll()
                 .and()
-                .logout().permitAll();
+                .httpBasic();
     }
 
     @Override
@@ -48,5 +54,10 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         provider.setUserDetailsService(userService);
         return provider;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
+        return new AppAuthenticationSuccessHandler();
     }
 }

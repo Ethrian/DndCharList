@@ -9,7 +9,7 @@
         <h1>Characters</h1>
         <div th:with="characters = ${characters != null} ? ${characters} : ${#session.getAttribute('characters')}">
             <div th:each ="character : ${characters}">
-                <a th:href="@{/character}">
+                <a th:href="@{character/{id}(id=${character.id})}">
                     <span th:text="${character.name}"></span>
                 </a>
             </div>

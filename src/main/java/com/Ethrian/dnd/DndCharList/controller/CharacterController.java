@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Set;
 
-//@Controller
+@Controller
 public class CharacterController {
 
     private final Logger logger = LoggerFactory.getLogger(CharacterController.class);
@@ -24,11 +23,12 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
-    @GetMapping(value = "/characters/{character_id}")
-    public String getCharacter(@PathVariable("character_id") Long id, Map<String, Object> model){
+    @GetMapping("/character/{id}")
+    public ModelAndView getCharacter(@PathVariable("id") Long id){
         Character character = characterService.getCharacterById(id);
-        model.put("character", character);
-        return "character";
+        ModelAndView model = new ModelAndView("character");
+        model.addObject("character", character);
+        return model;
     }
 //
 //    @RequestMapping(value = "/characters/new", method = RequestMethod.GET)
