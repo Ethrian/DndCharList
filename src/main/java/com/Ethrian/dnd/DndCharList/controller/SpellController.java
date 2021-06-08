@@ -1,12 +1,11 @@
 package com.Ethrian.dnd.DndCharList.controller;
 
 import com.Ethrian.dnd.DndCharList.model.Spell;
-import com.Ethrian.dnd.DndCharList.service.CharacterService;
 import com.Ethrian.dnd.DndCharList.service.SpellService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -20,34 +19,30 @@ public class SpellController {
         this.spellService = spellService;
     }
 
-    @GetMapping(value = "/")
-    public String getSpells(Map<String, Object> model){
+    @GetMapping
+    public ModelAndView getSpells(){
         List<Spell> spells = spellService.getAllSpells();
-        model.put("spells", spells);
-        return "spells";
+        ModelAndView model = new ModelAndView("spells");
+        model.addObject("spells", spells);
+        return model;
     }
 
-    @GetMapping(value = "/{spellId}")
-    public String editSpell(@PathVariable("spellId") Long id, Map<String, Object> model){
+    @GetMapping(value = "/{id}")
+    public ModelAndView editSpell(@PathVariable("id") Long id){
         Spell spell = spellService.getSpell(id);
-        model.put("spell", spell);
-        return "/editSpell";
+        ModelAndView model = new ModelAndView("/editSpell");
+        model.addObject("spell", spell);
+        return model;
     }
 
-    @PostMapping(value = "/delete")
-    public String deleteSpell(
-            HttpSession session,
-            @RequestParam("spellId") Long id,
-            Map<String, Object> model
-    ){
-        List<Spell> spellList = spellService.getAllSpells();
-        session.setAttribute("spells", spellList);
+    @DeleteMapping(value = "/{id}")
+    public ModelAndView deleteSpell(@PathVariable("id") Long id){
         spellService.deleteSpell(id);
-        return "redirect:/spells";
+        return new ModelAndView("redirect:/spells");
     }
 
     @PostMapping
-    public String saveSpell(
+    public ModelAndView saveSpell(
             @RequestParam("spellId") Long id,
             @RequestParam String name,
             @RequestParam Integer lvl,
@@ -55,36 +50,32 @@ public class SpellController {
             @RequestParam String castTime,
             @RequestParam String distance,
             @RequestParam String duration,
-            @RequestParam Boolean V,
-            @RequestParam Boolean S,
-            @RequestParam String M,
-            @RequestParam String description,
-            Map<String, Object> model
+            @RequestParam(required = false) Boolean V,
+            @RequestParam(required = false) Boolean S,
+            @RequestParam(required = false) String M,
+            @RequestParam String description
     ){
         spellService.updateName(id, name);
         spellService.updateDescription(id, description);
-        Spell spell = spellService.updateParams(id, lvl, spellType, castTime, distance, duration, V, S, M);
-        model.put("spell", spell);
-        return "redirect:/spells";
+        spellService.updateParams(id, lvl, spellType, castTime, distance, duration, V, S, M);
+        return new ModelAndView("redirect:/spells");
     }
 
     @PostMapping(value = "/new")
-    public String newSpell(
+    public ModelAndView newSpell(
             @RequestParam String name,
             @RequestParam Integer lvl,
             @RequestParam String spellType,
             @RequestParam String castTime,
             @RequestParam String distance,
             @RequestParam String duration,
-            @RequestParam Boolean V,
-            @RequestParam Boolean S,
-            @RequestParam String M,
-            @RequestParam String description,
-            Map<String, Object> model
+            @RequestParam(required = false) Boolean V,
+            @RequestParam(required = false) Boolean S,
+            @RequestParam(required = false) String M,
+            @RequestParam String description
     ){
-        Spell spell = spellService.createSpell(name, description, lvl, spellType, castTime, distance, duration, V, S, M);
-        model.put("spell", spell);
-        return "/spells";
+        spellService.createSpell(name, description, lvl, spellType, castTime, distance, duration, V, S, M);
+        return new ModelAndView("redirect:/spells");
     }
 
 }

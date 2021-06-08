@@ -5,54 +5,50 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:with="spells = ${spells != null} ? ${spells} : ${#session.getAttribute('spells')}">
-        <div th:with="character_id = ${character_id != null} ? ${character_id} : ${#session.getAttribute('character_id')}">
-            <form th:method="post" th:action="@{/spells/new}">
-                <input type="text" name="name" />
-                <input type="number" name="lvl" />
-                <input type="text" name="spellType" />
-                <input type="text" name="castTime" />
-                <input type="text" name="distance" />
-                <input type="text" name="duration" />
-                <input type="checkbox" name="V" />
-                <input type="checkbox" name="S" />
-                <input type="text" name="M" />
-                <input type="text" name="description" />
-                <button type="submit">Add new</button>
-            </form>
+    <form th:method="post" th:action="@{/spells/new}">
+        <input type="text" name="name" />
+        <input type="number" name="lvl" />
+        <input type="text" name="spellType" />
+        <input type="text" name="castTime" />
+        <input type="text" name="distance" />
+        <input type="text" name="duration" />
+        <input type="checkbox" name="V" />
+        <input type="checkbox" name="S" />
+        <input type="text" name="M" />
+        <input type="text" name="description" />
+        <button type="submit">Add new</button>
+    </form>
 
-            <table>
-                <tr th:each="spell : ${spells}">
-                    <td th:text="${spell.name}"></td>
-                    <td th:text="${spell.lvl}"></td>
-                    <td th:text="${spell.spellType}"></td>
-                    <td th:text="${spell.castTime}"></td>
-                    <td th:text="${spell.distance}"></td>
-                    <td th:text="${spell.duration}"></td>
-                    <td th:text="${spell.verbal}"></td>
-                    <td th:text="${spell.somatic}"></td>
-                    <td th:text="${spell.material}"></td>
-                    <td th:text="${spell.description}"></td>
-                    <td>
-                        <form th:action="@{/spells/delete}" th:method="post">
-                            <input type="hidden" value="${spell.id}" name="spellId">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a th:href="@{/spells/{spellId}(spellId=${spell.id})}">
-                            <button>Edit</button>
-                        </a>
-                    </td>
-                    <td th:if="${character_id != null}">
-                        <form th:action="@{/characters/addSpell/${character_id}(character_id=${character_id})}" th:method="post">
-                            <input type="hidden" value="${spell.id}" name="spell_id">
-                            <button type="submit">Add</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <table>
+        <tr th:each="spell : ${spells}">
+            <td th:text="${spell.name}"></td>
+            <td th:text="${spell.lvl}"></td>
+            <td th:text="${spell.spellType}"></td>
+            <td th:text="${spell.castTime}"></td>
+            <td th:text="${spell.distance}"></td>
+            <td th:text="${spell.duration}"></td>
+            <td th:text="${spell.verbal}"></td>
+            <td th:text="${spell.somatic}"></td>
+            <td th:text="${spell.material}"></td>
+            <td th:text="${spell.description}"></td>
+<!--            <td>-->
+<!--                <form th:action="@{/spells/(id=${spell.id})}" th:method="delete">-->
+<!--                    <input type="hidden" value="${spell.id}" name="spellId">-->
+<!--                    <button type="submit">Delete</button>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/spells/{spellId}(spellId=${spell.id})}">-->
+<!--                    <button>Edit</button>-->
+<!--                </a>-->
+<!--            </td>-->
+            <td th:if="${character_id != null}">
+                <form th:action="@{'/character/' + ${character_id} + '/addSpell'}" th:method="post">
+                    <input type="hidden" th:value="${spell.id}" th:name="spell_id">
+                    <button type="submit">Add</button>
+                </form>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.Ethrian.dnd.DndCharList.controller;
 import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.model.*;
 import com.Ethrian.dnd.DndCharList.service.CharacterService;
+import com.Ethrian.dnd.DndCharList.service.SpellService;
 import com.Ethrian.dnd.DndCharList.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +24,16 @@ public class CharacterController {
 
     private CharacterService characterService;
     private final UserService userService;
+    private final SpellService spellService;
 
     public CharacterController(
             CharacterService characterService,
-            UserService userService
+            UserService userService,
+            SpellService spellService
     ) {
         this.characterService = characterService;
         this.userService = userService;
+        this.spellService = spellService;
     }
 
     @GetMapping("/character/{id}")
@@ -123,41 +127,45 @@ public class CharacterController {
     }
 
     @PostMapping(value = "/character/{character_id}/addSpell")
-    public String addSpell(
+    public ModelAndView addSpell(
             @PathVariable("character_id") Long characterId,
-            @RequestParam("spell_id") Long spellId,
-            Map<String, Object> model
+            @RequestParam("spell_id") Long spellId
     ){
-        Character updatedCharacter = characterService.addSpell(characterId, spellId);
-        model.put("character", updatedCharacter);
-        return "characterSpells";
+        characterService.addSpell(characterId, spellId);
+        return new ModelAndView("redirect:/character/" + characterId + "/spells");
     }
 
-    @DeleteMapping(value = "/character/{character_id}/spell/{spell_id}")
-    public String removeSpell(
-            HttpSession session,
+    @PostMapping(value = "/character/{character_id}/spell/delete/{spell_id}")
+    public ModelAndView removeSpell(
             @PathVariable("character_id") Long characterId,
-            @RequestParam("spell_id") Long spellId,
-            Map<String, Object> model
+            @PathVariable("spell_id") Long spellId
     ){
         Character updatedCharacter = characterService.deleteSpell(characterId, spellId);
-        model.put("character", updatedCharacter);
+        ModelAndView model = new ModelAndView("redirect:/character/" + characterId + "/spells");
         Set<Spell> spellList = characterService.getSpells(characterId);
-        session.setAttribute("spells", spellList);
-        return "characterSpells";
+        model.addObject("character", updatedCharacter);
+        model.addObject("spells", spellList);
+        return model;
     }
 
     @GetMapping(value = "/character/{character_id}/spells")
-    public String getSpells(
-            HttpSession session,
-            @PathVariable("character_id") Long id,
-            Map<String, Object> model
+    public ModelAndView getSpells(
+            @PathVariable("character_id") Long id
     ){
-        session.setAttribute("character_id", characterService.getCharacterById(id).getId());
         Set<Spell> spells = characterService.getSpells(id);
-        logger.info("Character spells: {}", spells);
-        model.put("spells", spells);
-        return "characterSpells";
+        ModelAndView model = new ModelAndView("characterSpells");
+        model.addObject("spells", spells);
+        model.addObject("characterId", id);
+        return model;
+    }
+
+    @GetMapping(value = "/character/{character_id}/moreSpells")
+    public ModelAndView getMoreSpellsForCharacter(@PathVariable("character_id") Long id) {
+        List<Spell> spells = spellService.getAllSpells();
+        ModelAndView model = new ModelAndView("spells");
+        model.addObject("spells", spells);
+        model.addObject("characterId", id);
+        return model;
     }
 
     @PostMapping(value = "/character/{character_id}/addItem")
