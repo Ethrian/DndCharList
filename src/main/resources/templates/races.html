@@ -17,8 +17,7 @@
                 <td th:text="${race.name}"></td>
                 <td th:text="${race.description}"></td>
                 <td>
-                    <form th:action="@{/race/delete}" th:method="post">
-                        <input type="hidden" value="${race.id}" name="raceId">
+                    <form th:action="@{/race/delete/{id}(id=${race.id})}" th:method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
@@ -27,9 +26,9 @@
                         <button>Edit</button>
                     </a>
                 </td>
-                <td>
-                    <form th:action="@{/character/addRace}" th:method="post">
-                        <input type="hidden" value="${race.id}" name="raceId">
+                <td th:if="${character_id != null}">
+                    <form th:action="@{'/character/' + ${character_id} + '/addRace'}" th:method="post">
+                        <input type="hidden" th:value="${race.id}" th:name="race_id">
                         <button type="submit">Add</button>
                     </form>
                 </td>

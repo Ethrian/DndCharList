@@ -210,13 +210,13 @@
         <span th:text="${character.race.name}"></span>
         <span th:text="${character.race.description}"></span>
     </div>
-    <a th:href="@{/race/}">Change race</a><br />
+    <a th:href="@{/character/{character_id}/changeRace(character_id=${character.id})}">Change race</a><br />
 
     <div th:if="${character.characterClass != null}">
         <span th:text="${character.characterClass.name}"></span>
         <span th:text="${character.characterClass.hitDice}"></span>
     </div>
-    <a th:href="@{/charclass/}">Change class</a><br />
+    <a th:href="@{/character/{character_id}/changeClass(character_id=${character.id})}">Change class</a><br />
 
 </body>
 </html>

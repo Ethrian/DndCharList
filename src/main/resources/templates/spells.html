@@ -31,17 +31,16 @@
             <td th:text="${spell.somatic}"></td>
             <td th:text="${spell.material}"></td>
             <td th:text="${spell.description}"></td>
-<!--            <td>-->
-<!--                <form th:action="@{/spells/(id=${spell.id})}" th:method="delete">-->
-<!--                    <input type="hidden" value="${spell.id}" name="spellId">-->
-<!--                    <button type="submit">Delete</button>-->
-<!--                </form>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <a th:href="@{/spells/{spellId}(spellId=${spell.id})}">-->
-<!--                    <button>Edit</button>-->
-<!--                </a>-->
-<!--            </td>-->
+            <td>
+                <form th:action="@{/spells/delete/{id}(id=${spell.id})}" th:method="delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/spells/delete/{spellId}(spellId=${spell.id})}">
+                    <button>Edit</button>
+                </a>
+            </td>
             <td th:if="${character_id != null}">
                 <form th:action="@{'/character/' + ${character_id} + '/addSpell'}" th:method="post">
                     <input type="hidden" th:value="${spell.id}" th:name="spell_id">

@@ -5,37 +5,33 @@
     <title>Title</title>
 </head>
 <body>
-    <div>
-        <form th:method="post" th:action="/characterClass/add">
-            <input type="text" name="name" />
-<!--            hit dices? -->
-            <button type="submit">Add new</button>
-        </form>
+<div>
+    <form th:method="post" th:action="@{/class/new}">
+        <input type="text" name="name" />
+        <div>
+            <select name="hitDice">
+                <option th:each="hitDice : ${hitDices}" th:value="${hitDice}" th:text="${hitDice}"></option>
+            </select>
+        </div>
+        <button type="submit">Add new</button>
+    </form>
 
-        <table>
-            <tr th:each="characterClass : ${characterClasses}">
-                <td th:text="${characterClass.name}"></td>
-                <td th:text="${characterClass.hitDice}"></td>
-                <td>
-                    <form th:action="/characterClass/delete" th:method="post">
-                        <input type="hidden" value="${characterClass.id}" name="classId">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-                <td>
-                    <form th:action="/editClass" th:method="post">
-                        <input type="hidden" value="${characterClass.id}" name="classId">
-                        <button type="submit">Edit</button>
-                    </form>
-                </td>
-                <td>//roles
-                    <form th:action="/character/addClass" th:method="post">
-                        <input type="hidden" value="${characterClass.id}" name="classId">
-                        <button type="submit">Add</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table>
+        <tr th:each="characterClass : ${characterClasses}">
+            <td th:text="${characterClass.name}"></td>
+            <td th:text="${characterClass.hitDice}"></td>
+            <td>
+                <form th:action="@{/class/delete/{id}(id=${characterClass.id})}" th:method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/class/{classId}(classId=${characterClass.id})}">
+                    <button>Edit</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

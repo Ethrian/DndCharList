@@ -7,9 +7,14 @@
 <body>
 <h1>edit class</h1>
     <div>
-        <form th:action="characterClass/update" th:method="post">
-            <input type="text" value="${characterClass.name}" name="name"/>
-<!--            hit dices?-->
+        <form th:action="@{/class}" th:method="post">
+            <input type="text" th:value="${characterClass.name}" name="name"/>
+            <div>
+                <select name="hitDice">
+                    <option th:each="hitDice : ${hitDices}" th:value="${hitDice}" th:text="${hitDice}"></option>
+                </select>
+            </div>
+            <input type="hidden" th:value="${characterClass.id}" name="classId"/>
             <input type="submit"/>
         </form>
     </div>

@@ -9,6 +9,7 @@ import com.Ethrian.dnd.DndCharList.repo.CharacterClassRepo;
 import com.Ethrian.dnd.DndCharList.repo.CharacterRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class CharacterClassService {
 
     public List<CharacterClass> getAllClasses() {
         Iterable<CharacterClass> allClasses = characterClassRepo.findAll();
-        List<CharacterClass> characterClassList = null;
+        List<CharacterClass> characterClassList = new java.util.ArrayList<>(Collections.emptyList());
         for (CharacterClass characterClass : allClasses) {
             if(!characterClass.getDirty()) characterClassList.add(characterClass);
         }

@@ -2,9 +2,7 @@ package com.Ethrian.dnd.DndCharList.controller;
 
 import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.model.*;
-import com.Ethrian.dnd.DndCharList.service.CharacterService;
-import com.Ethrian.dnd.DndCharList.service.SpellService;
-import com.Ethrian.dnd.DndCharList.service.UserService;
+import com.Ethrian.dnd.DndCharList.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,15 +23,24 @@ public class CharacterController {
     private CharacterService characterService;
     private final UserService userService;
     private final SpellService spellService;
+    private final ItemService itemService;
+    private final RaceService raceService;
+    private final CharacterClassService characterClassService;
 
     public CharacterController(
             CharacterService characterService,
             UserService userService,
-            SpellService spellService
+            SpellService spellService,
+            ItemService itemService,
+            RaceService raceService,
+            CharacterClassService characterClassService
     ) {
         this.characterService = characterService;
         this.userService = userService;
         this.spellService = spellService;
+        this.itemService = itemService;
+        this.raceService = raceService;
+        this.characterClassService = characterClassService;
     }
 
     @GetMapping("/character/{id}")
@@ -169,58 +176,91 @@ public class CharacterController {
     }
 
     @PostMapping(value = "/character/{character_id}/addItem")
-    public String addItem(
+    public ModelAndView addItem(
             @PathVariable("character_id") Long characterId,
-            @RequestParam("item_id") Long itemId,
-            Map<String, Object> model
+            @RequestParam("item_id") Long itemId
     ){
-        Character updatedCharacter = characterService.addItem(characterId, itemId);
-        model.put("character", updatedCharacter);
-        return "character";
+        characterService.addItem(characterId, itemId);
+        return new ModelAndView("redirect:/character/" + characterId + "/items");
     }
 
-    @DeleteMapping(value = "/character/{character_id}/item/{item_id}")
-    public String removeItem(
+    @PostMapping(value = "/character/{character_id}/item/delete/{item_id}")
+    public ModelAndView removeItem(
             @PathVariable("character_id") Long characterId,
-            @RequestParam("item_id") Long itemId,
-            Map<String, Object> model
+            @PathVariable("item_id") Long itemId
     ){
         Character updatedCharacter = characterService.deleteItem(characterId, itemId);
-        model.put("character", updatedCharacter);
-        return "character";
+        ModelAndView model = new ModelAndView("redirect:/character/" + characterId + "/items");
+        Set<Item> itemList = characterService.getItems(characterId);
+        model.addObject("character", updatedCharacter);
+        model.addObject("items", itemList);
+        return model;
     }
 
     @GetMapping(value = "/character/{character_id}/items")
-    public String getItems(
-            HttpSession session,
-            @PathVariable("character_id") Long id,
-            Map<String, Object> model
+    public ModelAndView getItems(
+            @PathVariable("character_id") Long id
     ){
-        session.setAttribute("character_id", characterService.getCharacterById(id).getId());
         Set<Item> items = characterService.getItems(id);
-        model.put("items", items);
-        return "characterItems";
+        ModelAndView model = new ModelAndView("characterItems");
+        model.addObject("items", items);
+        model.addObject("characterId", id);
+        return model;
     }
 
-    @GetMapping(value = "/character/{character_id}/race")
-    public String getRace(
-            @PathVariable("character_id") Long id,
-            Map<String, Object> model
-    ){
-        Race race = characterService.getCharacterById(id).getRace();
-        model.put("race", race);
-        return "character";
+    @GetMapping(value = "/character/{character_id}/moreItems")
+    public ModelAndView getMoreItemsForCharacter(@PathVariable("character_id") Long id) {
+        List<Item> items = itemService.getAllItems();
+        ModelAndView model = new ModelAndView("items");
+        model.addObject("items", items);
+        model.addObject("characterId", id);
+        return model;
     }
+//----
+//    @GetMapping(value = "/character/{character_id}/race")
+//    public String getRace(
+//            @PathVariable("character_id") Long id,
+//            Map<String, Object> model
+//    ){
+//        Race race = characterService.getCharacterById(id).getRace();
+//        model.put("race", race);
+//        return new ModelAndView("redirect:/character/" + id + "/race");
+//    }
 
     @PostMapping(value = "/character/{character_id}/addRace")
-    public String addRace(
+    public ModelAndView addRace(
             @PathVariable("character_id") Long characterId,
-            @RequestParam Long raceId,
-            Map<String, Object> model
+            @RequestParam("race_id") Long raceId
     ){
-        Character character = characterService.addRace(characterId, raceId);
-        model.put("character", character);
-        return "character";
+        characterService.addRace(characterId, raceId);
+        return new ModelAndView("redirect:/character/" + characterId);
+    }
+
+    @GetMapping(value = "/character/{character_id}/changeRace")
+    public ModelAndView changeCharacterRace(@PathVariable("character_id") Long id) {
+        List<Race> races = raceService.getAllRaces();
+        ModelAndView model = new ModelAndView("charRace");
+        model.addObject("races", races);
+        model.addObject("characterId", id);
+        return model;
+    }
+    //--------
+    @PostMapping(value = "/character/{character_id}/addClass")
+    public ModelAndView addClass(
+            @PathVariable("character_id") Long characterId,
+            @RequestParam("class_id") Long classId
+    ){
+        characterService.addClass(characterId, classId);
+        return new ModelAndView("redirect:/character/" + characterId);
+    }
+
+    @GetMapping(value = "/character/{character_id}/changeClass")
+    public ModelAndView changeCharacterClass(@PathVariable("character_id") Long id) {
+        List<CharacterClass> characterClasses = characterClassService.getAllClasses();
+        ModelAndView model = new ModelAndView("charClass");
+        model.addObject("characterClasses", characterClasses);
+        model.addObject("characterId", id);
+        return model;
     }
 
 //    @GetMapping(value = "/getCharacterClass/{character_id}")

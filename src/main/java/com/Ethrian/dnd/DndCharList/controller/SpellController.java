@@ -35,7 +35,7 @@ public class SpellController {
         return model;
     }
 
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/delete/{id}")
     public ModelAndView deleteSpell(@PathVariable("id") Long id){
         spellService.deleteSpell(id);
         return new ModelAndView("redirect:/spells");

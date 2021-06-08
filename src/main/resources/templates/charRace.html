@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr th:each="race : ${races}">
+            <td th:text="${race.name}"></td>
+            <td th:text="${race.description}"></td>
+
+            <td th:if="${character_id != null}">
+                <form th:action="@{'/character/' + ${character_id} + '/addRace'}" th:method="post">
+                    <input type="hidden" th:value="${race.id}" th:name="race_id">
+                    <button type="submit">Select</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

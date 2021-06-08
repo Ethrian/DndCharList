@@ -37,21 +37,21 @@ public class RaceController {
     }
 
 
-    @DeleteMapping(value = "/delete/{id}")
-    public ModelAndView deletRace(@PathVariable Long id){
+    @PostMapping(value = "/delete/{id}")
+    public ModelAndView deleteRace(@PathVariable Long id){
         raceService.deleteRace(id);
-        return new ModelAndView("redirect:/races");
+        return new ModelAndView("redirect:/race");
     }
 
-    @PostMapping(value = "/{raceId}")
+    @PostMapping
     public ModelAndView saveRace(
-            @PathVariable Long id,
+            @RequestParam("raceId") Long id,
             @RequestParam String name,
             @RequestParam String description
     ){
         raceService.updateName(id, name);
         Race race = raceService.updateDescription(id, description);
-        return new ModelAndView("redirect:/races");
+        return new ModelAndView("redirect:/race");
     }
 
     @PostMapping(value = "/new")
@@ -60,6 +60,6 @@ public class RaceController {
             @RequestParam String description
     ){
         Race race = raceService.createRace(name, description);
-        return new ModelAndView("redirect:/races");
+        return new ModelAndView("redirect:/race");
     }
 }

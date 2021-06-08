@@ -7,9 +7,10 @@
 <body>
     <h1>edit race</h1>
     <div>
-        <form th:action="race/update" th:method="post">
-            <input type="text" value="${race.name}" name="name"/>
-            <input type="text" value="${characterClass.name}" name="name"/>
+        <form th:action="@{/race}" th:method="post">
+            <input type="text" th:value="${race.name}" name="name"/>
+            <input type="text" th:value="${race.description}" name="description"/>
+            <input type="hidden" th:value="${race.id}" name="raceId"/>
             <input type="submit"/>
         </form>
     </div>

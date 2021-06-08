@@ -7,11 +7,12 @@
 <body>
     <h1>edit item</h1>
     <div>
-        <form th:action="item/update" th:method="post">
-            <input type="text" value="${item.name}" name="name"/>
-            <input type="text" value="${item.description}" name="description"/>
-            <input type="number" value="${item.weight}" name="weight"/>
-            <input type="text" value="${item.itemType}" name="itemType"/>
+        <form th:action="@{/items}" th:method="post">
+            <input type="text" th:value="${item.name}" name="name"/>
+            <input type="text" th:value="${item.description}" name="description"/>
+            <input type="number" th:value="${item.weight}" name="weight"/>
+            <input type="text" th:value="${item.itemType}" name="itemType"/>
+            <input type="hidden" th:value="${item.id}" name="itemId"/>
             <input type="submit"/>
         </form>
     </div>

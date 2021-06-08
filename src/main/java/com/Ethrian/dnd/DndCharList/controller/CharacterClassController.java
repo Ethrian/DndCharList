@@ -3,9 +3,12 @@ package com.Ethrian.dnd.DndCharList.controller;
 import com.Ethrian.dnd.DndCharList.model.CharacterClass;
 import com.Ethrian.dnd.DndCharList.model.Dice;
 import com.Ethrian.dnd.DndCharList.model.Item;
+import com.Ethrian.dnd.DndCharList.model.Race;
 import com.Ethrian.dnd.DndCharList.service.CharacterClassService;
+import com.Ethrian.dnd.DndCharList.service.RaceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -21,47 +24,49 @@ public class CharacterClassController {
     }
 
     @GetMapping
-    public String getClasses(Map<String, Object> model){
+    public ModelAndView getClasses(){
         List<CharacterClass> characterClasses = characterClassService.getAllClasses();
-        model.put("characterClasses", characterClasses);
-        return "/charClasses";
+        ModelAndView model = new ModelAndView("charClasses");
+        model.addObject("characterClasses", characterClasses);
+        model.addObject("hitDices", Dice.values());
+        return model;
     }
 
     @GetMapping(value = "/{classId}")
-    public String editClass(@PathVariable("classId") Long classId, @PathVariable("userId") Long userId, Map<String, Object> model){
-        CharacterClass characterClass = characterClassService.getCharacterClass(classId);
-        model.put("characterClass", characterClass);
-        return "/editClass";
+    public ModelAndView editClass(@PathVariable("classId") Long id){
+        CharacterClass characterClass = characterClassService.getCharacterClass(id);
+        ModelAndView model = new ModelAndView("editClass");
+        model.addObject("characterClass", characterClass);
+        model.addObject("hitDices", Dice.values());
+        return model;
     }
 
-    @DeleteMapping(value = "/delete")
-    public String deleteClass(@PathVariable Long id, Map<String, Object> model){
+
+    @PostMapping(value = "/delete/{id}")
+    public ModelAndView deleteClass(@PathVariable Long id){
         characterClassService.deleteCharacterClass(id);
-        return "redirect:/charClasses";
+        return new ModelAndView("redirect:/class");
     }
 
-
-    @PostMapping(value = "/{id}")
-    public String saveClass(
-            @PathVariable Long id,
+    @PostMapping
+    public ModelAndView saveClass(
+            @RequestParam("classId") Long id,
             @RequestParam String name,
             @RequestParam Dice hitDice,
-            Map<String, Object> model
+            @RequestParam(required = false) Integer lvl
     ){
         characterClassService.updateName(id, name);
         CharacterClass characterClass = characterClassService.updateDice(id, hitDice);
-        model.put("characterClass", characterClass);
-        return "redirect:/charClasses";
+        if(characterClass.getDirty()) characterClassService.updateLvl(id, lvl);
+        return new ModelAndView("redirect:/class");
     }
 
     @PostMapping(value = "/new")
-    public String newClass(
+    public ModelAndView newClass(
             @RequestParam String name,
-            @RequestParam Dice hitDice,
-            Map<String, Object> model
+            @RequestParam Dice hitDice
     ){
-        CharacterClass characterClass = characterClassService.createCharacterClass(name, hitDice);
-        model.put("characterClass", characterClass);
-        return "redirect:/charClasses";
+        characterClassService.createCharacterClass(name, hitDice);
+        return new ModelAndView("redirect:/class");
     }
 }
