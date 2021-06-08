@@ -105,7 +105,10 @@ public class CharacterService {
     ){
         Character character = characterRepo.findById(id).orElseThrow();
         if(STR != null && STR > 0) character.setSTR(STR);
-        if(DEX != null && DEX > 0) character.setDEX(DEX);
+        if(DEX != null && DEX > 0){
+            character.setDEX(DEX);
+            character.setInitiative(((Integer) (DEX - 10) / 2) + 10);
+        }
         if(CON != null && CON > 0) character.setCON(CON);
         if(INT != null && INT > 0) character.setINT(INT);
         if(WIS != null && WIS > 0) character.setWIS(WIS);

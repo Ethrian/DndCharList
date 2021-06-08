@@ -141,10 +141,9 @@
         <form th:method="post" th:action="@{/character/{id}/updateStats(id=${character.id})}">
             <h4>change stats</h4>
 
-            <label>initiative <input type="number" name="initiative" th:value="${character.initiative}" /></label><br/>
             <label>speed <input type="number" name="speed" th:value="${character.speed}" /></label><br/>
+            <label>exp <input type="number" name="exp" th:value="${character.exp}" /></label><br/>
             <label>armor class <input type="number" name="armorClass" th:value="${character.armorClass}" /></label><br/>
-            <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
     </div>
@@ -159,7 +158,6 @@
             <label>INT <input type="number" name="INT" th:value="${character.INT}" /></label><br/>
             <label>WIS <input type="number" name="WIS" th:value="${character.WIS}" /></label><br/>
             <label>CHA <input type="number" name="CHA" th:value="${character.CHA}" /></label><br/>
-            <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
     </div>
@@ -187,7 +185,6 @@
             <label>performance <input type="number" name="performance" th:value="${character.performanceBonus}" /></label><br/>
             <label>persuasion <input type="number" name="persuasion" th:value="${character.persuationBonus}" /></label><br/>
 
-            <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
     </div>
@@ -200,7 +197,6 @@
             <label>background <input type="text" name="background" th:value="${character.background}" /></label><br/>
             <label>appearance <input type="text" name="appearance" th:value="${character.appearence}" /></label><br/>
             <label>gender <input type="text" name="gender" th:value="${character.gender}" /></label><br/>
-            <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
     </div>

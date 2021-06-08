@@ -51,39 +51,27 @@ public class CharacterController {
         return new ModelAndView("redirect:/profile");
     }
 
-//    @GetMapping(value = "/getDescription/{character_id}")
-//    public String getCharactersDescription(
-//            @RequestParam("character_id") Character character,
-//            Map<String, Object> model
-//    ){
-//
-//        return "character";
-//    }
-
     @PostMapping(value = "/character/{id}/updateAbilities")
-    public String updateAbilities(
+    public ModelAndView updateAbilities(
             @PathVariable("id") Long id,
             @RequestParam Integer STR, @RequestParam Integer DEX,
             @RequestParam Integer CON, @RequestParam Integer INT,
             @RequestParam Integer WIS, @RequestParam Integer CHA,
             Map<String, Object> model
     ){
-        Character updatedCharacter = characterService.updateAbilities(id, STR, DEX, CON, INT, WIS, CHA);
-        model.put("character", updatedCharacter);
-        return "character";
+        characterService.updateAbilities(id, STR, DEX, CON, INT, WIS, CHA);
+        return new ModelAndView("redirect:/character/" + id);
     }
 
     @PostMapping(value = "/character/{character_id}/updateStats")
-    public String updateStats(
+    public ModelAndView updateStats(
             @PathVariable("character_id") Long id,
             @RequestParam Integer armorClass,
             @RequestParam Integer exp,
-            @RequestParam Integer speed,
-            Map<String, Object> model
+            @RequestParam Integer speed
     ){
-        Character updatedCharacter = characterService.updateStats(id, armorClass, exp, speed);
-        model.put("character", updatedCharacter);
-        return "character";
+        characterService.updateStats(id, armorClass, exp, speed);
+        return new ModelAndView("redirect:/character/" + id);
     }
 
     @PostMapping(value = "/character/{id}/updateHp")
@@ -101,8 +89,8 @@ public class CharacterController {
     }
 
     @PostMapping(value = "/character/{id}/updateSkills")
-    public String updateSkills(
-            @PathVariable("id") Long characterId,
+    public ModelAndView updateSkills(
+            @PathVariable("id") Long id,
             @RequestParam Integer athletic,
             @RequestParam Integer acrobatic,
             @RequestParam Integer sleightOfHands,
@@ -120,11 +108,10 @@ public class CharacterController {
             @RequestParam Integer deception,
             @RequestParam Integer intimidation,
             @RequestParam Integer performance,
-            @RequestParam Integer persuasion,
-            Map<String, Object> model
+            @RequestParam Integer persuasion
     ) {
-        Character updatedCharacter = characterService.updateSkills(
-                characterId,
+        characterService.updateSkills(
+                id,
                 athletic,
                 acrobatic, sleightOfHands, stealth,
                 investigation, history, nature, arcana, religion,
@@ -132,8 +119,7 @@ public class CharacterController {
                 deception, intimidation, performance, persuasion
         );
 
-        model.put("character", updatedCharacter);
-        return "character";
+        return new ModelAndView("redirect:/character/" + id);
     }
 
     @PostMapping(value = "/character/{character_id}/addSpell")
@@ -251,7 +237,7 @@ public class CharacterController {
 //    }
 
     @PostMapping(value = "/character/{character_id}/description")
-    public String updateDescription(
+    public ModelAndView updateDescription(
             @PathVariable("character_id") Long id,
             @RequestParam String name,
             @RequestParam String appearance,
@@ -259,8 +245,7 @@ public class CharacterController {
             @RequestParam String gender,
             Map<String, Object> model
     ){
-        Character character = characterService.updateDescription(id, name, gender, background, appearance);
-        model.put("character", character);
-        return "character";
+        characterService.updateDescription(id, name, gender, background, appearance);
+        return new ModelAndView("redirect:/character/" + id);
     }
 }
