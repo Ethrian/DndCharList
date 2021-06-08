@@ -3,6 +3,7 @@ package com.Ethrian.dnd.DndCharList.controller;
 import com.Ethrian.dnd.DndCharList.model.Character;
 import com.Ethrian.dnd.DndCharList.model.*;
 import com.Ethrian.dnd.DndCharList.service.CharacterService;
+import com.Ethrian.dnd.DndCharList.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,9 +22,14 @@ public class CharacterController {
     private final Logger logger = LoggerFactory.getLogger(CharacterController.class);
 
     private CharacterService characterService;
+    private final UserService userService;
 
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(
+            CharacterService characterService,
+            UserService userService
+    ) {
         this.characterService = characterService;
+        this.userService = userService;
     }
 
     @GetMapping("/character/{id}")
@@ -32,25 +39,17 @@ public class CharacterController {
         model.addObject("character", character);
         return model;
     }
-//
-//    @RequestMapping(value = "/characters/new", method = RequestMethod.GET)
-//    public ModelAndView createCharacter() {
-//        return new ModelAndView("createCharacter");
-//    }
 
-//    @PostMapping(value = "/characters/new")
-//    public String createCharacter(
-//            HttpSession session,
-//            @RequestParam String name,
-//            @RequestParam String gender,
-//            Map<String, Object> model
-//    ){
-//        User user = (User) session.getAttribute("user");
-//        Character character = characterService.createCharacter(name, gender);
-//        model.put("character", character);
-//        return "character";
-//    }
-
+    @PostMapping(value = "/character/new")
+    public ModelAndView createCharacter(
+            Principal principal,
+            @RequestParam String name,
+            @RequestParam String gender
+    ){
+        User user = UserPrincipal.getUser(principal);
+        characterService.createCharacter(user, name, gender);
+        return new ModelAndView("redirect:/profile");
+    }
 
 //    @GetMapping(value = "/getDescription/{character_id}")
 //    public String getCharactersDescription(
@@ -61,7 +60,7 @@ public class CharacterController {
 //        return "character";
 //    }
 
-    @PostMapping(value = "/characters/updateAbilities/{id}")
+    @PostMapping(value = "/character/{id}/updateAbilities")
     public String updateAbilities(
             @PathVariable("id") Long id,
             @RequestParam Integer STR, @RequestParam Integer DEX,
@@ -74,7 +73,7 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/updateStats/{character_id}")
+    @PostMapping(value = "/character/{character_id}/updateStats")
     public String updateStats(
             @PathVariable("character_id") Long id,
             @RequestParam Integer armorClass,
@@ -87,23 +86,21 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/updateHp/{id}")
-    public String updateHp(
+    @PostMapping(value = "/character/{id}/updateHp")
+    public ModelAndView updateHp(
             @PathVariable("id") Long id,
             @RequestParam Integer maxHp,
             @RequestParam Integer curHp,
             @RequestParam Integer tmpHp,
             @RequestParam Integer deathSavesFailed,
             @RequestParam Integer deathSavesPassed,
-            @RequestParam Integer currentHitDices,
-            Map<String, Object> model
+            @RequestParam Integer currentHitDices
     ){
-        Character updatedCharacter = characterService.updateHp(id, maxHp, curHp, tmpHp, deathSavesFailed, deathSavesPassed, currentHitDices);
-        model.put("character", updatedCharacter);
-        return "character";
+        characterService.updateHp(id, maxHp, curHp, tmpHp, deathSavesFailed, deathSavesPassed, currentHitDices);
+        return new ModelAndView("redirect:/character/" + id);
     }
 
-    @PostMapping(value = "/characters/updateSkills/{id}")
+    @PostMapping(value = "/character/{id}/updateSkills")
     public String updateSkills(
             @PathVariable("id") Long characterId,
             @RequestParam Integer athletic,
@@ -139,7 +136,7 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/addSpell/{character_id}/{spell_id}")
+    @PostMapping(value = "/character/{character_id}/addSpell")
     public String addSpell(
             @PathVariable("character_id") Long characterId,
             @RequestParam("spell_id") Long spellId,
@@ -150,7 +147,7 @@ public class CharacterController {
         return "characterSpells";
     }
 
-    @PostMapping(value = "/characters/removeSpell/{character_id}")
+    @DeleteMapping(value = "/character/{character_id}/spell/{spell_id}")
     public String removeSpell(
             HttpSession session,
             @PathVariable("character_id") Long characterId,
@@ -164,7 +161,7 @@ public class CharacterController {
         return "characterSpells";
     }
 
-    @GetMapping(value = "/characters/getSpells/{character_id}")
+    @GetMapping(value = "/character/{character_id}/spells")
     public String getSpells(
             HttpSession session,
             @PathVariable("character_id") Long id,
@@ -177,7 +174,7 @@ public class CharacterController {
         return "characterSpells";
     }
 
-    @PostMapping(value = "/characters/addItem/{character_id}")
+    @PostMapping(value = "/character/{character_id}/addItem")
     public String addItem(
             @PathVariable("character_id") Long characterId,
             @RequestParam("item_id") Long itemId,
@@ -188,7 +185,7 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/removeItem/{character_id}")
+    @DeleteMapping(value = "/character/{character_id}/item/{item_id}")
     public String removeItem(
             @PathVariable("character_id") Long characterId,
             @RequestParam("item_id") Long itemId,
@@ -199,7 +196,7 @@ public class CharacterController {
         return "character";
     }
 
-    @GetMapping(value = "/characters/getItems/{character_id}")
+    @GetMapping(value = "/character/{character_id}/items")
     public String getItems(
             HttpSession session,
             @PathVariable("character_id") Long id,
@@ -211,7 +208,7 @@ public class CharacterController {
         return "characterItems";
     }
 
-    @GetMapping(value = "/characters/getRace/{character_id}")
+    @GetMapping(value = "/character/{character_id}/race")
     public String getRace(
             @PathVariable("character_id") Long id,
             Map<String, Object> model
@@ -221,7 +218,7 @@ public class CharacterController {
         return "character";
     }
 
-    @PostMapping(value = "/characters/addRace/{character_id}")
+    @PostMapping(value = "/character/{character_id}/addRace")
     public String addRace(
             @PathVariable("character_id") Long characterId,
             @RequestParam Long raceId,
@@ -253,7 +250,7 @@ public class CharacterController {
 //        return "character";
 //    }
 
-    @PostMapping(value = "/characters/updateDescription/{character_id}")
+    @PostMapping(value = "/character/{character_id}/description")
     public String updateDescription(
             @PathVariable("character_id") Long id,
             @RequestParam String name,

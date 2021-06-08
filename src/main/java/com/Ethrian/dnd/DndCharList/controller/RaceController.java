@@ -43,7 +43,7 @@ public class RaceController {
         return new ModelAndView("redirect:/races");
     }
 
-    @PostMapping(name = "/{raceId}")
+    @PostMapping(value = "/{raceId}")
     public ModelAndView saveRace(
             @PathVariable Long id,
             @RequestParam String name,
@@ -54,7 +54,7 @@ public class RaceController {
         return new ModelAndView("redirect:/races");
     }
 
-    @PostMapping(name = "/new")
+    @PostMapping(value = "/new")
     public ModelAndView newRace(
             @RequestParam String name,
             @RequestParam String description

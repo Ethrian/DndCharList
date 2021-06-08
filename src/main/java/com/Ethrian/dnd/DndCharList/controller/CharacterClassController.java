@@ -27,14 +27,14 @@ public class CharacterClassController {
         return "/charClasses";
     }
 
-    @GetMapping(name = "/{classId}")
+    @GetMapping(value = "/{classId}")
     public String editClass(@PathVariable("classId") Long classId, @PathVariable("userId") Long userId, Map<String, Object> model){
         CharacterClass characterClass = characterClassService.getCharacterClass(classId);
         model.put("characterClass", characterClass);
         return "/editClass";
     }
 
-    @DeleteMapping(name = "/delete")
+    @DeleteMapping(value = "/delete")
     public String deleteClass(@PathVariable Long id, Map<String, Object> model){
         characterClassService.deleteCharacterClass(id);
         return "redirect:/charClasses";

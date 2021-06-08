@@ -124,7 +124,7 @@
     </div>
 
     <div>
-        <form th:method="post" th:action="@{/characters/updateHp/{id}(id=${character.id})}">
+        <form th:method="post" th:action="@{/character/{id}/updateHp(id=${character.id})}">
             <h4>change hp</h4>
 
             <label>current hp <input type="number" name="curHp" th:value="${character.curHP}" /></label><br/>
@@ -133,13 +133,12 @@
             <label>death saves fails <input type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></label><br/>
             <label>death saves successes <input type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></label><br/>
             <label>hit dices <input type="number" name="currentHitDices" th:value="${character.curHitDices}" /></label><br/>
-            <input type="hidden" name="character_id" th:value="${character.id}" />
             <input type="submit" />
         </form>
     </div>
 
     <div>
-        <form th:method="post" th:action="@{/characters/updateStats/{id}(id=${character.id})}">
+        <form th:method="post" th:action="@{/character/{id}/updateStats(id=${character.id})}">
             <h4>change stats</h4>
 
             <label>initiative <input type="number" name="initiative" th:value="${character.initiative}" /></label><br/>
@@ -151,7 +150,7 @@
     </div>
 
     <div>
-        <form th:method="post" th:action="@{/characters/updateAbilities/{id}(id=${character.id})}">
+        <form th:method="post" th:action="@{/character/{id}/updateAbilities(id=${character.id})}">
             <h4>change abilities</h4>
 
             <label>STR <input type="number" name="STR" th:value="${character.STR}" /></label><br/>
@@ -166,7 +165,7 @@
     </div>
 
     <div>
-        <form th:method="post" th:action="@{/characters/updateSkills/{id}(id=${character.id})}">
+        <form th:method="post" th:action="@{/character/{id}/updateSkills(id=${character.id})}">
             <h4>change skills</h4>
 
             <label>athletic <input type="number" name="athletic" th:value="${character.athleticBonus}" /></label><br/>
@@ -194,7 +193,7 @@
     </div>
 
     <div>
-        <form th:method="post" th:action="@{/character/updateDescription}">
+        <form th:method="post" th:action="@{/character/{character_id}/description(character_id=${character.id})}">
             <h4>change description</h4>
 
             <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>
@@ -207,8 +206,8 @@
     </div>
 
     <div>
-        <a th:href="@{/characters/getSpells/{character_id}(character_id=${character.id})}">to spellbook</a>
-        <a th:href="@{/characters/getItems/{character_id}(character_id=${character.id})}">to inventory</a>
+        <a th:href="@{/character/{character_id}/spells(character_id=${character.id})}">to spellbook</a>
+        <a th:href="@{/character/{character_id}/items(character_id=${character.id})}">to inventory</a>
     </div>
 
     <div th:if="${character.race != null}">
