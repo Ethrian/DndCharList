@@ -43,6 +43,7 @@ public class LoginController {
             return model;
         }
         session.setAttribute("userId", user.getId());
+        session.setAttribute("user", user);
         ModelAndView model = new ModelAndView("redirect:/profile");
         return model;
     }

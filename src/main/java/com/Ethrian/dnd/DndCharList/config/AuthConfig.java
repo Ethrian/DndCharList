@@ -38,11 +38,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/class", "/class/*").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-//                .formLogin()
-//                .loginPage("/signIn.html")
-//                .successHandler(appAuthenticationSuccessHandler())
-//                .permitAll()
-//                .and()
                 .logout().permitAll()
                 .and()
                 .httpBasic();
