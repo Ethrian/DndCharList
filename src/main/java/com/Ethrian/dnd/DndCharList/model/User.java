@@ -93,4 +93,8 @@ public class User {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public boolean isAdmin() {
+        return !this.roles.isEmpty() && this.roles.contains(Role.ADMIN);
+    }
 }
