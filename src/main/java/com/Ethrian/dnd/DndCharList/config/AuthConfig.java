@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -30,7 +31,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/signIn", "/signUp", "/static/**").permitAll()
+                .antMatchers("/", "/login", "/signUp", "/static/**", "/logout").permitAll()
                 .antMatchers("/character/*").hasAuthority("USER")
                 .antMatchers("/spells/delete/*", "/spells/new").hasAuthority("ADMIN")
                 .antMatchers("/items/delete/*", "/items/new").hasAuthority("ADMIN")
@@ -38,9 +39,16 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/class", "/class/*").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .logout().permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/profile")
+                .permitAll()
                 .and()
-                .httpBasic();
+                .logout().permitAll();
+
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
     }
 
     @Override

@@ -53,11 +53,15 @@ public class CharacterController {
 
     @PostMapping(value = "/character/new")
     public ModelAndView createCharacter(
-            Principal principal,
+            HttpSession session,
             @RequestParam String name,
             @RequestParam String gender
     ){
-        User user = UserPrincipal.getUser(principal);
+        User user;
+        if (session.getAttribute("user") != null)
+            user = (User) session.getAttribute("user");
+        else
+            user = userService.getUserById((Long) session.getAttribute("userId"));
         characterService.createCharacter(user, name, gender);
         return new ModelAndView("redirect:/profile");
     }
