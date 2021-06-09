@@ -1,222 +1,373 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/static/style.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <div>
-        <h2 th:text="${character.name}"></h2>
-        <div>
-            <table>
-                <tr>
-                    <td th:text="${character.gender}"></td>
-                </tr>
-                <tr>
-                    <td th:text="${character.appearence}"></td>
-                </tr>
-                <tr>
-                    <td th:text="${character.background}"></td>
-                </tr>
-            </table>
+    <header class="header2">
+        <div class="header2-content">
+            <h1 th:text="${character.name}"></h1>
         </div>
-        <table>
-            <tr>
-                <th>STR</th>
-                <td th:text="${character.STR}"></td>
-                <th>DEX</th>
-                <td th:text="${character.DEX}"></td>
-                <th>CON</th>
-                <td th:text="${character.CON}"></td>
-            </tr>
-            <tr>
-                <th>INT</th>
-                <td th:text="${character.INT}"></td>
-                <th>WIS</th>
-                <td th:text="${character.WIS}"></td>
-                <th>CHA</th>
-                <td th:text="${character.CHA}"></td>
-            </tr>
-        </table>
+    </header>
 
-        <table>
-            <tr>
-                <th>athletic</th>
-                <td th:text="${character.athleticBonus}"></td>
-                <th>acrobatic</th>
-                <td th:text="${character.acrotabicBonus}"></td>
-                <th>sleight of hands</th>
-                <td th:text="${character.sleightOfHandsBonus}"></td>
-            </tr>
-            <tr>
-                <th>stealth</th>
-                <td th:text="${character.stealthBonus}"></td>
-                <th>investigation</th>
-                <td th:text="${character.investigationBonus}"></td>
-                <th>history</th>
-                <td th:text="${character.historyBonus}"></td>
-            </tr>
-            <tr>
-                <th>nature</th>
-                <td th:text="${character.natureBonus}"></td>
-                <th>arcana</th>
-                <td th:text="${character.arcanaBonus}"></td>
-                <th>religion</th>
-                <td th:text="${character.religionBonus}"></td>
-            </tr>
-            <tr>
-                <th>perception</th>
-                <td th:text="${character.perceptionBonus}"></td>
-                <th>insight</th>
-                <td th:text="${character.insightBonus}"></td>
-                <th>survival</th>
-                <td th:text="${character.survivalBonus}"></td>
-            </tr>
-            <tr>
-                <th>medicine</th>
-                <td th:text="${character.medicineBonus}"></td>
-                <th>animal handling</th>
-                <td th:text="${character.animalHandlingBonus}"></td>
-                <th>deception</th>
-                <td th:text="${character.decetpionBonus}"></td>
-            </tr>
-            <tr>
-                <th>investigation</th>
-                <td th:text="${character.investigationBonus}"></td>
-                <th>performance</th>
-                <td th:text="${character.performanceBonus}"></td>
-                <th>persuation</th>
-                <td th:text="${character.persuationBonus}"></td>
-            </tr>
-        </table>
+    <div class="content-block d-flex justify-content-center" >
 
-        <table>
-            <tr>
-                <th>current hp</th>
-                <td th:text="${character.curHP}"></td>
-                <th>maximum hp</th>
-                <td th:text="${character.maxHP}"></td>
-                <th>temporal hp</th>
-                <td th:text="${character.tmpHP}"></td>
-            </tr>
-            <tr>
-                <th>fails</th>
-                <td th:text="${character.deathSavesFailed}"></td>
-                <th>successes</th>
-                <td th:text="${character.deathSavesPassed}"></td>
-                <th>hit dices</th>
-                <td th:text="${character.curHitDices}"></td>
-            </tr>
-        </table>
+        <div class="character-params">
+            <div class="character-param-abilities">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">Character abilities</li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <th class="table-light">STR</th>
+                                <b><td class="table-secondary"  th:text="${character.STR}"></td></b>
+                                <th class="table-light">DEX</th>
+                                <b><td class="table-secondary" th:text="${character.DEX}"></td></b>
+                                <th class="table-light">CON</th>
+                                <b><td class="table-secondary" th:text="${character.CON}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">INT</th>
+                                <b><td class="table-secondary" th:text="${character.INT}"></td></b>
+                                <th class="table-light">WIS</th>
+                                <b><td class="table-secondary" th:text="${character.WIS}"></td></b>
+                                <th class="table-light">CHA</th>
+                                <b><td class="table-secondary" th:text="${character.CHA}"></td></b>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-danger" data-bs-toggle="collapse" href="#characterAbilities" role="button" aria-expanded="false" aria-controls="characterAbilities">
+                            characterAbilities
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="collapse" id="characterAbilities">
+                            <form th:method="post" th:action="@{/character/{id}/updateAbilities(id=${character.id})}">
+                                <h4>change abilities</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="form-label">STR</label><input type="number" class="form-control" min="1" max="30" maxlength="30" name="STR" th:value="${character.STR}" /></td>
+                                        <td><label class="form-label">DEX</label><input type="number" class="form-control" min="1" max="30"  name="DEX" th:value="${character.DEX}" /></td>
+                                        <td><label class="form-label">CON</label><input type="number" class="form-control" min="1" max="30"  name="CON" th:value="${character.CON}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">INT</label><input type="number" class="form-control" min="1" max="30"  name="INT" th:value="${character.INT}" /></td>
+                                        <td><label class="form-label">WIS</label><input type="number" class="form-control" min="1" max="30"  name="WIS" th:value="${character.WIS}" /></td>
+                                        <td><label class="form-label">CHA</label><input type="number" class="form-control" min="1" max="30"  name="CHA" th:value="${character.CHA}" /></td>
+                                    </tr>
+                                </table>
+                                <button class="btn btn-danger" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-        <table>
-            <tr>
-                <th>initiative</th>
-                <td th:text="${character.initiative}"></td>
-                <th>speed</th>
-                <td th:text="${character.speed}"></td>
-                <th>armor class</th>
-                <td th:text="${character.armorClass}"></td>
-            </tr>
-        </table>
+            <div class="character-param-skills">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning">Character skills</li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <th class="table-light">athletic</th>
+                                <b><td class="table-secondary" th:text="${character.athleticBonus}"></td></b>
+                                <th class="table-light">acrobatic</th>
+                                <b><td class="table-secondary" th:text="${character.acrotabicBonus}"></td></b>
+                                <th class="table-light">sleight of hands</th>
+                                <b><td class="table-secondary" th:text="${character.sleightOfHandsBonus}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">stealth</th>
+                                <b><td class="table-secondary" th:text="${character.stealthBonus}"></td></b>
+                                <th class="table-light">investigation</th>
+                                <b><td class="table-secondary" th:text="${character.investigationBonus}"></td></b>
+                                <th class="table-light">history</th>
+                                <b><td class="table-secondary" th:text="${character.historyBonus}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">nature</th>
+                                <b><td class="table-secondary" th:text="${character.natureBonus}"></td></b>
+                                <th class="table-light">arcana</th>
+                                <b><td class="table-secondary" th:text="${character.arcanaBonus}"></td></b>
+                                <th class="table-light">religion</th>
+                                <b><td class="table-secondary" th:text="${character.religionBonus}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">perception</th>
+                                <b><td class="table-secondary" th:text="${character.perceptionBonus}"></td></b>
+                                <th class="table-light">insight</th>
+                                <b><td class="table-secondary" th:text="${character.insightBonus}"></td></b>
+                                <th class="table-light">survival</th>
+                                <b><td class="table-secondary" th:text="${character.survivalBonus}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">medicine</th>
+                                <b><td class="table-secondary" th:text="${character.medicineBonus}"></td></b>
+                                <th class="table-light">animal handling</th>
+                                <b><td class="table-secondary" th:text="${character.animalHandlingBonus}"></td></b>
+                                <th class="table-light">deception</th>
+                                <b><td class="table-secondary" th:text="${character.decetpionBonus}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">investigation</th>
+                                <b><td class="table-secondary" th:text="${character.investigationBonus}"></td></b>
+                                <th class="table-light">performance</th>
+                                <b><td class="table-secondary" th:text="${character.performanceBonus}"></td></b>
+                                <th class="table-light">persuation</th>
+                                <b><td class="table-secondary" th:text="${character.persuationBonus}"></td></b>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#characterSkills" role="button" aria-expanded="false" aria-controls="characterSkills">
+                            characterSkills
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="collapse" id="characterSkills">
+                            <form th:method="post" th:action="@{/character/{id}/updateSkills(id=${character.id})}">
+                                <h4>change skills</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="form-label">athletic</label><input class="form-control" min="-5" max="30" type="number" name="athletic" th:value="${character.athleticBonus}" /></td>
+                                        <td><label class="form-label">acrobatic</label><input class="form-control" min="-5" max="30" type="number" name="acrobatic" th:value="${character.acrotabicBonus}" /></td>
+                                        <td><label class="form-label">sleight of hands</label><input class="form-control" min="-5" max="30" type="number" name="sleightOfHands" th:value="${character.sleightOfHandsBonus}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">stealth</label><input class="form-control" min="-5" max="30" type="number" name="stealth" th:value="${character.stealthBonus}" /></td>
+                                        <td><label class="form-label">investigation</label><input class="form-control" min="-5" max="30" type="number" name="investigation" th:value="${character.investigationBonus}" /></td>
+                                        <td><label class="form-label">history</label><input class="form-control" min="-5" max="30" type="number" name="history" th:value="${character.historyBonus}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">nature</label><input class="form-control" min="-5" max="30" type="number" name="nature" th:value="${character.natureBonus}" /></td>
+                                        <td><label class="form-label">arcana</label><input class="form-control" min="-5" max="30" type="number" name="arcana" th:value="${character.arcanaBonus}" /></td>
+                                        <td><label class="form-label">religion</label><input class="form-control" min="-5" max="30" type="number" name="religion" th:value="${character.religionBonus}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">perception</label><input class="form-control" min="-5" max="30" type="number" name="perception" th:value="${character.perceptionBonus}" /></td>
+                                        <td><label class="form-label">insight</label><input class="form-control" min="-5" max="30" type="number" name="insight" th:value="${character.insightBonus}" /></td>
+                                        <td><label class="form-label">survival</label><input class="form-control" min="-5" max="30" type="number" name="survival" th:value="${character.survivalBonus}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">medicine</label><input class="form-control" min="-5" max="30" type="number" name="medicine" th:value="${character.medicineBonus}" /></td>
+                                        <td><label class="form-label">animal handling</label><input class="form-control" min="-5" max="30" type="number" name="animalHandling" th:value="${character.animalHandlingBonus}" /></td>
+                                        <td><label class="form-label">deception</label><input class="form-control" min="-5" max="30" type="number" name="deception" th:value="${character.decetpionBonus}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">intimidation</label><input class="form-control" min="-5" max="30" type="number" name="intimidation" th:value="${character.intimidationBonus}" /></td>
+                                        <td><label class="form-label">performance</label><input class="form-control" min="-5" max="30" type="number" name="performance" th:value="${character.performanceBonus}" /></td>
+                                        <td><label class="form-label">persuasion</label><input class="form-control" min="-5" max="30" type="number" name="persuasion" th:value="${character.persuationBonus}" /></td>
+                                    </tr>
+                                </table>
+                                <button class="btn btn-warning" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
+            <div class="character-param-stats">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">Character stats</li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <th class="table-light">initiative</th>
+                                <b><td class="table-secondary" th:text="${character.initiative}"></td></b>
+                                <th class="table-light">speed</th>
+                                <b><td class="table-secondary" th:text="${character.speed}"></td></b>
+                                <th class="table-light">armor class</th>
+                                <b><td class="table-secondary" th:text="${character.armorClass}"></td></b>
+                                <th class="table-light">experience</th>
+                                <b><td class="table-secondary" th:text="${character.exp}"></td></b>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-dark" data-bs-toggle="collapse" href="#characterStats" role="button" aria-expanded="false" aria-controls="characterStats">
+                            characterStats
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="collapse" id="characterStats">
+                            <form th:method="post" th:action="@{/character/{id}/updateStats(id=${character.id})}">
+                                <h4>change stats</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="form-label">speed </label><input class="form-control" type="number" min="0" max="200" name="speed" th:value="${character.speed}" /></td>
+                                        <td><label class="form-label">exp </label><input class="form-control" type="number" min="0" max="355000" name="exp" th:value="${character.exp}" /></td>
+                                        <td><label class="form-label">armor class </label><input class="form-control" type="number" min="0" max="35" name="armorClass" th:value="${character.armorClass}" /></td>
+                                    </tr>
+                                </table>
+                                <button class="btn btn-dark" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="character-items-spells">
+                <ul class="list-group">
+                    <li class="list-group-item">Spells and items</li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-around">
+                            <a th:href="@{/character/{character_id}/spells(character_id=${character.id})}">
+                                <button class="btn btn-danger">to spellbook</button>
+                            </a>
+                            <a th:href="@{/character/{character_id}/items(character_id=${character.id})}">
+                                <button class="btn btn-warning">to inventory</button>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="character-params">
+
+            <div class="character-param-hp">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">Character hp</li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <th class="table-light">current hp</th>
+                                <b><td class="table-secondary" th:text="${character.curHP}"></td></b>
+                                <th class="table-light">maximum hp</th>
+                                <b><td class="table-secondary" th:text="${character.maxHP}"></td></b>
+                                <th class="table-light">temporal hp</th>
+                                <b><td class="table-secondary" th:text="${character.tmpHP}"></td></b>
+                            </tr>
+                            <tr>
+                                <th class="table-light">fails</th>
+                                <b><td class="table-secondary" th:text="${character.deathSavesFailed}"></td></b>
+                                <th class="table-light">successes</th>
+                                <b><td class="table-secondary" th:text="${character.deathSavesPassed}"></td></b>
+                                <th class="table-light">hit dices</th>
+                                <b><td class="table-secondary" th:text="${character.curHitDices}"></td></b>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-success" data-bs-toggle="collapse" href="#characterHP" role="button" aria-expanded="false" aria-controls="characterHP">
+                            characterHP
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="collapse" id="characterHP">
+                            <form th:method="post" th:action="@{/character/{id}/updateHp(id=${character.id})}">
+                                <h4>change hp</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td><label class="form-label">current hp </label><input class="form-control" type="number" name="curHp" min="0" th:max="${character.maxHP}" th:value="${character.curHP}" /></td>
+                                        <td><label class="form-label">temporal hp </label><input class="form-control" type="number" name="tmpHp" min="0" th:value="${character.tmpHP}" /></td>
+                                        <td><label class="form-label">maximum hp </label><input class="form-control" type="number" name="maxHp" min="1" th:value="${character.maxHP}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label">death saves fails </label><input class="form-control" type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></td>
+                                        <td><label class="form-label">death saves successes </label><input class="form-control" type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></td>
+                                        <td><label class="form-label">hit dices </label><input class="form-control" type="number" name="currentHitDices" th:value="${character.curHitDices}" /></td>
+                                    </tr>
+                                </table>
+                                <button class="btn btn-success" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="character-class">
+                <ul class="list-group">
+                    <li class="list-group-item">Class</li>
+                    <li class="list-group-item">
+
+                    <div th:if="${character.characterClass != null}">
+                        <b><h5 th:text="${character.characterClass.name}"></h5></b>
+                        <span>Hit Dice: </span><span th:text="${character.characterClass.hitDice}"></span>
+                    </div>
+                    </li>
+                    <li class="list-group-item">
+                    <a th:href="@{/character/{character_id}/changeClass(character_id=${character.id})}">
+                        <button class="btn btn-secondary">change class</button>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="character-race">
+                <ul class="list-group">
+                    <li class="list-group-item">Race</li>
+                    <li class="list-group-item">
+                        <div th:if="${character.race != null}">
+                            <b><h5 th:text="${character.race.name}"></h5></b>
+                            <span th:text="${character.race.description}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <a th:href="@{/character/{character_id}/changeRace(character_id=${character.id})}">
+                            <button class="btn btn-dark">change race</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="character-param-desc">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info">Character description</li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <tr>
+                                <td class="table-light" th:text="${character.gender}"></td>
+                            </tr>
+                            <tr>
+                                <td class="table-light" th:text="${character.appearence}"></td>
+                            </tr>
+                            <tr>
+                                <td class="table-light" th:text="${character.background}"></td>
+                            </tr>
+                        </table>
+                    <li class="list-group-item">
+                        <a class="btn btn-info" data-bs-toggle="collapse" href="#characterDesc" role="button" aria-expanded="false" aria-controls="characterDesc">
+                            characterDesc
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="collapse" id="characterDesc">
+                            <form th:method="post" th:action="@{/character/{character_id}/description(character_id=${character.id})}">
+                                <h4>change description</h4>
+                                <label class="form-label">name</label><input class="form-control" type="text" name="name" th:value="${character.name}" /><br/>
+                                <label class="form-label">background</label> <textarea class="form-control" type="text" name="background" th:text="${character.background}"></textarea>
+                                <label class="form-label">appearance</label> <textarea class="form-control" type="text" name="appearance" th:text="${character.appearence}"></textarea>
+                                <label class="form-label">gender</label><input class="form-control" type="text" name="gender" th:value="${character.gender}" /><br/>
+                                <button class="btn btn-info" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <form th:method="post" th:action="@{/character/{id}/updateHp(id=${character.id})}">
-            <h4>change hp</h4>
-
-            <label>current hp <input type="number" name="curHp" th:value="${character.curHP}" /></label><br/>
-            <label>temporal hp <input type="number" name="tmpHp" th:value="${character.tmpHP}" /></label><br/>
-            <label>maximum hp <input type="number" name="maxHp" th:value="${character.maxHP}" /></label><br/>
-            <label>death saves fails <input type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></label><br/>
-            <label>death saves successes <input type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></label><br/>
-            <label>hit dices <input type="number" name="currentHitDices" th:value="${character.curHitDices}" /></label><br/>
-            <input type="submit" />
-        </form>
-    </div>
-
-    <div>
-        <form th:method="post" th:action="@{/character/{id}/updateStats(id=${character.id})}">
-            <h4>change stats</h4>
-
-            <label>speed <input type="number" name="speed" th:value="${character.speed}" /></label><br/>
-            <label>exp <input type="number" name="exp" th:value="${character.exp}" /></label><br/>
-            <label>armor class <input type="number" name="armorClass" th:value="${character.armorClass}" /></label><br/>
-            <input type="submit" />
-        </form>
-    </div>
-
-    <div>
-        <form th:method="post" th:action="@{/character/{id}/updateAbilities(id=${character.id})}">
-            <h4>change abilities</h4>
-
-            <label>STR <input type="number" name="STR" th:value="${character.STR}" /></label><br/>
-            <label>DEX <input type="number" name="DEX" th:value="${character.DEX}" /></label><br/>
-            <label>CON <input type="number" name="CON" th:value="${character.CON}" /></label><br/>
-            <label>INT <input type="number" name="INT" th:value="${character.INT}" /></label><br/>
-            <label>WIS <input type="number" name="WIS" th:value="${character.WIS}" /></label><br/>
-            <label>CHA <input type="number" name="CHA" th:value="${character.CHA}" /></label><br/>
-            <input type="submit" />
-        </form>
-    </div>
-
-    <div>
-        <form th:method="post" th:action="@{/character/{id}/updateSkills(id=${character.id})}">
-            <h4>change skills</h4>
-
-            <label>athletic <input type="number" name="athletic" th:value="${character.athleticBonus}" /></label><br/>
-            <label>acrobatic <input type="number" name="acrobatic" th:value="${character.acrotabicBonus}" /></label><br/>
-            <label>sleight of hands <input type="number" name="sleightOfHands" th:value="${character.sleightOfHandsBonus}" /></label><br/>
-            <label>stealth <input type="number" name="stealth" th:value="${character.stealthBonus}" /></label><br/>
-            <label>investigation <input type="number" name="investigation" th:value="${character.investigationBonus}" /></label><br/>
-            <label>history <input type="number" name="history" th:value="${character.historyBonus}" /></label><br/>
-            <label>nature <input type="number" name="nature" th:value="${character.natureBonus}" /></label><br/>
-            <label>arcana <input type="number" name="arcana" th:value="${character.arcanaBonus}" /></label><br/>
-            <label>religion <input type="number" name="religion" th:value="${character.religionBonus}" /></label><br/>
-            <label>perception <input type="number" name="perception" th:value="${character.perceptionBonus}" /></label><br/>
-            <label>insight <input type="number" name="insight" th:value="${character.insightBonus}" /></label><br/>
-            <label>survival <input type="number" name="survival" th:value="${character.survivalBonus}" /></label><br/>
-            <label>medicine <input type="number" name="medicine" th:value="${character.medicineBonus}" /></label><br/>
-            <label>animal handling <input type="number" name="animalHandling" th:value="${character.animalHandlingBonus}" /></label><br/>
-            <label>deception <input type="number" name="deception" th:value="${character.decetpionBonus}" /></label><br/>
-            <label>intimidation <input type="number" name="intimidation" th:value="${character.intimidationBonus}" /></label><br/>
-            <label>performance <input type="number" name="performance" th:value="${character.performanceBonus}" /></label><br/>
-            <label>persuasion <input type="number" name="persuasion" th:value="${character.persuationBonus}" /></label><br/>
-
-            <input type="submit" />
-        </form>
-    </div>
-
-    <div>
-        <form th:method="post" th:action="@{/character/{character_id}/description(character_id=${character.id})}">
-            <h4>change description</h4>
-
-            <label>name <input type="text" name="name" th:value="${character.name}" /></label><br/>
-            <label>background <input type="text" name="background" th:value="${character.background}" /></label><br/>
-            <label>appearance <input type="text" name="appearance" th:value="${character.appearence}" /></label><br/>
-            <label>gender <input type="text" name="gender" th:value="${character.gender}" /></label><br/>
-            <input type="submit" />
-        </form>
-    </div>
-
-    <div>
-        <a th:href="@{/character/{character_id}/spells(character_id=${character.id})}">to spellbook</a>
-        <a th:href="@{/character/{character_id}/items(character_id=${character.id})}">to inventory</a>
-    </div>
-
-    <div th:if="${character.race != null}">
-        <span th:text="${character.race.name}"></span>
-        <span th:text="${character.race.description}"></span>
-    </div>
-    <a th:href="@{/character/{character_id}/changeRace(character_id=${character.id})}">Change race</a><br />
-
-    <div th:if="${character.characterClass != null}">
-        <span th:text="${character.characterClass.name}"></span>
-        <span th:text="${character.characterClass.hitDice}"></span>
-    </div>
-    <a th:href="@{/character/{character_id}/changeClass(character_id=${character.id})}">Change class</a><br />
-
+    <footer>
+        <div class="d-flex justify-content-around">
+            <div><img src="/static/footerPart.jpg"></div>
+            <div class="footer-content-div-text">
+                <h5>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
+                    vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
+                    Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
+                    bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
+                </h5>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
 </body>
 </html>

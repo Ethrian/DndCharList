@@ -343,8 +343,7 @@ public class CharacterService {
         return characterRepo.save(character);
     }
 
-    public void deleteCharacter(Long id, String name){
-        Character character = characterRepo.findById(id).orElseThrow();
-        if(character.getName().equals(name)) characterRepo.deleteById(id);
+    public void deleteCharacter(Long id){
+        characterRepo.deleteById(id);
     }
 }

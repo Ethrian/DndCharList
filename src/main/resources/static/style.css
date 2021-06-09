@@ -1,0 +1,220 @@
+body {
+    font-family: Roboto, "Open Sans", Helvetica, sans-serif !important;
+    width: 100%;
+    min-width: 510px;
+    height: 100%;
+}
+
+.header1 {
+    height: 500px;
+    width: 100%;
+    top: -10px;
+    display: block;
+    background-image: url("headerBG.jpg");
+    background-position: center center;
+    background-repeat: space;
+}
+
+.header2 {
+    height: 120px;
+    width: 100%;
+    top: -10px;
+    display: block;
+    background-image: url("headerBG.jpg");
+    background-position: center center;
+    background-repeat: space;
+}
+
+.header2-content {
+    padding: 25px 25px;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(45deg, rgba(20,18,14,0.9553571428571429) 2%, rgba(20,18,14,0.24667366946778713) 95%);
+}
+
+.header-content {
+    padding: 90px 45px;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(45deg, rgba(20,18,14,0.9553571428571429) 2%, rgba(20,18,14,0.24667366946778713) 95%);
+}
+
+.header2-content h1{
+    margin-left: 25%;
+    margin-right: 25%;
+    font-weight: bold;
+    font-size: 48px;
+    text-align: center;
+    text-shadow: 1px 1px #999;
+}
+
+.header-content h1{
+    margin-left: 25%;
+    margin-right: 25%;
+    font-weight: bold;
+    font-size: 48px;
+    text-align: center;
+    text-shadow: 1px 1px #999;
+}
+
+.header-content h5{
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.content-block {
+    width: 100%;
+    min-height: 400px;
+    height: 100%;
+    background-color; #ccc;
+}
+
+footer {
+    height: 300px;
+    width: 100%;
+    bottom: -10px;
+    position: static;
+    background-color: #1B0D0A;
+}
+
+.footer-content {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.footer-content-div-text {
+    text-align: left;
+    height: 300px;
+    width: 400px;
+    padding: 50px 1px;
+    color: #fff;
+}
+
+.sign-in-div {
+    text-align: center;
+    margin: 80px 80px;
+    width: 300px;
+    padding-bottom: 10px;
+    display: block;
+    padding: 8px;
+}
+
+.character-list-div {
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 60px;
+    width: 300px;
+    padding-bottom: 10px;
+    display: block;
+    padding: 8px;
+}
+
+.character-list-text{
+    display: block;
+    margin-top: 50px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.character-select{
+    margin: 5px;
+}
+
+.char-button{
+    width: 100%;
+}
+
+.character-params{
+    width: 96%
+    padding: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.character-param-desc {
+    display:block;
+    max-width: 600px;
+    text-align: center;
+    margin: 7px;
+}
+
+.character-param-abilities {
+    display:block;
+    max-width: 600px;
+    text-align: center;
+    margin: 7px;
+}
+
+.character-param-skills {
+    display:block;
+    max-width: 600px;
+    text-align: center;
+    margin: 7px;
+}
+
+.character-param-hp {
+    display:block;
+    max-width: 600px;
+    text-align: center;
+    margin: 7px;
+}
+
+.character-param-stats {
+    display:block;
+    max-width: 600px;
+    text-align: center;
+    margin: 7px;
+}
+
+.character-race{
+    display: block;
+    margin: 7px;
+    text-align: center;
+    max-width: 600px;
+
+}
+
+.character-class{
+    display: block;
+    margin: 7px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.character-items-spells{
+    display: block;
+    margin: 7px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.spells-box{
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    text-align: center;
+    max-width: 700px;
+}
+
+.spells-table{
+    display: block;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    text-align: center;
+    max-width: 800px;
+}
+.more-button{
+    display: block;
+    margin: 7px;
+    text-align: center;
+}

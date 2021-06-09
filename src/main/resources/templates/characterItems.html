@@ -1,32 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/static/style.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </head>
 <body>
-<table>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.name}"></td>
-        <td th:text="${item.weight}"></td>
-        <td th:text="${item.itemType}"></td>
-        <td th:text="${item.description}"></td>
-        <td>
-            <form action="#" th:action="@{'/character/' + ${characterId} + '/item/delete/' + ${item.id}}" th:method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-        <td>
-            <a th:href="@{/items/{itemId}(itemId=${item.id})}">
-                <button>Edit</button>
-            </a>
-        </td>
-    </tr>
-</table>
-<div>
-    <a th:href="@{'/character/' + ${characterId} + '/moreItems'}">
-        <button type="submit">More items</button>
-    </a>
+<header class="header2">
+    <div class="header2-content">
+        <h1>Inventory</h1>
+    </div>
+</header>
+
+<div class="content-block" >
+    <div class="spells-table">
+        <table class="table">
+            <div th:each="item : ${items}">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Type</th>
+                </tr>
+                <tr>
+                    <td class="table-light" th:text="${item.name}"></td>
+                    <td class="table-light" th:text="${item.weight}"></td>
+                    <td class="table-light" th:text="${item.itemType}"></td>
+                </tr>
+                <tr>
+                    <td class="table-light" colspan="7" th:text="${item.description}"></td>
+                </tr>
+                <tr>
+                    <td colspan="7" class="table-secondary">
+                        <div class="d-flex justify-content-left">
+                            <form class="character-select" action="#" th:action="@{'/character/' + ${characterId} + '/items/delete/' + ${item.id}}" th:method="post">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                            <a class="character-select" th:href="@{/items/{itemId}(itemId=${item.id})}">
+                                <button class="btn btn-warning">Edit</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr></tr>
+            </div>
+        </table>
+    </div>
+    <div class="more-button">
+        <a th:href="@{'/character/' + ${characterId} + '/moreItems'}">
+            <button class="btn btn-dark" type="submit">More items</button>
+        </a>
+    </div>
 </div>
+
+<footer>
+    <div class="d-flex justify-content-around">
+        <div><img src="/static/footerPart.jpg"></div>
+        <div class="footer-content-div-text">
+            <h5>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
+                vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
+                Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
+                bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
+            </h5>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

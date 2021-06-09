@@ -296,4 +296,10 @@ public class CharacterController {
         characterService.updateDescription(id, name, gender, background, appearance);
         return new ModelAndView("redirect:/character/" + id);
     }
+
+    @PostMapping("/character/delete/{id}")
+    public ModelAndView deleteCharacter(@PathVariable("id") Long id){
+        characterService.deleteCharacter(id);
+        return new ModelAndView("redirect:/profile");
+    }
 }

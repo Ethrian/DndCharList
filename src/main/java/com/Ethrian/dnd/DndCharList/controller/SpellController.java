@@ -27,8 +27,8 @@ public class SpellController {
         return model;
     }
 
-    @GetMapping(value = "/{id}")
-    public ModelAndView editSpell(@PathVariable("id") Long id){
+    @GetMapping(value = "/{spellId}")
+    public ModelAndView editSpell(@PathVariable("spellId") Long id){
         Spell spell = spellService.getSpell(id);
         ModelAndView model = new ModelAndView("/editSpell");
         model.addObject("spell", spell);
