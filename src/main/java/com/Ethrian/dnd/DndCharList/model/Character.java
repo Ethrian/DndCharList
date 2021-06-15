@@ -21,6 +21,7 @@ public class Character {
     @ManyToOne
     @JoinColumn(name = "characterClass")
     private CharacterClass characterClass;
+    @Column(columnDefinition = "TEXT")
     private String background;
     private String gender;
     private String appearence;

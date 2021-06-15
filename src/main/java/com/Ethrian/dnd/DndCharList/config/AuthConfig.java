@@ -32,7 +32,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/signUp", "/static/**", "/logout").permitAll()
-                .antMatchers("/character/*").hasAuthority("USER")
+                .antMatchers("/character/**").hasAuthority("USER")
                 .antMatchers("/spells/delete/*", "/spells/new").hasAuthority("ADMIN")
                 .antMatchers("/items/delete/*", "/items/new").hasAuthority("ADMIN")
                 .antMatchers("/race/*").hasAuthority("ADMIN")
@@ -63,9 +63,9 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userService);
         return provider;
     }
-
-    @Bean
-    public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
-        return new AppAuthenticationSuccessHandler();
-    }
+//
+//    @Bean
+//    public AuthenticationSuccessHandler appAuthenticationSuccessHandler(){
+//        return new AppAuthenticationSuccessHandler();
+//    }
 }

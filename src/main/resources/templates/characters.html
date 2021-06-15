@@ -10,26 +10,25 @@
 <body>
     <header class="header1">
         <div class="header-content">
-            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+            <h1>Хмарне сховище персонажів для гри у "Підземелля та Драконів".</h1>
             <h5>
-                Quisque facilisis, felis vel mollis luctus, dui erat congue odio, sit amet gravida
-                mauris justo sed magna. Donec tincidunt vel neque ac viverra.
+                Створи свого персонажа та використовуй його всюди.
             </h5>
         </div>
     </header>
 
     <div class="content-block">
         <div class="character-list-text">
-            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
-            <h6>
-                Quisque facilisis, felis vel mollis luctus, dui erat congue odio, sit amet gravida
-                mauris justo sed magna. Donec tincidunt vel neque ac viverra.
+            <h4 th:if="${!#session.getAttribute('user').isAdmin()}">Ласкаво просимо до вашого профілю!</h4>
+            <h6 th:if="${!#session.getAttribute('user').isAdmin()}" >
+                На сторінці Вашого профілю знаходиться перелік ваших персонажів, а також форма для створення нових.
+                Оберіть того героя, котрим бажаете продовжити історію, або створіть нового: новий персонаж - нова гра, нова історія.
             </h6>
         </div>
         <div class="d-flex justify-content-center">
 
             <div th:if="${!#session.getAttribute('user').isAdmin()}" class="character-list-div">
-                <h1>Characters</h1>
+                <h1>Персонажі</h1>
                 <div>
                     <div class="character-select" th:each ="character : ${characters}">
                         <div class="btn-group char-button" role="group" aria-label="Basic example">
@@ -46,35 +45,76 @@
 
                 </div>
             </div>
-
-            <div th:if="${!#session.getAttribute('user').isAdmin()}" class="character-list-div shadow p-3 mb-5 bg-body rounded">
-                <h1>Create new character</h1>
-                <form th:action="@{/character/new}" th:method="post">
-                    <div class="mb-3">
-                        <label class="form-label">Character name</label>
-                        <input class="form-control" type="text" name="name" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Character gender</label>
-                        <input class="form-control" type="text" name="gender" />
-                    </div>
-                    <button class="btn btn-warning mb-3" type="submit">Create character</button>
-                </form>
+            <div th:unless="${!#session.getAttribute('user').isAdmin()}" class="character-list-div">
+                <h6>
+                    Доброго дня, редактор. На сторінці Вашого профілю не має функції створення персонажів, але у вас є
+                    доступ до внесення змін до бібліотеки ігрових об'єктів.
+                </h6>
             </div>
 
+            <div th:if="${!#session.getAttribute('user').isAdmin()}" class="character-list-div shadow p-3 mb-5 bg-body rounded">
+                <h1>Створити нового персонажа</h1>
+                <form th:action="@{/character/new}" th:method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Ім'я персонажа</label>
+                        <input class="form-control" required type="text" name="name" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Стать персонажа</label>
+                        <input class="form-control" required type="text" name="gender" />
+                    </div>
+                    <button class="btn btn-warning mb-3" type="submit">Створити</button>
+                </form>
+            </div>
+            <div th:unless="${!#session.getAttribute('user').isAdmin()}" class="character-list-div shadow p-3 mb-5 bg-body rounded">
+                <h3>Бібліотека ігрових об'єктів</h3>
+                <br/>
+                <a class="more-button" th:href="@{/spells}">
+                    <button type="button" class="btn btn-danger char-button">
+                        <span>Бібліотека заклять</span>
+                    </button>
+                </a>
+                <a class="more-button" th:href="@{/items}">
+                    <button type="button" class="btn btn-warning char-button">
+                        <span>Бібліотека предметів</span>
+                    </button>
+                </a>
+                <a class="more-button" th:href="@{/class}">
+                    <button type="button" class="btn btn-secondary char-button">
+                        <span>Бібліотека класів</span>
+                    </button>
+                </a>
+                <a class="more-button" th:href="@{/race}">
+                    <button type="button" class="btn btn-dark char-button">
+                        <span>Бібліотека рас</span>
+                    </button>
+                </a>
+
+            </div>
         </div>
     </div>
 
     <footer>
+        <div class="logout">
+            <a th:href="@{/logout}">
+                <button class="btn btn-danger">Вихід</button>
+            </a>
+            <a th:href="@{/profile}">
+                <button class="btn btn-warning">На головну</button>
+            </a>
+        </div>
         <div class="d-flex justify-content-around">
             <div><img src="/static/footerPart.jpg"></div>
             <div class="footer-content-div-text">
-                <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
-                    vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
-                    Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
-                    bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
-                </h5>
+                <h6>
+                    Бажаєте більше ознайомитися з "Підземеллями та Драконами"?
+                    <br/>
+                    <a href="https://dungeon.su/">https://dungeon.su/</a>
+                    <br/>
+                    <a href="http://dnd5e.wikidot.com/">http://dnd5e.wikidot.com/</a>
+                    <br/>
+                    <a href="https://company.wizards.com/en">https://company.wizards.com/en</a>
+                </h6>
             </div>
         </div>
     </footer>

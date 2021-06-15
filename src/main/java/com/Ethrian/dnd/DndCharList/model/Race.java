@@ -12,7 +12,7 @@ public class Race {
     private Long id;
 
     private String name;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Boolean dirty;
 

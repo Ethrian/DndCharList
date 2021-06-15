@@ -10,10 +10,9 @@
 <body>
     <header class="header1">
         <div class="header-content">
-            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+            <h1>Хмарне сховище персонажів для гри у "Підземелля та Драконів".</h1>
             <h5>
-                Quisque facilisis, felis vel mollis luctus, dui erat congue odio, sit amet gravida
-                mauris justo sed magna. Donec tincidunt vel neque ac viverra.
+                Створи свого персонажа та використовуй його всюди.
             </h5>
         </div>
     </header>
@@ -21,10 +20,9 @@
     <div class="content-block d-flex justify-content-center" >
 
         <div class="sign-in-div">
-            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+            <h3>Вхід у Ваш профіль.</h3>
             <h6>
-                Quisque facilisis, felis vel mollis luctus, dui erat congue odio,
-                sit amet gravida mauris justo sed magna.
+                Отримайте доступ до своїх персонажів у будь-якій точці світу.
             </h6>
         </div>
 
@@ -32,20 +30,20 @@
             <div>
                 <form th:method="post" th:action="@{/login}">
                     <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input class="form-control" type="text" name="username" />
+                        <label class="form-label">Ім'я користувача</label>
+                        <input class="form-control" required type="text" maxlength="254" name="username" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input class="form-control" type="password" name="password" />
+                        <label class="form-label">Пароль</label>
+                        <input class="form-control" required type="password" maxlength="254" name="password" />
                     </div>
-                    <button class="btn btn-warning mb-3" type="submit">Sign In</button>
+                    <button class="btn btn-warning mb-3" type="submit">Увійти</button>
                 </form>
                 <th:block th:if="${message != null}" th:text="${message}"></th:block>
             </div>
-            <h6>Or</h6>
+            <h6>Ще не маете власного акаунта?</h6>
             <div>
-                <a th:href="@{/signUp}"><button class="btn btn-danger mb-3">Sign Up</button></a>
+                <a th:href="@{/signUp}"><button class="btn btn-danger mb-3">Створити акаунт</button></a>
             </div>
         </div>
     </div>
@@ -54,12 +52,15 @@
         <div class="d-flex justify-content-around">
             <div><img src="/static/footerPart.jpg"></div>
             <div class="footer-content-div-text">
-                <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
-                    vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
-                    Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
-                    bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
-                </h5>
+                <h6>
+                    Бажаєте більше ознайомитися з "Підземеллями та Драконами"?
+                    <br/>
+                    <a href="https://dungeon.su/">https://dungeon.su/</a>
+                    <br/>
+                    <a href="http://dnd5e.wikidot.com/">http://dnd5e.wikidot.com/</a>
+                    <br/>
+                    <a href="https://company.wizards.com/en">https://company.wizards.com/en</a>
+                </h6>
             </div>
         </div>
     </footer>

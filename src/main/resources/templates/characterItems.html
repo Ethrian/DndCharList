@@ -12,7 +12,7 @@
 <body>
 <header class="header2">
     <div class="header2-content">
-        <h1>Inventory</h1>
+        <h1>Спорядження</h1>
     </div>
 </header>
 
@@ -21,9 +21,9 @@
         <table class="table">
             <div th:each="item : ${items}">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Weight</th>
-                    <th scope="col">Type</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">Вага</th>
+                    <th scope="col">Тип</th>
                 </tr>
                 <tr>
                     <td class="table-light" th:text="${item.name}"></td>
@@ -36,11 +36,11 @@
                 <tr>
                     <td colspan="7" class="table-secondary">
                         <div class="d-flex justify-content-left">
-                            <form class="character-select" action="#" th:action="@{'/character/' + ${characterId} + '/items/delete/' + ${item.id}}" th:method="post">
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                            <form class="character-select" action="#" th:action="@{'/character/' + ${characterId} + '/item/delete/' + ${item.id}}" th:method="post">
+                                <button class="btn btn-danger" type="submit">Видалити</button>
                             </form>
                             <a class="character-select" th:href="@{/items/{itemId}(itemId=${item.id})}">
-                                <button class="btn btn-warning">Edit</button>
+                                <button class="btn btn-warning">Редагувати</button>
                             </a>
                         </div>
                     </td>
@@ -51,21 +51,32 @@
     </div>
     <div class="more-button">
         <a th:href="@{'/character/' + ${characterId} + '/moreItems'}">
-            <button class="btn btn-dark" type="submit">More items</button>
+            <button class="btn btn-dark" type="submit">Додати предмет</button>
         </a>
     </div>
 </div>
 
 <footer>
+    <div class="logout">
+        <a th:href="@{/logout}">
+            <button class="btn btn-danger">Вихід</button>
+        </a>
+        <a th:href="@{/profile}">
+            <button class="btn btn-warning">На головну</button>
+        </a>
+    </div>
     <div class="d-flex justify-content-around">
         <div><img src="/static/footerPart.jpg"></div>
         <div class="footer-content-div-text">
-            <h5>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
-                vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
-                Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
-                bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
-            </h5>
+            <h6>
+                Бажаєте більше ознайомитися з "Підземеллями та Драконами"?
+                <br/>
+                <a href="https://dungeon.su/">https://dungeon.su/</a>
+                <br/>
+                <a href="http://dnd5e.wikidot.com/">http://dnd5e.wikidot.com/</a>
+                <br/>
+                <a href="https://company.wizards.com/en">https://company.wizards.com/en</a>
+            </h6>
         </div>
     </div>
 </footer>

@@ -68,7 +68,7 @@ body {
 
 .content-block {
     width: 100%;
-    min-height: 400px;
+    min-height: 60vh;
     height: 100%;
     background-color; #ccc;
 }
@@ -79,6 +79,13 @@ footer {
     bottom: -10px;
     position: static;
     background-color: #1B0D0A;
+}
+
+footer a {
+    color: #FFB800;
+}
+footer a:hover {
+    color: #AAB800;
 }
 
 .footer-content {
@@ -99,6 +106,7 @@ footer {
     text-align: center;
     margin: 80px 80px;
     width: 300px;
+
     padding-bottom: 10px;
     display: block;
     padding: 8px;
@@ -202,7 +210,7 @@ footer {
     margin: auto;
     margin-top: 40px;
     text-align: center;
-    max-width: 700px;
+    max-width: 740px;
 }
 
 .spells-table{
@@ -217,4 +225,13 @@ footer {
     display: block;
     margin: 7px;
     text-align: center;
+}
+
+.logout{
+    display: block;
+    margin: 7px;
+    text-align: center;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
 }

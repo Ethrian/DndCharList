@@ -21,49 +21,49 @@
         <div class="character-params">
             <div class="character-param-abilities">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-danger">Character abilities</li>
+                    <li class="list-group-item list-group-item-danger">Навички персонажа</li>
                     <li class="list-group-item">
                         <table class="table">
                             <tr>
-                                <th class="table-light">STR</th>
+                                <th class="table-light">Сила</th>
                                 <b><td class="table-secondary"  th:text="${character.STR}"></td></b>
-                                <th class="table-light">DEX</th>
+                                <th class="table-light">Спритність</th>
                                 <b><td class="table-secondary" th:text="${character.DEX}"></td></b>
-                                <th class="table-light">CON</th>
+                                <th class="table-light">Статура</th>
                                 <b><td class="table-secondary" th:text="${character.CON}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">INT</th>
+                                <th class="table-light">Інтелект</th>
                                 <b><td class="table-secondary" th:text="${character.INT}"></td></b>
-                                <th class="table-light">WIS</th>
+                                <th class="table-light">Мудрість</th>
                                 <b><td class="table-secondary" th:text="${character.WIS}"></td></b>
-                                <th class="table-light">CHA</th>
+                                <th class="table-light">Харизма</th>
                                 <b><td class="table-secondary" th:text="${character.CHA}"></td></b>
                             </tr>
                         </table>
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-danger" data-bs-toggle="collapse" href="#characterAbilities" role="button" aria-expanded="false" aria-controls="characterAbilities">
-                            characterAbilities
+                            Редагувати
                         </a>
                     </li>
                     <li class="list-group-item">
                         <div class="collapse" id="characterAbilities">
                             <form th:method="post" th:action="@{/character/{id}/updateAbilities(id=${character.id})}">
-                                <h4>change abilities</h4>
+                                <h4>Редагувати навички</h4>
                                 <table class="table">
                                     <tr>
-                                        <td><label class="form-label">STR</label><input type="number" class="form-control" min="1" max="30" maxlength="30" name="STR" th:value="${character.STR}" /></td>
-                                        <td><label class="form-label">DEX</label><input type="number" class="form-control" min="1" max="30"  name="DEX" th:value="${character.DEX}" /></td>
-                                        <td><label class="form-label">CON</label><input type="number" class="form-control" min="1" max="30"  name="CON" th:value="${character.CON}" /></td>
+                                        <td><label class="form-label">Сила</label><input type="number" class="form-control" min="1" max="30" maxlength="30" name="STR" th:value="${character.STR}" /></td>
+                                        <td><label class="form-label">Спритність</label><input type="number" class="form-control" min="1" max="30"  name="DEX" th:value="${character.DEX}" /></td>
+                                        <td><label class="form-label">Статура</label><input type="number" class="form-control" min="1" max="30"  name="CON" th:value="${character.CON}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">INT</label><input type="number" class="form-control" min="1" max="30"  name="INT" th:value="${character.INT}" /></td>
-                                        <td><label class="form-label">WIS</label><input type="number" class="form-control" min="1" max="30"  name="WIS" th:value="${character.WIS}" /></td>
-                                        <td><label class="form-label">CHA</label><input type="number" class="form-control" min="1" max="30"  name="CHA" th:value="${character.CHA}" /></td>
+                                        <td><label class="form-label">Інтелект</label><input type="number" class="form-control" min="1" max="30"  name="INT" th:value="${character.INT}" /></td>
+                                        <td><label class="form-label">Мудрість</label><input type="number" class="form-control" min="1" max="30"  name="WIS" th:value="${character.WIS}" /></td>
+                                        <td><label class="form-label">Харизма</label><input type="number" class="form-control" min="1" max="30"  name="CHA" th:value="${character.CHA}" /></td>
                                     </tr>
                                 </table>
-                                <button class="btn btn-danger" type="submit">Save</button>
+                                <button class="btn btn-danger" type="submit">Зберегти</button>
                             </form>
                         </div>
                     </li>
@@ -72,101 +72,101 @@
 
             <div class="character-param-skills">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-warning">Character skills</li>
+                    <li class="list-group-item list-group-item-warning">Таланти персонажа</li>
                     <li class="list-group-item">
                         <table class="table">
                             <tr>
-                                <th class="table-light">athletic</th>
+                                <th class="table-light">Атлетика</th>
                                 <b><td class="table-secondary" th:text="${character.athleticBonus}"></td></b>
-                                <th class="table-light">acrobatic</th>
+                                <th class="table-light">Акробатика</th>
                                 <b><td class="table-secondary" th:text="${character.acrotabicBonus}"></td></b>
-                                <th class="table-light">sleight of hands</th>
+                                <th class="table-light">Спритність рук</th>
                                 <b><td class="table-secondary" th:text="${character.sleightOfHandsBonus}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">stealth</th>
+                                <th class="table-light">Непомітність</th>
                                 <b><td class="table-secondary" th:text="${character.stealthBonus}"></td></b>
-                                <th class="table-light">investigation</th>
+                                <th class="table-light">Аналіз</th>
                                 <b><td class="table-secondary" th:text="${character.investigationBonus}"></td></b>
-                                <th class="table-light">history</th>
+                                <th class="table-light">Історія</th>
                                 <b><td class="table-secondary" th:text="${character.historyBonus}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">nature</th>
+                                <th class="table-light">Природа</th>
                                 <b><td class="table-secondary" th:text="${character.natureBonus}"></td></b>
-                                <th class="table-light">arcana</th>
+                                <th class="table-light">Магія</th>
                                 <b><td class="table-secondary" th:text="${character.arcanaBonus}"></td></b>
-                                <th class="table-light">religion</th>
+                                <th class="table-light">Релігія</th>
                                 <b><td class="table-secondary" th:text="${character.religionBonus}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">perception</th>
+                                <th class="table-light">Уважність</th>
                                 <b><td class="table-secondary" th:text="${character.perceptionBonus}"></td></b>
-                                <th class="table-light">insight</th>
+                                <th class="table-light">Прозорливість</th>
                                 <b><td class="table-secondary" th:text="${character.insightBonus}"></td></b>
-                                <th class="table-light">survival</th>
+                                <th class="table-light">Виживання</th>
                                 <b><td class="table-secondary" th:text="${character.survivalBonus}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">medicine</th>
+                                <th class="table-light">Медицина</th>
                                 <b><td class="table-secondary" th:text="${character.medicineBonus}"></td></b>
-                                <th class="table-light">animal handling</th>
+                                <th class="table-light">Приборкування</th>
                                 <b><td class="table-secondary" th:text="${character.animalHandlingBonus}"></td></b>
-                                <th class="table-light">deception</th>
+                                <th class="table-light">Переконливість</th>
                                 <b><td class="table-secondary" th:text="${character.decetpionBonus}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">investigation</th>
+                                <th class="table-light">Залякування</th>
                                 <b><td class="table-secondary" th:text="${character.investigationBonus}"></td></b>
-                                <th class="table-light">performance</th>
+                                <th class="table-light">Акторство</th>
                                 <b><td class="table-secondary" th:text="${character.performanceBonus}"></td></b>
-                                <th class="table-light">persuation</th>
+                                <th class="table-light">Шахрайство</th>
                                 <b><td class="table-secondary" th:text="${character.persuationBonus}"></td></b>
                             </tr>
                         </table>
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-warning" data-bs-toggle="collapse" href="#characterSkills" role="button" aria-expanded="false" aria-controls="characterSkills">
-                            characterSkills
+                            Редагувати
                         </a>
                     </li>
                     <li class="list-group-item">
                         <div class="collapse" id="characterSkills">
                             <form th:method="post" th:action="@{/character/{id}/updateSkills(id=${character.id})}">
-                                <h4>change skills</h4>
+                                <h4>Редагувати таланти</h4>
                                 <table class="table">
                                     <tr>
-                                        <td><label class="form-label">athletic</label><input class="form-control" min="-5" max="30" type="number" name="athletic" th:value="${character.athleticBonus}" /></td>
-                                        <td><label class="form-label">acrobatic</label><input class="form-control" min="-5" max="30" type="number" name="acrobatic" th:value="${character.acrotabicBonus}" /></td>
-                                        <td><label class="form-label">sleight of hands</label><input class="form-control" min="-5" max="30" type="number" name="sleightOfHands" th:value="${character.sleightOfHandsBonus}" /></td>
+                                        <td><label class="form-label">Атлетика</label><input class="form-control" min="-5" max="30" type="number" name="athletic" th:value="${character.athleticBonus}" /></td>
+                                        <td><label class="form-label">Акробатика</label><input class="form-control" min="-5" max="30" type="number" name="acrobatic" th:value="${character.acrotabicBonus}" /></td>
+                                        <td><label class="form-label">Спритність рук</label><input class="form-control" min="-5" max="30" type="number" name="sleightOfHands" th:value="${character.sleightOfHandsBonus}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">stealth</label><input class="form-control" min="-5" max="30" type="number" name="stealth" th:value="${character.stealthBonus}" /></td>
-                                        <td><label class="form-label">investigation</label><input class="form-control" min="-5" max="30" type="number" name="investigation" th:value="${character.investigationBonus}" /></td>
-                                        <td><label class="form-label">history</label><input class="form-control" min="-5" max="30" type="number" name="history" th:value="${character.historyBonus}" /></td>
+                                        <td><label class="form-label">Непомітність</label><input class="form-control" min="-5" max="30" type="number" name="stealth" th:value="${character.stealthBonus}" /></td>
+                                        <td><label class="form-label">Аналіз</label><input class="form-control" min="-5" max="30" type="number" name="investigation" th:value="${character.investigationBonus}" /></td>
+                                        <td><label class="form-label">Історія</label><input class="form-control" min="-5" max="30" type="number" name="history" th:value="${character.historyBonus}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">nature</label><input class="form-control" min="-5" max="30" type="number" name="nature" th:value="${character.natureBonus}" /></td>
-                                        <td><label class="form-label">arcana</label><input class="form-control" min="-5" max="30" type="number" name="arcana" th:value="${character.arcanaBonus}" /></td>
-                                        <td><label class="form-label">religion</label><input class="form-control" min="-5" max="30" type="number" name="religion" th:value="${character.religionBonus}" /></td>
+                                        <td><label class="form-label">Природа</label><input class="form-control" min="-5" max="30" type="number" name="nature" th:value="${character.natureBonus}" /></td>
+                                        <td><label class="form-label">Магія</label><input class="form-control" min="-5" max="30" type="number" name="arcana" th:value="${character.arcanaBonus}" /></td>
+                                        <td><label class="form-label">Релігія</label><input class="form-control" min="-5" max="30" type="number" name="religion" th:value="${character.religionBonus}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">perception</label><input class="form-control" min="-5" max="30" type="number" name="perception" th:value="${character.perceptionBonus}" /></td>
-                                        <td><label class="form-label">insight</label><input class="form-control" min="-5" max="30" type="number" name="insight" th:value="${character.insightBonus}" /></td>
-                                        <td><label class="form-label">survival</label><input class="form-control" min="-5" max="30" type="number" name="survival" th:value="${character.survivalBonus}" /></td>
+                                        <td><label class="form-label">Уважність</label><input class="form-control" min="-5" max="30" type="number" name="perception" th:value="${character.perceptionBonus}" /></td>
+                                        <td><label class="form-label">Прозорливість</label><input class="form-control" min="-5" max="30" type="number" name="insight" th:value="${character.insightBonus}" /></td>
+                                        <td><label class="form-label">Виживання</label><input class="form-control" min="-5" max="30" type="number" name="survival" th:value="${character.survivalBonus}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">medicine</label><input class="form-control" min="-5" max="30" type="number" name="medicine" th:value="${character.medicineBonus}" /></td>
-                                        <td><label class="form-label">animal handling</label><input class="form-control" min="-5" max="30" type="number" name="animalHandling" th:value="${character.animalHandlingBonus}" /></td>
-                                        <td><label class="form-label">deception</label><input class="form-control" min="-5" max="30" type="number" name="deception" th:value="${character.decetpionBonus}" /></td>
+                                        <td><label class="form-label">Медицина</label><input class="form-control" min="-5" max="30" type="number" name="medicine" th:value="${character.medicineBonus}" /></td>
+                                        <td><label class="form-label">Приборкування</label><input class="form-control" min="-5" max="30" type="number" name="animalHandling" th:value="${character.animalHandlingBonus}" /></td>
+                                        <td><label class="form-label">Переконливість</label><input class="form-control" min="-5" max="30" type="number" name="deception" th:value="${character.decetpionBonus}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">intimidation</label><input class="form-control" min="-5" max="30" type="number" name="intimidation" th:value="${character.intimidationBonus}" /></td>
-                                        <td><label class="form-label">performance</label><input class="form-control" min="-5" max="30" type="number" name="performance" th:value="${character.performanceBonus}" /></td>
-                                        <td><label class="form-label">persuasion</label><input class="form-control" min="-5" max="30" type="number" name="persuasion" th:value="${character.persuationBonus}" /></td>
+                                        <td><label class="form-label">Залякування</label><input class="form-control" min="-5" max="30" type="number" name="intimidation" th:value="${character.intimidationBonus}" /></td>
+                                        <td><label class="form-label">Акторство</label><input class="form-control" min="-5" max="30" type="number" name="performance" th:value="${character.performanceBonus}" /></td>
+                                        <td><label class="form-label">Шахрайство</label><input class="form-control" min="-5" max="30" type="number" name="persuasion" th:value="${character.persuationBonus}" /></td>
                                     </tr>
                                 </table>
-                                <button class="btn btn-warning" type="submit">Save</button>
+                                <button class="btn btn-warning" type="submit">Зберегти</button>
                             </form>
                         </div>
                     </li>
@@ -175,38 +175,38 @@
 
             <div class="character-param-stats">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-dark">Character stats</li>
+                    <li class="list-group-item list-group-item-dark">Параметри персонажа</li>
                     <li class="list-group-item">
                         <table class="table">
                             <tr>
-                                <th class="table-light">initiative</th>
+                                <th class="table-light">Ініціатива</th>
                                 <b><td class="table-secondary" th:text="${character.initiative}"></td></b>
-                                <th class="table-light">speed</th>
+                                <th class="table-light">Швидкість</th>
                                 <b><td class="table-secondary" th:text="${character.speed}"></td></b>
-                                <th class="table-light">armor class</th>
+                                <th class="table-light">Коефіцієнт броні</th>
                                 <b><td class="table-secondary" th:text="${character.armorClass}"></td></b>
-                                <th class="table-light">experience</th>
+                                <th class="table-light">Досвід</th>
                                 <b><td class="table-secondary" th:text="${character.exp}"></td></b>
                             </tr>
                         </table>
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-dark" data-bs-toggle="collapse" href="#characterStats" role="button" aria-expanded="false" aria-controls="characterStats">
-                            characterStats
+                            Редагувати
                         </a>
                     </li>
                     <li class="list-group-item">
                         <div class="collapse" id="characterStats">
                             <form th:method="post" th:action="@{/character/{id}/updateStats(id=${character.id})}">
-                                <h4>change stats</h4>
+                                <h4>Редагувати параметри</h4>
                                 <table class="table">
                                     <tr>
-                                        <td><label class="form-label">speed </label><input class="form-control" type="number" min="0" max="200" name="speed" th:value="${character.speed}" /></td>
-                                        <td><label class="form-label">exp </label><input class="form-control" type="number" min="0" max="355000" name="exp" th:value="${character.exp}" /></td>
-                                        <td><label class="form-label">armor class </label><input class="form-control" type="number" min="0" max="35" name="armorClass" th:value="${character.armorClass}" /></td>
+                                        <td><label class="form-label">Швидкість</label><input class="form-control" type="number" min="0" max="200" name="speed" th:value="${character.speed}" /></td>
+                                        <td><label class="form-label">Досвід</label><input class="form-control" type="number" min="0" max="355000" name="exp" th:value="${character.exp}" /></td>
+                                        <td><label class="form-label">Коефіцієнт броні</label><input class="form-control" type="number" min="0" max="35" name="armorClass" th:value="${character.armorClass}" /></td>
                                     </tr>
                                 </table>
-                                <button class="btn btn-dark" type="submit">Save</button>
+                                <button class="btn btn-dark" type="submit">Зберегти</button>
                             </form>
                         </div>
                     </li>
@@ -214,14 +214,14 @@
             </div>
             <div class="character-items-spells">
                 <ul class="list-group">
-                    <li class="list-group-item">Spells and items</li>
+                    <li class="list-group-item">Закляття та предмети</li>
                     <li class="list-group-item">
                         <div class="d-flex justify-content-around">
                             <a th:href="@{/character/{character_id}/spells(character_id=${character.id})}">
-                                <button class="btn btn-danger">to spellbook</button>
+                                <button class="btn btn-danger">До книги заклять</button>
                             </a>
                             <a th:href="@{/character/{character_id}/items(character_id=${character.id})}">
-                                <button class="btn btn-warning">to inventory</button>
+                                <button class="btn btn-warning">До спорядження</button>
                             </a>
                         </div>
                     </li>
@@ -233,49 +233,49 @@
 
             <div class="character-param-hp">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-success">Character hp</li>
+                    <li class="list-group-item list-group-item-success">Стан персонажа</li>
                     <li class="list-group-item">
                         <table class="table">
                             <tr>
-                                <th class="table-light">current hp</th>
+                                <th class="table-light">Поточне здоров'я</th>
                                 <b><td class="table-secondary" th:text="${character.curHP}"></td></b>
-                                <th class="table-light">maximum hp</th>
+                                <th class="table-light">Максимальне здоров'я</th>
                                 <b><td class="table-secondary" th:text="${character.maxHP}"></td></b>
-                                <th class="table-light">temporal hp</th>
+                                <th class="table-light">Тимчасове здоров'я</th>
                                 <b><td class="table-secondary" th:text="${character.tmpHP}"></td></b>
                             </tr>
                             <tr>
-                                <th class="table-light">fails</th>
+                                <th class="table-light">Провали</th>
                                 <b><td class="table-secondary" th:text="${character.deathSavesFailed}"></td></b>
-                                <th class="table-light">successes</th>
+                                <th class="table-light">Успіхи</th>
                                 <b><td class="table-secondary" th:text="${character.deathSavesPassed}"></td></b>
-                                <th class="table-light">hit dices</th>
+                                <th class="table-light">Кістки здоров'я</th>
                                 <b><td class="table-secondary" th:text="${character.curHitDices}"></td></b>
                             </tr>
                         </table>
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-success" data-bs-toggle="collapse" href="#characterHP" role="button" aria-expanded="false" aria-controls="characterHP">
-                            characterHP
+                            Редагувати
                         </a>
                     </li>
                     <li class="list-group-item">
                         <div class="collapse" id="characterHP">
                             <form th:method="post" th:action="@{/character/{id}/updateHp(id=${character.id})}">
-                                <h4>change hp</h4>
+                                <h4>Редагувати стан</h4>
                                 <table class="table">
                                     <tr>
-                                        <td><label class="form-label">current hp </label><input class="form-control" type="number" name="curHp" min="0" th:max="${character.maxHP}" th:value="${character.curHP}" /></td>
-                                        <td><label class="form-label">temporal hp </label><input class="form-control" type="number" name="tmpHp" min="0" th:value="${character.tmpHP}" /></td>
-                                        <td><label class="form-label">maximum hp </label><input class="form-control" type="number" name="maxHp" min="1" th:value="${character.maxHP}" /></td>
+                                        <td><label class="form-label">Поточне здоров'я</label><input class="form-control" type="number" name="curHp" min="0" th:max="${character.maxHP}" th:value="${character.curHP}" /></td>
+                                        <td><label class="form-label">Тимчасове здоров'я</label><input class="form-control" type="number" name="tmpHp" min="0" th:value="${character.tmpHP}" /></td>
+                                        <td><label class="form-label">Максимальне здоров'я</label><input class="form-control" type="number" name="maxHp" min="1" th:value="${character.maxHP}" /></td>
                                     </tr>
                                     <tr>
-                                        <td><label class="form-label">death saves fails </label><input class="form-control" type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></td>
-                                        <td><label class="form-label">death saves successes </label><input class="form-control" type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></td>
-                                        <td><label class="form-label">hit dices </label><input class="form-control" type="number" name="currentHitDices" th:value="${character.curHitDices}" /></td>
+                                        <td><label class="form-label">Провали</label><input class="form-control" type="number" name="deathSavesFailed" th:value="${character.deathSavesFailed}" /></td>
+                                        <td><label class="form-label">Успіхи</label><input class="form-control" type="number" name="deathSavesPassed" th:value="${character.deathSavesPassed}" /></td>
+                                        <td><label class="form-label">Кістки здоров'я</label><input class="form-control" type="number" name="currentHitDices" th:value="${character.curHitDices}" /></td>
                                     </tr>
                                 </table>
-                                <button class="btn btn-success" type="submit">Save</button>
+                                <button class="btn btn-success" type="submit">Зберегти</button>
                             </form>
                         </div>
                     </li>
@@ -284,17 +284,17 @@
 
             <div class="character-class">
                 <ul class="list-group">
-                    <li class="list-group-item">Class</li>
+                    <li class="list-group-item">Класс</li>
                     <li class="list-group-item">
 
                     <div th:if="${character.characterClass != null}">
                         <b><h5 th:text="${character.characterClass.name}"></h5></b>
-                        <span>Hit Dice: </span><span th:text="${character.characterClass.hitDice}"></span>
+                        <span>Кістки здоров'я: </span><span th:text="${character.characterClass.hitDice}"></span>
                     </div>
                     </li>
                     <li class="list-group-item">
                     <a th:href="@{/character/{character_id}/changeClass(character_id=${character.id})}">
-                        <button class="btn btn-secondary">change class</button>
+                        <button class="btn btn-secondary">Змінити клас</button>
                     </a>
                     </li>
                 </ul>
@@ -302,7 +302,7 @@
 
             <div class="character-race">
                 <ul class="list-group">
-                    <li class="list-group-item">Race</li>
+                    <li class="list-group-item">Раса</li>
                     <li class="list-group-item">
                         <div th:if="${character.race != null}">
                             <b><h5 th:text="${character.race.name}"></h5></b>
@@ -311,14 +311,14 @@
                     </li>
                     <li class="list-group-item">
                         <a th:href="@{/character/{character_id}/changeRace(character_id=${character.id})}">
-                            <button class="btn btn-dark">change race</button>
+                            <button class="btn btn-dark">Змінити расу</button>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="character-param-desc">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-info">Character description</li>
+                    <li class="list-group-item list-group-item-info">Опис персонажа</li>
                     <li class="list-group-item">
                         <table class="table">
                             <tr>
@@ -333,18 +333,18 @@
                         </table>
                     <li class="list-group-item">
                         <a class="btn btn-info" data-bs-toggle="collapse" href="#characterDesc" role="button" aria-expanded="false" aria-controls="characterDesc">
-                            characterDesc
+                            Редагувати
                         </a>
                     </li>
                     <li class="list-group-item">
                         <div class="collapse" id="characterDesc">
                             <form th:method="post" th:action="@{/character/{character_id}/description(character_id=${character.id})}">
-                                <h4>change description</h4>
-                                <label class="form-label">name</label><input class="form-control" type="text" name="name" th:value="${character.name}" /><br/>
-                                <label class="form-label">background</label> <textarea class="form-control" type="text" name="background" th:text="${character.background}"></textarea>
-                                <label class="form-label">appearance</label> <textarea class="form-control" type="text" name="appearance" th:text="${character.appearence}"></textarea>
-                                <label class="form-label">gender</label><input class="form-control" type="text" name="gender" th:value="${character.gender}" /><br/>
-                                <button class="btn btn-info" type="submit">Save</button>
+                                <h4>Редагувати опис</h4>
+                                <label class="form-label">Ім'я</label><input class="form-control" required type="text" name="name" th:value="${character.name}" /><br/>
+                                <label class="form-label">Передісторія</label> <textarea class="form-control" type="text" name="background" th:text="${character.background}"></textarea>
+                                <label class="form-label">Зовнішність</label> <textarea class="form-control" type="text" name="appearance" th:text="${character.appearence}"></textarea>
+                                <label class="form-label">Стать</label><input class="form-control" type="text" name="gender" th:value="${character.gender}" /><br/>
+                                <button class="btn btn-info" type="submit">Зберегти</button>
                             </form>
                         </div>
                     </li>
@@ -355,15 +355,26 @@
     </div>
 
     <footer>
+        <div class="logout">
+            <a th:href="@{/logout}">
+                <button class="btn btn-danger">Вихід</button>
+            </a>
+            <a th:href="@{/profile}">
+                <button class="btn btn-warning">На головну</button>
+            </a>
+        </div>
         <div class="d-flex justify-content-around">
             <div><img src="/static/footerPart.jpg"></div>
             <div class="footer-content-div-text">
-                <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis, felis
-                    vel mollis luctus, dui erat congue odio, sit amet gravida mauris justo sed magna.
-                    Donec tincidunt vel neque ac viverra. Proin finibus nibh in ligula lobortis, vel
-                    bibendum libero dapibus. Donec porta semper dignissim. Etiam et ex nibh.
-                </h5>
+                <h6>
+                    Бажаєте більше ознайомитися з "Підземеллями та Драконами"?
+                    <br/>
+                    <a href="https://dungeon.su/">https://dungeon.su/</a>
+                    <br/>
+                    <a href="http://dnd5e.wikidot.com/">http://dnd5e.wikidot.com/</a>
+                    <br/>
+                    <a href="https://company.wizards.com/en">https://company.wizards.com/en</a>
+                </h6>
             </div>
         </div>
     </footer>

@@ -220,16 +220,6 @@ public class CharacterController {
         model.addObject("characterId", id);
         return model;
     }
-//----
-//    @GetMapping(value = "/character/{character_id}/race")
-//    public String getRace(
-//            @PathVariable("character_id") Long id,
-//            Map<String, Object> model
-//    ){
-//        Race race = characterService.getCharacterById(id).getRace();
-//        model.put("race", race);
-//        return new ModelAndView("redirect:/character/" + id + "/race");
-//    }
 
     @PostMapping(value = "/character/{character_id}/addRace")
     public ModelAndView addRace(
@@ -248,7 +238,7 @@ public class CharacterController {
         model.addObject("characterId", id);
         return model;
     }
-    //--------
+
     @PostMapping(value = "/character/{character_id}/addClass")
     public ModelAndView addClass(
             @PathVariable("character_id") Long characterId,
@@ -266,27 +256,6 @@ public class CharacterController {
         model.addObject("characterId", id);
         return model;
     }
-
-//    @GetMapping(value = "/getCharacterClass/{character_id}")
-//    public String getCharacterClass(
-//            @PathVariable("character_id") Long id,
-//            Map<String, Object> model
-//    ){
-//        CharacterClass characterClass = characterService.getCharacterById(id).getCharacterClass();
-//        model.put("class", characterClass);
-//        return "character";
-//    }
-
-//    @PostMapping(value = "/addCharacterClass/{character_id}")
-//    public String addCharacterClass(
-//            @PathVariable("character_id") Long characterId,
-//            @RequestParam Long classId,
-//            Map<String, Object> model
-//    ){
-//        Character character = characterService.addRace(characterId, classId);
-//        model.put("character", character);
-//        return "character";
-//    }
 
     @PostMapping(value = "/character/{character_id}/description")
     public ModelAndView updateDescription(
