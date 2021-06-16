@@ -31,7 +31,7 @@ public class ItemController {
     @GetMapping(value = "/{itemId}")
     public ModelAndView editItem(@PathVariable("itemId") Long id){
         Item item = itemService.getItem(id);
-        ModelAndView model = new ModelAndView("/editItem");
+        ModelAndView model = new ModelAndView("editItem");
         model.addObject("item", item);
         return model;
     }

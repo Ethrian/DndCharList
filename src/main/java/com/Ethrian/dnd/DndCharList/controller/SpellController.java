@@ -30,7 +30,7 @@ public class SpellController {
     @GetMapping(value = "/{spellId}")
     public ModelAndView editSpell(@PathVariable("spellId") Long id){
         Spell spell = spellService.getSpell(id);
-        ModelAndView model = new ModelAndView("/editSpell");
+        ModelAndView model = new ModelAndView("editSpell");
         model.addObject("spell", spell);
         return model;
     }
