@@ -15,6 +15,7 @@
 	<description>DndCharList</description>
 	<properties>
 		<java.version>11</java.version>
+		<sonar.projectKey>Ethrian_DndCharList</sonar.projectKey>
 	</properties>
 	<dependencies>
 		<dependency>
